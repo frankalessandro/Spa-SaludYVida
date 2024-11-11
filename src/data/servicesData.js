@@ -2,7 +2,6 @@ import {
     Bars4Icon,
     GlobeAmericasIcon,
     NewspaperIcon,
-    PhoneIcon,
     RectangleGroupIcon,
     SquaresPlusIcon,
     SunIcon,
