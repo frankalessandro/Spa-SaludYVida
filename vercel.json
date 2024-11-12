@@ -1,0 +1,11 @@
+{
+    "build": {
+      "env": {
+        "NODE_ENV": "production"
+      }
+    },
+    "commands": {
+      "build": "chmod +x ./node_modules/.bin/vite && vite build"
+    }
+  }
+  
