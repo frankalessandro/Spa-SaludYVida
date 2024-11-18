@@ -120,7 +120,7 @@ function NavListMenu({ title, items }) {
           </Typography>
           <Typography
             variant="paragraph"
-            className="text-xs !font-medium text-textDark"
+            className="text-xs !font-medium text-black"
           >
             {description}
           </Typography>

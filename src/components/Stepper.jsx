@@ -49,14 +49,14 @@ export function SpaAppointmentStepper() {
               <div className="absolute -bottom-[4.5rem] w-max text-center">
                 <Typography
                   variant="h6"
-                  color={activeStep === index ? "purple" : "gray"}
-                  className="text-white"
+                  color={activeStep === index ? "red" : "gray"}
+                  className="text-textLight"
                 >
                   {step.label}
                 </Typography>
                 <Typography
                   color={activeStep === index ? "purple" : "gray"}
-                  className="font-normal text-gray-600"
+                  className="font-normal text-textLight"
                 >
                   {step.description}
                 </Typography>

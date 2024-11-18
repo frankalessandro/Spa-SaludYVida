@@ -18,10 +18,10 @@
   --color-button-alternative:rgb(58, 183, 208); /*color de boton saber mas en slider*/
   --color-button-alternative-hover:rgb(88, 157, 217);
   --color-tittle:rgb(110, 208, 172); /*color de TEXTO saber mas en slider*/
-  --color-text-light: #ffffff;
+  --color-text-light: #ffffff; /*color de texto*/
   --color-text-dark: #180530;
   --color-text-gray: #919191;
-  --color-underline: #00bcd4;
+  --color-underline: #00bcd4; /*aun no se usa*/
   --color-bg-1: #f7fafca8;
   --color-bg-2: #2068af;
   background-color: var(--color-bg-2);
