@@ -137,6 +137,7 @@ function NavListMenu({ title, items }) {
         offset={{ mainAxis: 20 }}
         placement="bottom"
         allowHover={true}
+        className="z-1"
       >
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">

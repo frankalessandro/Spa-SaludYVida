@@ -57,15 +57,15 @@ export const Hifu = () => {
 
       {/* Hero Section with Parallax */}
       <motion.section
-        className="relative h-screen flex items-center justify-center overflow-hidden"
+        className="relative min-w-[100vw] top-0 h-screen flex items-center justify-center overflow-hidden bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${img1})`, // Cambia `img1` por la imagen que desees de fondo
+        }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <ParallaxImage scrollYProgress={scrollYProgress}>
-          <div className="absolute inset-0 bg-[url('/api/placeholder/1920/1080')] bg-cover bg-center opacity-30 scale-110" />
-        </ParallaxImage>
-
+        <div className="absolute inset-0 bg-black/50" /> {/* Capa de oscurecimiento */}
         <div className="relative z-10 text-center px-4">
           <motion.h1
             className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
@@ -76,7 +76,7 @@ export const Hifu = () => {
             HIFU 7D
           </motion.h1>
           <motion.p
-            className="text-xl md:text-3xl text-gray-300 max-w-3xl mx-auto"
+            className="text-xl md:text-3xl text-textDark max-w-3xl mx-auto"
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -85,7 +85,7 @@ export const Hifu = () => {
           </motion.p>
 
           <motion.button
-            className="mt-8 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all"
+            className="mt-8 px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-textDark font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
@@ -93,6 +93,7 @@ export const Hifu = () => {
           </motion.button>
         </div>
       </motion.section>
+
 
       {/* Antes/Después Gallery con Scroll Animation */}
       <motion.section
@@ -102,7 +103,7 @@ export const Hifu = () => {
         viewport={{ once: true }}
         variants={staggerContainer}
       >
-        <h2 className="text-4xl font-bold text-center text-white mb-16">Resultados Reales</h2>
+        <h2 className="text-4xl font-bold text-center text-textDark mb-16">Resultados Reales</h2>
 
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {images.map((image, index) => (
@@ -120,7 +121,7 @@ export const Hifu = () => {
                   className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <p className="absolute bottom-4 left-4 text-white text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <p className="absolute bottom-4 left-4 text-textDark text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {
                     textImages[index]
                   }
@@ -141,7 +142,7 @@ export const Hifu = () => {
         variants={staggerContainer}
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-white mb-16">Proceso del Tratamiento</h2>
+          <h2 className="text-4xl font-bold text-center text-textDark mb-16">Proceso del Tratamiento</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               {
@@ -168,8 +169,8 @@ export const Hifu = () => {
                 <div className="absolute -top-4 -left-4 w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-xl font-bold">
                   {item.step}
                 </div>
-                <h3 className="text-2xl font-semibold text-white mt-4 mb-4">{item.title}</h3>
-                <p className="text-gray-300">{item.description}</p>
+                <h3 className="text-2xl font-semibold text-textDark mt-4 mb-4">{item.title}</h3>
+                <p className="text-textLight">{item.description}</p>
               </motion.div>
             ))}
           </div>
@@ -185,7 +186,7 @@ export const Hifu = () => {
         variants={staggerContainer}
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-white mb-16">Beneficios del Tratamiento</h2>
+          <h2 className="text-4xl font-bold text-center text-textDark mb-16">Beneficios del Tratamiento</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {[
               "Rejuvenecimiento facial sin cirugía",
@@ -201,7 +202,7 @@ export const Hifu = () => {
                 variants={fadeInUp}
               >
                 <Check className="text-blue-400 flex-shrink-0" />
-                <p className="text-gray-300 text-lg">{benefit}</p>
+                <p className="text-textLight text-lg">{benefit}</p>
               </motion.div>
             ))}
           </div>
@@ -217,7 +218,7 @@ export const Hifu = () => {
         variants={staggerContainer}
       >
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-center text-white mb-16">Inversión en tu Belleza</h2>
+          <h2 className="text-4xl font-bold text-center text-textDark mb-16">Inversión en tu Belleza</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <motion.div
               className="relative p-8 bg-gradient-to-br from-blue-900/40 to-purple-900/40 rounded-xl backdrop-blur-sm overflow-hidden group"
@@ -225,9 +226,9 @@ export const Hifu = () => {
               whileHover={{ scale: 1.02 }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 transform -skew-y-12 translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
-              <h3 className="text-2xl font-semibold text-white mb-4">Sesión Individual</h3>
-              <p className="text-5xl font-bold text-white mb-6">$1,000,000</p>
-              <ul className="text-gray-300 space-y-4">
+              <h3 className="text-2xl font-semibold text-textDark mb-4">Sesión Individual</h3>
+              <p className="text-5xl font-bold text-textDark mb-6">$1,000,000</p>
+              <ul className="text-textLight space-y-4">
                 <li className="flex items-center space-x-2">
                   <Check className="text-blue-400" />
                   <span>1 sesión completa de HIFU 7D</span>
@@ -249,9 +250,9 @@ export const Hifu = () => {
               whileHover={{ scale: 1.02 }}
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 transform -skew-y-12 translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
-              <h3 className="text-2xl font-semibold text-white mb-4">Tratamiento Completo</h3>
-              <p className="text-5xl font-bold text-white mb-6">$2,500,000</p>
-              <ul className="text-gray-300 space-y-4">
+              <h3 className="text-2xl font-semibold text-textDark mb-4">Tratamiento Completo</h3>
+              <p className="text-5xl font-bold text-textDark mb-6">$2,500,000</p>
+              <ul className="text-textLight space-y-4">
                 <li className="flex items-center space-x-2">
                   <Check className="text-blue-400" />
                   <span>Múltiples sesiones de HIFU 7D</span>
@@ -287,14 +288,14 @@ export const Hifu = () => {
         </ParallaxImage>
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-textDark mb-8">
             Comienza tu Transformación Hoy
           </h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
+          <p className="text-xl text-textLight mb-12 max-w-2xl mx-auto">
             Agenda tu valoración gratuita y descubre cómo HIFU 7D puede ayudarte a lograr una piel más joven y radiante
           </p>
           <motion.button
-            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-white font-semibold text-lg flex items-center space-x-2 mx-auto hover:shadow-lg hover:shadow-blue-500/30 transition-all"
+            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-textDark font-semibold text-lg flex items-center space-x-2 mx-auto hover:shadow-lg hover:shadow-blue-500/30 transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >

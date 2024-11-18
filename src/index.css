@@ -13,18 +13,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  --color-button-light:rgba(186, 90, 164, 0.865);/*color de boton navbar CONTACTANOS*/
-  --color-button-light-hover:rgba(204, 112, 199, 0.865);
-  --color-button-alternative:rgb(58, 183, 208); /*color de boton saber mas en slider*/
+  --color-button-light:rgba(198, 111, 197, 0.865);/*color de boton navbar CONTACTANOS*/
+  --color-button-light-hover:rgba(183, 228, 205, 0.865);
+  --color-button-alternative:rgb(201, 128, 193); /*color de boton saber mas en slider*/
   --color-button-alternative-hover:rgb(88, 157, 217);
-  --color-tittle:rgb(110, 208, 172); /*color de TEXTO saber mas en slider*/
-  --color-text-light: #ffffff; /*color de texto*/
+  --color-tittle:rgb(150, 60, 140); /*color de TEXTO saber mas en slider*/
+  --color-text-light: #000000; /*color de texto*/
   --color-text-dark: #180530;
   --color-text-gray: #919191;
   --color-underline: #00bcd4; /*aun no se usa*/
   --color-bg-1: #f7fafca8;
   --color-bg-2: #2068af;
-  background-color: var(--color-bg-2);
+  background-color: var(--color-bg-1);
 
 }
 
