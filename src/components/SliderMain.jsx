@@ -109,15 +109,15 @@ export const SliderMain = () => {
     return (
         <div className="container lg:max-w-screen-2xl">
             <section className='content-info'>
-                <div className="container-title">
-                    <span>Nuestros Tratamientos</span>
+                <div className="container-title text-textDark">
+                    <span className='textDark'>Nuestros Tratamientos</span>
                     <div className="buttons">
-                        <span className="prev"><ChevronLeftIcon width={30} height={30} /></span>
+                        <span className="text-textDark prev"><ChevronLeftIcon width={30} height={30} /></span>
                         <span className="next"><ChevronRightIcon width={30} height={30} /></span>
                     </div>
                 </div>
-                <div className={`content ${isSliding ? '' : 'active'}`}>
-                    <span className='text-md text-green-400'>{slides[currentSlide].title}</span>
+                <div className={`text-textLight content ${isSliding ? '' : 'active'}`}>
+                    <span className='text-md'>{slides[currentSlide].title}</span>
                     <span className=''>{slides[currentSlide].ReqConsulta === 'Si' ? 'Requiere consulta' : 'No requiere consulta'}</span>
                     <div className="btn-info">
                         <div className="btn-info-child"><TimerIcon width={30} height={30} /><div className='child-info'><p>Tiempo:</p><p>{slides[currentSlide].duracion}</p></div></div>
