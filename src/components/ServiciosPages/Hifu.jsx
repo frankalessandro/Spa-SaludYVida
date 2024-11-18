@@ -2,21 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { NavbarWithMegaMenu } from '../NavbarWithMegaMenu';
 import { ChevronDown, Clock, Star, Shield, Calendar, Check, ArrowRight } from 'lucide-react';
-// importacion de imagenes aqui
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
+// importacion de imagenes aqui
 import img1 from "../../assets/img/hifu/hifu1.jpg";
 import img2 from "../../assets/img/hifu/hifu2.png";
 import img3 from "../../assets/img/hifu/hifu3.png";
 import img4 from "../../assets/img/hifu/hifu4.png";
 
-const images = [img1, img2, img3, img4]; // Array con las imágenes importadas
+const images = [img1, img2, img3, img4];
 const textImages = [
   '💡 Innovación que inspira',
   '🎯 Precisión en cada detalle',
   '🛡️ Tu seguridad, nuestra prioridad',
   '⚡ Resultados efectivos garantizados'
 ];
-
 
 const ParallaxImage = ({ scrollYProgress, children }) => {
   const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
@@ -26,6 +27,7 @@ const ParallaxImage = ({ scrollYProgress, children }) => {
     </motion.div>
   );
 };
+
 const whatsappLink = "https://wa.me/1234567890"; // Reemplaza con tu número de WhatsApp
 
 export const Hifu = () => {
@@ -34,6 +36,11 @@ export const Hifu = () => {
 
   useEffect(() => {
     setIsVisible(true);
+    AOS.init({
+      duration: 1000,
+      once: true,
+      mirror: false
+    });
   }, []);
 
   const fadeInUp = {
@@ -59,13 +66,13 @@ export const Hifu = () => {
       <motion.section
         className="relative min-w-[100vw] top-0 h-screen flex items-center justify-center overflow-hidden bg-cover bg-center"
         style={{
-          backgroundImage: `url(${img1})`, // Cambia `img1` por la imagen que desees de fondo
+          backgroundImage: `url(${img1})`,
         }}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-        <div className="absolute inset-0 bg-black/50" /> {/* Capa de oscurecimiento */}
+        <div className="absolute inset-0 bg-black/50" />
         <div className="relative z-10 text-center px-4">
           <motion.h1
             className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
@@ -94,44 +101,32 @@ export const Hifu = () => {
         </div>
       </motion.section>
 
-
-      {/* Antes/Después Gallery con Scroll Animation */}
-      <motion.section
-        className="py-20 px-4"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true }}
-        variants={staggerContainer}
-      >
+      {/* Antes/Después Gallery con AOS Animation */}
+      <section className="py-20 px-4">
         <h2 className="text-4xl font-bold text-center text-textDark mb-16">Resultados Reales</h2>
-
         <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
           {images.map((image, index) => (
-            <motion.div
+            <div
               key={index}
               className="relative group cursor-pointer"
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
+              data-aos={index % 2 === 0 ? "fade-up-right" : "fade-up-left"}
+              data-aos-delay={index * 100}
             >
               <div className="relative h-96 overflow-hidden rounded-xl">
-                <img
-                  src={image} // Usar la imagen correspondiente
+                <img 
+                  src={image}
                   alt={`Resultado ${index + 1}`}
                   className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 <p className="absolute bottom-4 left-4 text-textDark text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  {
-                    textImages[index]
-                  }
+                  {textImages[index]}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
-
-      </motion.section>
+      </section>
 
       {/* Proceso de Tratamiento con Scroll Reveal */}
       <motion.section
@@ -298,8 +293,9 @@ export const Hifu = () => {
             className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-textDark font-semibold text-lg flex items-center space-x-2 mx-auto hover:shadow-lg hover:shadow-blue-500/30 transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
+            onClick={() => window.open(whatsappLink, "_blank")}
           >
-            <button onClick={() => window.open(whatsappLink, "_blank")} >Agendar Consulta Gratuita</button>
+            Agendar Consulta Gratuita
             <ArrowRight className="w-5 h-5" />
           </motion.button>
         </div>

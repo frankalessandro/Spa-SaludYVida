@@ -224,7 +224,7 @@ export function NavbarWithMegaMenu() {
         <div className="hidden lg:block">
           <NavList />
         </div>
-        <button className="align-middle select-none font-sans font-bold text-center uppercase disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-Botones text-textLight shadow-md shadow-purple-500/20 hover:shadow-xl hover:bg-BotonesHover focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none transform transition-all duration-300 ease-out translate-y-0 opacity-100">
+        <button className="align-middle select-none font-sans font-bold text-center uppercase disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-Botones text-white shadow-md shadow-purple-500/20 hover:shadow-xl hover:bg-BotonesHover focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none transform transition-all duration-300 ease-out translate-y-0 opacity-100">
           Contactanos
         </button>
 
