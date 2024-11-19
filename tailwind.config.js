@@ -1,5 +1,5 @@
 const withMT = require("@material-tailwind/react/utils/withMT");
-
+const scrollbarHide = require("tailwind-scrollbar-hide");
 export default withMT({
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
@@ -17,5 +17,5 @@ export default withMT({
       },
     },
   },
-  plugins: [],
+  plugins: [scrollbarHide],
 });

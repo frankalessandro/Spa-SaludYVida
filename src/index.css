@@ -29,8 +29,8 @@
   /*aun no se usa*/
   --color-bg-1: #f7fafca8;
   --color-bg-2: #2068af;
-  background: rgb(255,255,255);
-  background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(233,250,225,1) 35%, rgba(244,206,255,1) 100%);
+  background: rgb(255, 255, 255);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(233, 250, 225, 1) 35%, rgba(244, 206, 255, 1) 100%);
 }
 
 @layer base {
@@ -43,4 +43,28 @@
       url('/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
   }
 
+  /* Configuración de Tailwind para el scroll */
+  .reveal-section {
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-snap-align-start {
+    scroll-snap-align: start;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thumb-purple-500 {
+    scrollbar-color: #9b4de0 #f7fafc;
+  }
+
+  .scrollbar-track-gray-200 {
+    scrollbar-color: #f7fafc #e2e8f0;
+  }
+  
 }
+
+
