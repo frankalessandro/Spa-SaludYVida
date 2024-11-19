@@ -4,14 +4,13 @@ import ScrollReveal from "scrollreveal";
 import { NavbarWithMegaMenu } from "../components/NavbarWithMegaMenu";
 import { SliderMain } from "../components/SliderMain";
 import { SpaAppointmentStepper } from "../components/Stepper";
-import '../css/leaves.css';
-
+import img_spa_ambiente from "../assets/img/home/spaAmbiente.webp";
 const commonRevealConfig = {
-  duration: 1500,
-  distance: "20px",
-  easing: "cubic-bezier(0.4, 0, 0.2, 1)", // Suavizar curva de animación
+  duration: 1000,
+  distance: "50px",
+  easing: "cubic-bezier(0.5, 0, 0, 1)",
   origin: "bottom",
-  reset: false, // Desactivar reset para animación más natural
+  reset: true,
 };
 
 export const Home = () => {
@@ -20,53 +19,19 @@ export const Home = () => {
   useEffect(() => {
     scrollRevealRef.current = ScrollReveal();
 
-    // Configuración base para todas las secciones
-    scrollRevealRef.current.reveal(".reveal-section", {
-      ...commonRevealConfig,
-      interval: 100,
-      afterReveal: (domEl) => {
-        const diagonalStyles = [
-          'diagonal-lines',
-          'diagonal-crossed-lines',
-          'diagonal-pulsing',
-          'diagonal-mask'
-        ];
-
-        const randomStyle = diagonalStyles[Math.floor(Math.random() * diagonalStyles.length)];
-
-        domEl.classList.add(randomStyle);
-      }
-    });
-
-    // Configuración para revelar hojas con efecto realista
-    scrollRevealRef.current.reveal(".container-leaves", {
-      duration: 2000, // Aumentar duración para efecto más suave
-      distance: "0px", // No mover más allá de la posición final
-      opacity: 1,
-      scale: 1,
-      delay: 800, // Retraso más largo
-      beforeReveal: (domEl) => {
-        domEl.style.opacity = 0;
-        domEl.style.transform = 'translateY(100vh)'; // Empezar fuera de la pantalla, abajo
-        domEl.style.transition = 'transform 2s ease-out, opacity 2s ease-out'; // Transición suave
-      },
-      afterReveal: (domEl) => {
-        domEl.style.opacity = 1;
-        domEl.style.transform = 'translateY(0)'; // Termina en su posición original
-        domEl.classList.add('animate__animated', 'animate__fadeIn');
-      }
-    });
-
+    scrollRevealRef.current.reveal(".reveal-section", { ...commonRevealConfig });
+    scrollRevealRef.current.reveal(".reveal-title", { ...commonRevealConfig, delay: 200, origin: "left" });
+    scrollRevealRef.current.reveal(".reveal-service", { ...commonRevealConfig, interval: 200, scale: 0.85 });
+    
     return () => {
       if (scrollRevealRef.current) scrollRevealRef.current.destroy();
     };
   }, []);
 
   return (
-    <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] relative">
+    <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-gradient-to-b from-[#f7f8fa] to-[#dfe4ea]">
       {/* Navbar */}
       <NavbarWithMegaMenu />
-
       {/* Slider */}
       <section className="w-full h-[90vh] flex items-center justify-center reveal-section scroll-snap-align-start relative overflow-hidden">
         <SliderMain />
@@ -83,7 +48,7 @@ export const Home = () => {
               { title: "Terapias Energéticas", description: "Restaura tu campo energético y vitalidad", image: "/home/terapiaEnergetica.webp" },
               { title: "Medicina Natural", description: "Tratamientos naturales personalizados", image: "/home/mujerSpa.webp" }
             ].map((service, index) => (
-              <div key={index} className="rounded-lg shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 reveal-service">
+              <div key={index} className="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 reveal-service">
                 <img src={service.image} alt={service.title} className="w-full h-48 object-cover transition-all duration-500 transform hover:scale-110" />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">{service.title}</h3>
@@ -95,18 +60,37 @@ export const Home = () => {
         </div>
       </section>
 
-      {/* Resto de secciones... */}
+      {/* Proceso de Reserva */}
+      <section className="w-full py-16 flex items-center justify-center reveal-section scroll-snap-align-start">
+        <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+          <div className="space-y-8">
+            <h2 className="text-4xl font-extrabold text-gray-900 mb-6 reveal-title">Proceso de Reserva</h2>
+            {[
+              { step: 1, title: "Busca el servicio que deseas", description: "Explora nuestra amplia gama de servicios holísticos" },
+              { step: 2, title: "Envíanos un mensaje por WhatsApp", description: "Contacta con nosotros de manera rápida y sencilla" },
+              { step: 3, title: "Una asesora te guiará paso a paso", description: "Recibe atención personalizada para tu reserva" }
+            ].map((step, index) => (
+              <div key={index} className="flex flex-col sm:flex-row sm:items-start gap-4 reveal-service">
+                <div className="w-12 h-12 bg-indigo-500 rounded-full flex-shrink-0 flex items-center justify-center text-white font-bold text-lg">
+                  {step.step}
+                </div>
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{step.title}</h3>
+                  <p className="text-gray-500">{step.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="relative">
+            <img src={img_spa_ambiente} alt="Spa ambiente" className="rounded-lg shadow-2xl w-full transform hover:scale-105 transition-all duration-500" />
+          </div>
+        </div>
+      </section>
+
+      {/* Stepper */}
       <section className="w-full py-16 reveal-section scroll-snap-align-start">
         <SpaAppointmentStepper />
       </section>
-
-      {/* Contenedores de hojas con imágenes realistas */}
-      {/* <div
-        id="left-leave"
-        className="container-leaves fixed left-0 max-h-[20vh] top-[80vh] min-w-[60vw] md:min-w-[20vw] lg:w-[10vw] lg:h-[40vh] opacity-70 z-0"
-      >
-      </div> */}
-
     </div>
   );
 };
