@@ -1,0 +1,230 @@
+/* estilos de animacion para las hojas */
+
+.container-leaves{
+    position: fixed;
+    top: 50vh;
+    left: 0;
+    width: 40vw;
+    height: 60vh;
+    z-index: 99999999;
+    background-image: url('../../public/home/hojas.webp');
+    object-fit: cover;
+    background-size: 100% 100%;
+  }
+/* Animaciones Diagonales Base */
+.diagonal-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  /* 1. Líneas Diagonales Básicas con Gradiente */
+  .diagonal-lines::before,
+  .diagonal-lines::after {
+    content: '';
+    position: absolute;
+    width: 2px;
+    height: 250px;
+    background: linear-gradient(to bottom, transparent, rgba(41, 128, 185, 0.5));
+    animation: diagonalLinesMove 4s ease-in-out infinite alternate;
+  }
+  
+  .diagonal-lines::before {
+    top: -100px;
+    left: 20%;
+    transform: rotate(45deg);
+  }
+  
+  .diagonal-lines::after {
+    bottom: -100px;
+    right: 20%;
+    background: linear-gradient(to top, transparent, rgba(46, 204, 113, 0.5));
+    transform: rotate(45deg);
+  }
+  
+  @keyframes diagonalLinesMove {
+    0% {
+      opacity: 0.3;
+      transform: rotate(45deg) scale(0.8);
+    }
+    100% {
+      opacity: 0.8;
+      transform: rotate(45deg) scale(1.2);
+    }
+  }
+  
+  /* 2. Múltiples Líneas Diagonales Cruzadas */
+  .diagonal-crossed-lines {
+    position: relative;
+  }
+  
+  .diagonal-crossed-lines::before,
+  .diagonal-crossed-lines::after,
+  .diagonal-crossed-lines > span {
+    content: '';
+    position: absolute;
+    width: 1px;
+    height: 300px;
+    background: linear-gradient(to bottom, 
+      rgba(52, 152, 219, 0.2), 
+      rgba(52, 152, 219, 0.6), 
+      transparent
+    );
+    animation: crossedDiagonalLines 5s ease-in-out infinite alternate;
+  }
+  
+  .diagonal-crossed-lines::before {
+    left: 30%;
+    top: -150px;
+    transform: rotate(45deg);
+    animation-delay: -2s;
+  }
+  
+  .diagonal-crossed-lines::after {
+    right: 30%;
+    bottom: -150px;
+    transform: rotate(-45deg);
+    animation-delay: -3s;
+    background: linear-gradient(to top, 
+      rgba(46, 204, 113, 0.2), 
+      rgba(46, 204, 113, 0.6), 
+      transparent
+    );
+  }
+  
+  .diagonal-crossed-lines > span {
+    left: 50%;
+    top: -100px;
+    transform: rotate(0deg);
+    animation-delay: -1s;
+    background: linear-gradient(to bottom, 
+      rgba(241, 196, 15, 0.2), 
+      rgba(241, 196, 15, 0.6), 
+      transparent
+    );
+  }
+  
+  @keyframes crossedDiagonalLines {
+    0% {
+      transform: rotate(45deg) translateX(-50px);
+      opacity: 0.3;
+    }
+    100% {
+      transform: rotate(45deg) translateX(50px);
+      opacity: 0.8;
+    }
+  }
+  
+  /* 3. Líneas Diagonales Pulsantes con Múltiples Capas */
+  .diagonal-pulsing {
+    position: relative;
+  }
+  
+  .diagonal-pulsing::before,
+  .diagonal-pulsing::after {
+    content: '';
+    position: absolute;
+    width: 3px;
+    height: 400px;
+    background: rgba(155, 89, 182, 0.2);
+    transform: rotate(45deg);
+    animation: diagonalPulsing 4s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+  }
+  
+  .diagonal-pulsing::before {
+    top: -200px;
+    left: 10%;
+    animation-delay: -2s;
+  }
+  
+  .diagonal-pulsing::after {
+    bottom: -200px;
+    right: 10%;
+    background: rgba(230, 126, 34, 0.2);
+  }
+  
+  @keyframes diagonalPulsing {
+    0% {
+      transform: rotate(45deg) scale(0.7);
+      opacity: 0.2;
+    }
+    50% {
+      transform: rotate(45deg) scale(1);
+      opacity: 0.6;
+    }
+    100% {
+      transform: rotate(45deg) scale(1.3);
+      opacity: 0.3;
+    }
+  }
+  
+  /* 4. Líneas Diagonales con Efecto de Máscara */
+  .diagonal-mask {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .diagonal-mask::before,
+  .diagonal-mask::after {
+    content: '';
+    position: absolute;
+    width: 5px;
+    height: 500px;
+    background: linear-gradient(
+      45deg, 
+      rgba(52, 152, 219, 0.1), 
+      rgba(52, 152, 219, 0.5)
+    );
+    transform: rotate(45deg);
+    animation: diagonalMaskEffect 6s ease-in-out infinite alternate;
+  }
+  
+  .diagonal-mask::before {
+    top: -250px;
+    left: 20%;
+    animation-delay: -3s;
+  }
+  
+  .diagonal-mask::after {
+    bottom: -250px;
+    right: 20%;
+    background: linear-gradient(
+      -45deg, 
+      rgba(46, 204, 113, 0.1), 
+      rgba(46, 204, 113, 0.5)
+    );
+  }
+  
+  @keyframes diagonalMaskEffect {
+    0% {
+      clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+      opacity: 0.2;
+    }
+    50% {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      opacity: 0.6;
+    }
+    100% {
+      clip-path: polygon(0 0, 100% 0, 100% 0%, 0 0%);
+      opacity: 0.2;
+    }
+  }
+  
+  /* Estilos de contenedor para demostración */
+  .diagonal-section {
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px 0;
+    border: 1px solid #e0e0e0;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .diagonal-content {
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+  }

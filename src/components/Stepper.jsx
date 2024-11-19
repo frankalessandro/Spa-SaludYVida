@@ -10,21 +10,21 @@ const backgroundSVGs = [
 ];
 
 const sections = [
-  {
-    title: "Bienvenido a nuestro SPA",
-    content: "Relájate en un espacio único donde cuidamos cada detalle para tu bienestar.",
-    image: "home/happySpa.webp",
-  },
-  {
-    title: "Nuestros Servicios",
-    content: "Masajes, tratamientos faciales y más para tu relajación completa.",
-    image: "home/happySpa.webp", 
-    details: [
-      "Masajes terapéuticos y relajantes",
-      "Tratamientos faciales personalizados",
-      "Aromaterapia y mucho más"
-    ]
-  },
+  // {
+  //   title: "Bienvenido a nuestro SPA",
+  //   content: "Relájate en un espacio único donde cuidamos cada detalle para tu bienestar.",
+  //   image: "home/happySpa.webp",
+  // },
+  // {
+  //   title: "Nuestros Servicios",
+  //   content: "Masajes, tratamientos faciales y más para tu relajación completa.",
+  //   image: "home/happySpa.webp", 
+  //   details: [
+  //     "Masajes terapéuticos y relajantes",
+  //     "Tratamientos faciales personalizados",
+  //     "Aromaterapia y mucho más"
+  //   ]
+  // },
   {
     title: "Ubicación y Contacto",
     content: "Visítanos en Calle 59b #34e-24 o contáctanos para reservar.",
@@ -35,26 +35,26 @@ const sections = [
       { platform: "Facebook", link: "https://facebook.com", color: "bg-blue-600" }
     ]
   },
-  {
-    title: "Asesores Siempre Disponibles",
-    content: "Nuestro equipo está disponible 24/7 para ayudarte a resolver todas tus dudas.",
-    image: "home/happySpa.webp", 
-    details: [
-      "Atención personalizada",
-      "Consultas gratuitas",
-      "Disponibilidad 24/7"
-    ]
-  },
-  {
-    title: "Agenda tu Cita",
-    content: "Reserva tu experiencia y disfruta de nuestros servicios.",
-    image: "home/happySpa.webp", 
-  },
-  {
-    title: "Ubicación",
-    content: "Encuéntranos en la Calle 59b #34e-24, una zona tranquila y exclusiva.",
-    type: "map"
-  }
+  // {
+  //   title: "Asesores Siempre Disponibles",
+  //   content: "Nuestro equipo está disponible 24/7 para ayudarte a resolver todas tus dudas.",
+  //   image: "home/happySpa.webp", 
+  //   details: [
+  //     "Atención personalizada",
+  //     "Consultas gratuitas",
+  //     "Disponibilidad 24/7"
+  //   ]
+  // },
+  // {
+  //   title: "Agenda tu Cita",
+  //   content: "Reserva tu experiencia y disfruta de nuestros servicios.",
+  //   image: "home/happySpa.webp", 
+  // },
+  // {
+  //   title: "Ubicación",
+  //   content: "Encuéntranos en la Calle 59b #34e-24, una zona tranquila y exclusiva.",
+  //   type: "map"
+  // }
 ];
 
 export const SpaAppointmentStepper = () => {

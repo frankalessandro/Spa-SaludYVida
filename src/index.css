@@ -68,3 +68,62 @@
 }
 
 
+.animated-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.animated-container::before,
+.animated-container::after {
+  content: "";
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background-image: url('/path/to/leaf-image.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: translateY(50%) rotate(0deg);
+  transition: opacity 1s, transform 1.5s ease-in-out;
+}
+
+.animated-container::before {
+  transform-origin: center;
+  animation: floatLeaves 3s ease-in-out infinite alternate;
+}
+
+.animated-container::after {
+  animation: floatLeavesReverse 3s ease-in-out infinite alternate;
+}
+
+/* Mostrar cuando se activa ScrollReveal */
+.animated-container.show::before,
+.animated-container.show::after {
+  opacity: 1;
+  top: 20%;
+  transform: translateY(0) rotate(45deg);
+}
+
+/* Animaciones */
+@keyframes floatLeaves {
+  0% {
+    transform: translateY(50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(60%) rotate(20deg);
+  }
+}
+
+@keyframes floatLeavesReverse {
+  0% {
+    transform: translateY(50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(40%) rotate(-20deg);
+  }
+}
+  
