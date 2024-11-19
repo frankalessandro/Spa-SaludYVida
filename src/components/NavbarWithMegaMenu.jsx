@@ -107,7 +107,7 @@ function NavListMenu({ title, items }) {
         <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2">
           {React.createElement(icon, {
             strokeWidth: 2,
-            className: "h-6 text-gray-900 w-6",
+            className: "h-6 text-textGray w-6",
           })}
         </div>
         <div>
@@ -120,7 +120,7 @@ function NavListMenu({ title, items }) {
           </Typography>
           <Typography
             variant="paragraph"
-            className="text-xs !font-medium text-blue-gray-500"
+            className="text-xs !font-medium text-black"
           >
             {description}
           </Typography>
@@ -137,11 +137,12 @@ function NavListMenu({ title, items }) {
         offset={{ mainAxis: 20 }}
         placement="bottom"
         allowHover={true}
+        className="z-1"
       >
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-gray-900"
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-textDark"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
@@ -174,13 +175,13 @@ function NavListMenu({ title, items }) {
 function NavList() {
   return (
     <List className="mt-4 mb-6 p-0 lg:mt-0 lg:mb-0 lg:flex-row lg:p-1">
-      <Link to="/" className="font-medium text-gray-900">
+      <Link to="/" className="font-medium text-textDark">
         <Typography
           variant="small"
           color="blue-gray"
           className="text-gray-900"
         >
-          <ListItem className="flex items-center gap-2 py-2 pr-4 text-gray-900">Inicio</ListItem>
+          <ListItem className="flex items-center gap-2 py-2 pr-4 text-textDark">Inicio</ListItem>
         </Typography>
       </Link>
       {/* Menu for Servicios Faciales */}
@@ -216,14 +217,14 @@ export function NavbarWithMegaMenu() {
 
   return (
     <Navbar className="mx-auto w-full px-4 py-2">
-      <div className="flex items-center justify-between text-blue-gray-900">
+      <div className="flex items-center justify-between text-textDark">
         <Link to={'/'}>
           <img src={Logo} alt="Logo" className="w-12 h-12 cursor-pointer hover:bg-blue-gray-50 hover:rounded-md" />
         </Link>
         <div className="hidden lg:block">
           <NavList />
         </div>
-        <button className="align-middle select-none font-sans font-bold text-center uppercase disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-purple-500 text-white shadow-md shadow-purple-500/20 hover:shadow-xl hover:shadow-purple-500/60 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none transform transition-all duration-300 ease-out translate-y-0 opacity-100">
+        <button className="align-middle select-none font-sans font-bold text-center uppercase disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-Botones text-white shadow-md shadow-purple-500/20 hover:shadow-xl hover:bg-BotonesHover focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none transform transition-all duration-300 ease-out translate-y-0 opacity-100">
           Contactanos
         </button>
 

@@ -45,18 +45,18 @@ export function SpaAppointmentStepper() {
         <Stepper activeStep={activeStep}>
           {steps.map((step, index) => (
             <Step key={index} onClick={() => setActiveStep(index)}>
-              <UserIcon className="h-5 w-5 text-purple-700" />
+              <UserIcon className="h-5 w-5 text-colorIcon" />
               <div className="absolute -bottom-[4.5rem] w-max text-center">
                 <Typography
                   variant="h6"
-                  color={activeStep === index ? "purple" : "gray"}
-                  className="text-white"
+                  color={activeStep === index ? "red" : "gray"}
+                  className="text-textLight"
                 >
                   {step.label}
                 </Typography>
                 <Typography
                   color={activeStep === index ? "purple" : "gray"}
-                  className="font-normal text-gray-600"
+                  className="font-normal text-textLight"
                 >
                   {step.description}
                 </Typography>
