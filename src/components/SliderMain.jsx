@@ -120,11 +120,11 @@ export const SliderMain = () => {
                     <span className='text-md'>{slides[currentSlide].title}</span>
                     <span className=''>{slides[currentSlide].ReqConsulta === 'Si' ? 'Requiere consulta' : 'No requiere consulta'}</span>
                     <div className="btn-info">
-                        <div className="btn-info-child"><TimerIcon width={30} height={30} /><div className='child-info'><p>Tiempo:</p><p>{slides[currentSlide].duracion}</p></div></div>
-                        <div className="btn-info-child"><HobbyKnifeIcon width={30} height={30} /><div className='child-info'><p>Invasión:</p><p>{slides[currentSlide].invasion}</p></div></div>
-                        <div className="btn-info-child"><PersonIcon width={30} height={30} /><div className='child-info'><p>Edad Mínima:</p><p>{slides[currentSlide].edadMinima}</p></div></div>
+                        <div className="btn-info-child"><TimerIcon width={30} height={30} /><div className='child-info'><div>Tiempo:</div><div>{slides[currentSlide].duracion}</div></div></div>
+                        <div className="btn-info-child"><HobbyKnifeIcon width={30} height={30} /><div className='child-info'><div>Invasión:</div><div>{slides[currentSlide].invasion}</div></div></div>
+                        <div className="btn-info-child"><PersonIcon width={30} height={30} /><div className='child-info'><div>Edad Mínima:</div><div>{slides[currentSlide].edadMinima}</div></div></div>
                     </div>
-                    <div className='content-descr'><p>{slides[currentSlide].description}</p></div>
+                    <div className='content-descr'><div>{slides[currentSlide].description}</div></div>
                     <div className='container-btn-showmore'>
                         <Link to={slides[currentSlide].link}>
                             <button className='content-btn'>Saber más</button>
