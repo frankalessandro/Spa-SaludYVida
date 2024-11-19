@@ -216,7 +216,7 @@ export function NavbarWithMegaMenu() {
   }, []);
 
   return (
-    <Navbar className="mx-auto w-full px-4 py-2">
+    <Navbar className="mx-auto w-full px-4 py-2  top-0 left-0 z-50">
       <div className="flex items-center justify-between text-textDark">
         <Link to={'/'}>
           <img src={Logo} alt="Logo" className="w-12 h-12 cursor-pointer hover:bg-blue-gray-50 hover:rounded-md" />

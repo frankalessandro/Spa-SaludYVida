@@ -10,21 +10,6 @@ const backgroundSVGs = [
 ];
 
 const sections = [
-  // {
-  //   title: "Bienvenido a nuestro SPA",
-  //   content: "Relájate en un espacio único donde cuidamos cada detalle para tu bienestar.",
-  //   image: "home/happySpa.webp",
-  // },
-  // {
-  //   title: "Nuestros Servicios",
-  //   content: "Masajes, tratamientos faciales y más para tu relajación completa.",
-  //   image: "home/happySpa.webp", 
-  //   details: [
-  //     "Masajes terapéuticos y relajantes",
-  //     "Tratamientos faciales personalizados",
-  //     "Aromaterapia y mucho más"
-  //   ]
-  // },
   {
     title: "Ubicación y Contacto",
     content: "Visítanos en Calle 59b #34e-24 o contáctanos para reservar.",
@@ -34,27 +19,7 @@ const sections = [
       { platform: "Instagram", link: "https://instagram.com", color: "bg-pink-600" },
       { platform: "Facebook", link: "https://facebook.com", color: "bg-blue-600" }
     ]
-  },
-  // {
-  //   title: "Asesores Siempre Disponibles",
-  //   content: "Nuestro equipo está disponible 24/7 para ayudarte a resolver todas tus dudas.",
-  //   image: "home/happySpa.webp", 
-  //   details: [
-  //     "Atención personalizada",
-  //     "Consultas gratuitas",
-  //     "Disponibilidad 24/7"
-  //   ]
-  // },
-  // {
-  //   title: "Agenda tu Cita",
-  //   content: "Reserva tu experiencia y disfruta de nuestros servicios.",
-  //   image: "home/happySpa.webp", 
-  // },
-  // {
-  //   title: "Ubicación",
-  //   content: "Encuéntranos en la Calle 59b #34e-24, una zona tranquila y exclusiva.",
-  //   type: "map"
-  // }
+  }
 ];
 
 export const SpaAppointmentStepper = () => {
@@ -63,21 +28,19 @@ export const SpaAppointmentStepper = () => {
   useEffect(() => {
     scrollRevealRef.current = ScrollReveal();
 
-    scrollRevealRef.current.reveal('.reveal-content', {
-      duration: 1200,
-      distance: '50px',
-      easing: 'ease-out',
-      origin: 'bottom',
-      reset: true
-    });
-
+    // Configuración para la animación de la imagen de la ubicación y contacto
     scrollRevealRef.current.reveal('.reveal-image', {
       duration: 1500,
       delay: 300,
-      origin: 'right',
+      origin: 'right', // Viene desde la derecha
       distance: '100px',
-      rotate: { x: 0, y: 45, z: 0 },
-      reset: true
+      rotate: { x: 0, y: 0, z: 15 }, // Rotación inicial de 15 grados
+      opacity: 0,
+      reset: true,
+      afterReveal: (domEl) => {
+        domEl.style.transform = 'rotate(0deg)'; // Al final, la imagen debe quedar recta
+        domEl.style.opacity = 1; // Aseguramos que la imagen sea completamente visible
+      }
     });
 
     return () => {
@@ -89,20 +52,6 @@ export const SpaAppointmentStepper = () => {
     const isEvenSection = index % 2 === 0;
     
     const renderContent = () => {
-      if (section.type === 'map') {
-        return (
-          <div className="w-full flex flex-col items-center justify-center p-6 reveal-content">
-            <h2 className="text-3xl font-semibold mb-6 text-center text-indigo-800">{section.title}</h2>
-            <iframe
-              className="w-full max-w-6xl h-[500px] rounded-lg shadow-lg"
-              src="https://www.google.com/maps/embed?pb=..."
-              allowFullScreen=""
-              loading="lazy"
-            ></iframe>
-          </div>
-        );
-      }
-
       return (
         <div className={`
           w-full flex flex-col md:flex-row items-center justify-center 
@@ -116,17 +65,6 @@ export const SpaAppointmentStepper = () => {
           `}>
             <h2 className="text-3xl font-semibold mb-4 text-indigo-800">{section.title}</h2>
             <p className="text-lg mb-4 text-gray-700">{section.content}</p>
-
-            {section.details && (
-              <ul className={`
-                list-disc mb-4 space-y-2
-                ${isEvenSection ? 'list-inside text-left' : 'list-inside text-right'}
-              `}>
-                {section.details.map((detail, i) => (
-                  <li key={i} className="text-base text-gray-600">{detail}</li>
-                ))}
-              </ul>
-            )}
 
             {section.contactInfo && (
               <div className={`
@@ -171,7 +109,7 @@ export const SpaAppointmentStepper = () => {
           backgroundPosition: 'center'
         }}
       >
-        <div className="absolute inset-0 bg-white bg-opacity-70"></div>
+        <div className="absolute inset-0 "></div>
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
           {renderContent()}
         </div>

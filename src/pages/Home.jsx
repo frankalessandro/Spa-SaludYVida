@@ -41,18 +41,18 @@ export const Home = () => {
     // Configuración para revelar hojas con efecto realista
     scrollRevealRef.current.reveal(".container-leaves", {
       duration: 2000, // Aumentar duración para efecto más suave
-      distance: "150px",
-      origin: "bottom",
+      distance: "0px", // No mover más allá de la posición final
       opacity: 1,
       scale: 1,
       delay: 800, // Retraso más largo
       beforeReveal: (domEl) => {
         domEl.style.opacity = 0;
-        domEl.style.transform = 'translateY(100px) rotate(-5deg) scale(0.8)';
+        domEl.style.transform = 'translateY(100vh)'; // Empezar fuera de la pantalla, abajo
+        domEl.style.transition = 'transform 2s ease-out, opacity 2s ease-out'; // Transición suave
       },
       afterReveal: (domEl) => {
         domEl.style.opacity = 1;
-        domEl.style.transform = 'translateY(0) rotate(0) scale(1)';
+        domEl.style.transform = 'translateY(0)'; // Termina en su posición original
         domEl.classList.add('animate__animated', 'animate__fadeIn');
       }
     });
@@ -63,7 +63,7 @@ export const Home = () => {
   }, []);
 
   return (
-    <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-gradient-to-b from-[#f7f8fa] to-[#dfe4ea] relative">
+    <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] relative">
       {/* Navbar */}
       <NavbarWithMegaMenu />
 
@@ -83,7 +83,7 @@ export const Home = () => {
               { title: "Terapias Energéticas", description: "Restaura tu campo energético y vitalidad", image: "/home/terapiaEnergetica.webp" },
               { title: "Medicina Natural", description: "Tratamientos naturales personalizados", image: "/home/mujerSpa.webp" }
             ].map((service, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 reveal-service">
+              <div key={index} className="rounded-lg shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 reveal-service">
                 <img src={service.image} alt={service.title} className="w-full h-48 object-cover transition-all duration-500 transform hover:scale-110" />
                 <div className="p-6">
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">{service.title}</h3>
@@ -103,7 +103,7 @@ export const Home = () => {
       {/* Contenedores de hojas con imágenes realistas */}
       {/* <div
         id="left-leave"
-        className="container-leaves fixed bottom-0 left-0 min-w-[100vw] md:min-w-[20vw] lg:w-[100vw] opacity-70 z-0"
+        className="container-leaves fixed left-0 max-h-[20vh] top-[80vh] min-w-[60vw] md:min-w-[20vw] lg:w-[10vw] lg:h-[40vh] opacity-70 z-0"
       >
       </div> */}
 
