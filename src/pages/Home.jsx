@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavbarWithMegaMenu } from '../components/NavbarWithMegaMenu';
-import { SliderMain } from '../components/Slidermain';
+import { SliderMain } from '../components/SliderMain';
 import { Rating, Switch } from "@material-tailwind/react";
 import { SpaAppointmentStepper } from '../components/Stepper';
 export const Home = () => {

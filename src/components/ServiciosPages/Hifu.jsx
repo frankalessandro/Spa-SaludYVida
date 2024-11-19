@@ -113,15 +113,15 @@ export const Hifu = () => {
               data-aos-delay={index * 100}
             >
               <div className="relative h-96 overflow-hidden rounded-xl">
-                <img 
+                <img
                   src={image}
                   alt={`Resultado ${index + 1}`}
                   className="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                <p className="absolute bottom-4 left-4 text-textDark text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="absolute bottom-4 left-4 text-textDark text-lg font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   {textImages[index]}
-                </p>
+                </div>
               </div>
             </div>
           ))}
@@ -165,7 +165,7 @@ export const Hifu = () => {
                   {item.step}
                 </div>
                 <h3 className="text-2xl font-semibold text-textDark mt-4 mb-4">{item.title}</h3>
-                <p className="text-textLight">{item.description}</p>
+                <div className="text-textLight">{item.description}</div>
               </motion.div>
             ))}
           </div>
@@ -197,7 +197,7 @@ export const Hifu = () => {
                 variants={fadeInUp}
               >
                 <Check className="text-blue-400 flex-shrink-0" />
-                <p className="text-textLight text-lg">{benefit}</p>
+                <div className="text-textLight text-lg">{benefit}</div>
               </motion.div>
             ))}
           </div>
@@ -222,7 +222,7 @@ export const Hifu = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 transform -skew-y-12 translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
               <h3 className="text-2xl font-semibold text-textDark mb-4">Sesión Individual</h3>
-              <p className="text-5xl font-bold text-textDark mb-6">$1,000,000</p>
+              <div className="text-5xl font-bold text-textDark mb-6">$1,000,000</div>
               <ul className="text-textLight space-y-4">
                 <li className="flex items-center space-x-2">
                   <Check className="text-blue-400" />
@@ -246,7 +246,7 @@ export const Hifu = () => {
             >
               <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 transform -skew-y-12 translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
               <h3 className="text-2xl font-semibold text-textDark mb-4">Tratamiento Completo</h3>
-              <p className="text-5xl font-bold text-textDark mb-6">$2,500,000</p>
+              <div className="text-5xl font-bold text-textDark mb-6">$2,500,000</div>
               <ul className="text-textLight space-y-4">
                 <li className="flex items-center space-x-2">
                   <Check className="text-blue-400" />
@@ -286,9 +286,9 @@ export const Hifu = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-textDark mb-8">
             Comienza tu Transformación Hoy
           </h2>
-          <p className="text-xl text-textLight mb-12 max-w-2xl mx-auto">
+          <div className="text-xl text-textLight mb-12 max-w-2xl mx-auto">
             Agenda tu valoración gratuita y descubre cómo HIFU 7D puede ayudarte a lograr una piel más joven y radiante
-          </p>
+          </div>
           <motion.button
             className="px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full text-textDark font-semibold text-lg flex items-center space-x-2 mx-auto hover:shadow-lg hover:shadow-blue-500/30 transition-all"
             whileHover={{ scale: 1.05 }}
