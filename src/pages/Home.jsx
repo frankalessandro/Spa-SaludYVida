@@ -59,9 +59,9 @@ export const Home = () => {
 
   return (
 
-    <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-gradient-to-b from-[#f7f8fa] to-[#dfe4ea] z-[10]">
+    <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]">
       {/* Navbar */}
-      <AnimatedBackground />  
+      <AnimatedBackground />
       <NavbarWithMegaMenu />
       {/* Slider */}
       <section className="w-full h-[90vh] flex items-center justify-center reveal-section scroll-snap-align-start relative overflow-hidden">
@@ -71,19 +71,19 @@ export const Home = () => {
       {/* Servicios */}
       <section className="w-full py-16 reveal-section scroll-snap-align-start">
         <div className="max-w-7xl mx-auto px-4 text-center ">
-          <h2 className="text-4xl font-extrabold text-gray-900 mb-6 reveal-title ">Servicios Holísticos</h2>
-          <p className="text-xl text-gray-600 mb-12">Descubre nuestro enfoque integral para tu bienestar</p>
+          <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)]  mb-6 reveal-title ">Servicios Holísticos</h2>
+          <p className="text-xl text-[var(--color-text-gray)] mb-12">Descubre nuestro enfoque integral para tu bienestar</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               { title: "Masajes Terapéuticos", description: "Técnicas ancestrales para equilibrar cuerpo y mente", image: "/home/happySpa.webp" },
               { title: "Terapias Energéticas", description: "Restaura tu campo energético y vitalidad", image: "/home/terapiaEnergetica.webp" },
               { title: "Medicina Natural", description: "Tratamientos naturales personalizados", image: "/home/mujerSpa.webp" }
             ].map((service, index) => (
-              <div key={index} className="bg-white rounded-lg shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 reveal-service">
+              <div key={index} className="bg-[var(--color-background-white)] rounded-lg shadow-xl overflow-hidden transform hover:scale-105 hover:shadow-2xl transition-all duration-300 reveal-service">
                 <img src={service.image} alt={service.title} className="w-full h-48 object-cover transition-all duration-500 transform hover:scale-110" />
                 <div className="p-6">
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{service.title}</h3>
-                  <p className="text-gray-500">{service.description}</p>
+                  <h3 className="text-xl font-semibold text-[var(--color-text-dark)]  mb-2">{service.title}</h3>
+                  <p className="text-[var(--color-text-gray)] ">{service.description}</p>
                 </div>
               </div>
             ))}
@@ -95,19 +95,19 @@ export const Home = () => {
       <section className="w-full py-16 flex items-center justify-center reveal-section scroll-snap-align-start">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
           <div className="space-y-8">
-            <h2 className="text-4xl font-extrabold text-gray-900 mb-6 reveal-title">Proceso de Reserva</h2>
+            <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)]  mb-6 reveal-title">Proceso de Reserva</h2>
             {[
               { step: 1, title: "Busca el servicio que deseas", description: "Explora nuestra amplia gama de servicios holísticos" },
               { step: 2, title: "Envíanos un mensaje por WhatsApp", description: "Contacta con nosotros de manera rápida y sencilla" },
               { step: 3, title: "Una asesora te guiará paso a paso", description: "Recibe atención personalizada para tu reserva" }
             ].map((step, index) => (
               <div key={index} className="flex flex-col sm:flex-row sm:items-start gap-4 reveal-service">
-                <div className="w-12 h-12 bg-indigo-500 rounded-full flex-shrink-0 flex items-center justify-center text-white font-bold text-lg">
+                <div className="w-12 h-12  rounded-full flex-shrink-0 flex items-center justify-center text-white bg-[var(--color-button-alternative)] font-bold text-lg">
                   {step.step}
                 </div>
                 <div>
                   <h3 className="text-xl font-semibold text-gray-800 mb-2">{step.title}</h3>
-                  <p className="text-gray-500">{step.description}</p>
+                  <p className="text-[var(--color-text-gray)] ">{step.description}</p>
                 </div>
               </div>
             ))}
@@ -119,7 +119,7 @@ export const Home = () => {
       </section>
 
       {/* Stepper */}
-      <section className="w-full h-[100vh] bg-green-100/50 py-16 reveal-section scroll-snap-align-start">
+      <section className="w-full h-[100vh] py-16 reveal-section scroll-snap-align-start">
         <SpaAppointmentStepper />
       </section>
       <FloatButtons />

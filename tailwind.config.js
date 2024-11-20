@@ -14,6 +14,9 @@ export default withMT({
         underline: "var(--color-underline)",
         background1: "var(--color-bg-1)",
         background2: "var(--color-bg-2)",
+        indigo: "var(--color-indigo)", // #6366f1
+        bgGreenLight: "var(--color-bg-green-light)", // rgba(209, 250, 229, 0.5)
+        fillGreenDark: "var(--color-fill-green-dark)", // #167364
       },
       keyframes: {
         fly: {

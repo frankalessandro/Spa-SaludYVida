@@ -2,9 +2,20 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from 'scrollreveal';
 import { MapPin, Phone, Mail } from 'lucide-react';
+
+const colors = {
+  primaryBackground: '#e0f3ff',
+  secondaryBackground: '#c0e4ff',
+  accentColor: '#b0d4ff',
+  textPrimary: '#2d3748',
+  textSecondary: '#718096',
+  linkColor: '#38b2ac',
+  iconColor: '#38b2ac',
+};
+
 const backgroundSVGs = [
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 1600 800' preserveAspectRatio='none'%3E%3Cpath fill='%23e0f3ff' d='M0 0l800 400L1600 0v800H0z'/%3E%3C/svg%3E",
-  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 1600 800' preserveAspectRatio='none'%3E%3Cpath fill='%23c0e4ff' d='M0 0c0 0 800 400 1600 0v800H0z'/%3E%3C/svg%3E"
+  `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 1600 800' preserveAspectRatio='none'%3E%3Cpath fill='${colors.primaryBackground}' d='M0 0l800 400L1600 0v800H0z'/%3E%3C/svg%3E`,
+  `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 1600 800' preserveAspectRatio='none'%3E%3Cpath fill='${colors.secondaryBackground}' d='M0 0c0 0 800 400 1600 0v800H0z'/%3E%3C/svg%3E`,
 ];
 
 const sections = [
@@ -20,15 +31,13 @@ const sections = [
   }
 ];
 
-
-
 const BackgroundShapes = () => {
   const shapes = [
-    { type: 'circle', size: { desktop: 600, mobile: 250 }, color: '#b0d4ff', delay: 0, top: '10%', left: '-10%' },
-    { type: 'circle', size: { desktop: 400, mobile: 150 }, color: '#d0e6ff', delay: 0.5, top: '70%', right: '-5%' },
-    { type: 'circle', size: { desktop: 800, mobile: 350 }, color: '#90c4ff', delay: 1, bottom: '-20%', left: '5%' },
-    { type: 'triangle', size: { desktop: 300, mobile: 100 }, color: '#a0c4ff', delay: 0.2, top: '30%', right: '10%' },
-    { type: 'diamond', size: { desktop: 250, mobile: 125 }, color: '#c0d4ff', delay: 0.7, bottom: '10%', right: '20%' }
+    { type: 'circle', size: { desktop: 600, mobile: 250 }, color: colors.accentColor, delay: 0, top: '10%', left: '-10%' },
+    { type: 'circle', size: { desktop: 400, mobile: 150 }, color: colors.secondaryBackground, delay: 0.5, top: '70%', right: '-5%' },
+    { type: 'circle', size: { desktop: 800, mobile: 350 }, color: colors.primaryBackground, delay: 1, bottom: '-20%', left: '5%' },
+    { type: 'triangle', size: { desktop: 300, mobile: 100 }, color: colors.accentColor, delay: 0.2, top: '30%', right: '10%' },
+    { type: 'diamond', size: { desktop: 250, mobile: 125 }, color: colors.secondaryBackground, delay: 0.7, bottom: '10%', right: '20%' }
   ];
 
   return shapes.map((shape, index) => {
@@ -116,7 +125,6 @@ const BackgroundShapes = () => {
   });
 };
 
-
 export const SpaAppointmentStepper = () => {
   const scrollRevealRef = useRef(null);
 
@@ -148,17 +156,18 @@ export const SpaAppointmentStepper = () => {
           backgroundPosition: 'center'
         }}
       >
-        {/* <FlyingBirdsBackground /> */}
         <BackgroundShapes />
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
           <div className="w-full flex flex-col md:flex-row items-center justify-center p-6 space-y-6 md:space-y-0 md:space-x-12">
             <div className="w-full md:w-1/2 text-center md:text-left reveal-content md:bg-white/70 p-8 rounded-xl shadow-2xl backdrop-blur-sm">
-              <h2 className="text-2xl md:text-4xl font-bold mb-6 text-teal-700 flex items-center justify-center md:justify-start gap-3">
+              <h2 className="text-2xl md:text-4xl font-bold mb-6 flex items-center justify-center md:justify-start gap-3" style={{ color: colors.textPrimary }}>
                 <MapPin className="text-teal-500 w-6 md:w-9 h-6 md:h-9" />
                 {section.title}
               </h2>
-              <p className="text-base md:text-lg mb-6 text-gray-800">{section.content}</p>
+              <p className="text-base md:text-lg mb-6" style={{ color: colors.textSecondary }}>
+                {section.content}
+              </p>
 
               <div className="mt-6 text-gray-700 space-y-4">
                 <div className="flex items-center gap-3">
@@ -174,7 +183,7 @@ export const SpaAppointmentStepper = () => {
                     {section.contactDetails.email}
                   </a>
                 </div>
-                <div className="flex items-center gap-3 text-gray-700">
+                <div className="flex items-center gap-3" style={{ color: colors.textSecondary }}>
                   <MapPin className="text-teal-500 w-5 md:w-6 h-5 md:h-6" />
                   <span className="text-sm md:text-base">{section.contactDetails.address}</span>
                 </div>
