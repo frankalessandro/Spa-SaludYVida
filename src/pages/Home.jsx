@@ -5,6 +5,7 @@ import { NavbarWithMegaMenu } from "../components/NavbarWithMegaMenu";
 import { SliderMain } from "../components/SliderMain";
 import { SpaAppointmentStepper } from "../components/Stepper";
 import img_spa_ambiente from "../assets/img/home/spaAmbiente.webp";
+import { FloatButtons } from "../components/FloatButtons";
 const commonRevealConfig = {
   duration: 1000,
   distance: "50px",
@@ -91,6 +92,7 @@ export const Home = () => {
       <section className="w-full py-16 reveal-section scroll-snap-align-start">
         <SpaAppointmentStepper />
       </section>
+      <FloatButtons/>
     </div>
   );
 };
