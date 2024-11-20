@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import ScrollReveal from 'scrollreveal';
 import { MapPin, Phone, Mail } from 'lucide-react';
-import { FlyingBirdsBackground } from './FlyingBirdsBackground';
 const backgroundSVGs = [
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 1600 800' preserveAspectRatio='none'%3E%3Cpath fill='%23e0f3ff' d='M0 0l800 400L1600 0v800H0z'/%3E%3C/svg%3E",
   "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%' height='100%' viewBox='0 0 1600 800' preserveAspectRatio='none'%3E%3Cpath fill='%23c0e4ff' d='M0 0c0 0 800 400 1600 0v800H0z'/%3E%3C/svg%3E"

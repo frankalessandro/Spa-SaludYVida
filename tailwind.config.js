@@ -15,46 +15,63 @@ export default withMT({
         background1: "var(--color-bg-1)",
         background2: "var(--color-bg-2)",
       },
+      keyframes: {
+        fly: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        'slide-in-bottom-left': {
+          '0%': {
+            transform: 'translate(-100%, 100%) rotate(75deg)',
+            opacity: '0'
+          },
+          '30%': {
+            transform: 'translate(-60%, 60%) rotate(45deg)',
+            opacity: '0.3'
+          },
+          '100%': {
+            transform: 'translate(0, 0) rotate(15deg)',
+            opacity: '1'
+          }
+        },
+        'float-rotate-left': {
+          '0%, 100%': {
+            transform: 'translateY(-50%) translateX(0) rotate(0deg)',
+          },
+          '25%': {
+            transform: 'translateY(-60%) translateX(10px) rotate(-5deg)',
+          },
+          '50%': {
+            transform: 'translateY(-50%) translateX(0) rotate(0deg)',
+          },
+          '75%': {
+            transform: 'translateY(-40%) translateX(10px) rotate(5deg)',
+          }
+        },
+        'float-rotate-right': {
+          '0%, 100%': {
+            transform: 'translateY(-50%) translateX(0) rotate(0deg)',
+          },
+          '25%': {
+            transform: 'translateY(-60%) translateX(-10px) rotate(5deg)',
+          },
+          '50%': {
+            transform: 'translateY(-50%) translateX(0) rotate(0deg)',
+          },
+          '75%': {
+            transform: 'translateY(-40%) translateX(-10px) rotate(-5deg)',
+          }
+        }
+      },
+      animation: {
+        fly: 'fly 10s linear infinite',
+        'float-rotate-left': 'float-rotate-left 6s ease-in-out infinite',
+        'float-rotate-right': 'float-rotate-right 6s ease-in-out infinite',
+        'slide-in-bottom-left': 'slide-in-bottom-left 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' //animacion de hoja en el home
+
+      }
     },
   },
   plugins: [scrollbarHide],
-  keyframes: {
-    fly: {
-      '0%': { transform: 'translateX(-100%)' },
-      '100%': { transform: 'translateX(100%)' },
-    },
-    'float-rotate-left': {
-      '0%, 100%': {
-        transform: 'translateY(-50%) translateX(0) rotate(0deg)',
-      },
-      '25%': {
-        transform: 'translateY(-60%) translateX(10px) rotate(-5deg)',
-      },
-      '50%': {
-        transform: 'translateY(-50%) translateX(0) rotate(0deg)',
-      },
-      '75%': {
-        transform: 'translateY(-40%) translateX(10px) rotate(5deg)',
-      }
-    },
-    'float-rotate-right': {
-      '0%, 100%': {
-        transform: 'translateY(-50%) translateX(0) rotate(0deg)',
-      },
-      '25%': {
-        transform: 'translateY(-60%) translateX(-10px) rotate(5deg)',
-      },
-      '50%': {
-        transform: 'translateY(-50%) translateX(0) rotate(0deg)',
-      },
-      '75%': {
-        transform: 'translateY(-40%) translateX(-10px) rotate(-5deg)',
-      }
-    }
-  },
-  animation: {
-    fly: 'fly 10s linear infinite',
-    'float-rotate-left': 'float-rotate-left 6s ease-in-out infinite',
-    'float-rotate-right': 'float-rotate-right 6s ease-in-out infinite'
-  }
+
 });
