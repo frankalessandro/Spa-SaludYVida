@@ -19,6 +19,10 @@ export default withMT({
   },
   plugins: [scrollbarHide],
   keyframes: {
+    fly: {
+      '0%': { transform: 'translateX(-100%)' },
+      '100%': { transform: 'translateX(100%)' },
+    },
     'float-rotate-left': {
       '0%, 100%': {
         transform: 'translateY(-50%) translateX(0) rotate(0deg)',
@@ -49,6 +53,7 @@ export default withMT({
     }
   },
   animation: {
+    fly: 'fly 10s linear infinite',
     'float-rotate-left': 'float-rotate-left 6s ease-in-out infinite',
     'float-rotate-right': 'float-rotate-right 6s ease-in-out infinite'
   }

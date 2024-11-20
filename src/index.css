@@ -127,3 +127,45 @@
   }
 }
   
+
+
+ /* Animación de batir las alas */
+@keyframes flap {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Estilo para las alas */
+.wing-left, .wing-right {
+  animation: flap 1s infinite ease-in-out;
+}
+
+.wing-left {
+  animation-delay: 0s;
+}
+
+.wing-right {
+  animation-delay: 0.5s; /* Retraso para que las alas se muevan en un ciclo alterno */
+}
+
+/* Animación de vuelo para los pájaros */
+@keyframes fly {
+  0% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(1deg);
+  }
+}
+
+.animate-fly {
+  animation: fly 10s linear infinite;
+}
+
