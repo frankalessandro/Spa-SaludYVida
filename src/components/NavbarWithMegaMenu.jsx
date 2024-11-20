@@ -94,7 +94,7 @@ function NavListMenu({ title, items }) {
   const renderItems = items.map(({ icon, title, description, to }, key) => (
     <Link to={to} key={key}>
       <MenuItem className="flex items-center gap-3 rounded-lg">
-        <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2">
+        <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
           {React.createElement(icon, {
             className: "h-6 text-textGray w-6",
           })}
