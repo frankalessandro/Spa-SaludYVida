@@ -12,7 +12,7 @@ export const AnimatedBackground = () => {
   });
 
   return (
-    <div className="fixed inset-0 md:left-[40%] rotate-[-12] md:rotate-45 w-[100vw] md:w-[30vw] h-full pointer-events-none z-0 opacity-20 md:opacity-50">
+    <div className="fixed inset-0 md:left-[20%] rotate-[-12] md:rotate-45 w-[130vw] md:w-[40vw] h-full pointer-events-none z-0 opacity-20 md:opacity-50">
       {/* Layer 1: Gradient Background */}
       <div className="absolute inset-0  opacity-80" />
       {/* Layer 2: Animated Leaves */}

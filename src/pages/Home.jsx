@@ -61,7 +61,10 @@ export const Home = () => {
 
     <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]">
       {/* Navbar */}
-      <AnimatedBackground />
+      <div className="overflow-hidden max-w-[100vw]">
+        <AnimatedBackground />
+
+      </div>
       <NavbarWithMegaMenu />
       {/* Slider */}
       <section className="w-full h-[90vh] flex items-center justify-center reveal-section scroll-snap-align-start relative overflow-hidden">
