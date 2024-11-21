@@ -14,6 +14,7 @@
   flex-direction: column;
   align-items: center;
   --color-button-light: rgba(198, 111, 197, 0.865);
+  --bg-gradient: rgba(255, 255, 255, 0.296);
   /*color de boton navbar CONTACTANOS*/
   --color-button-light-hover: rgba(183, 228, 205, 0.865);
   --color-button-alternative: rgb(201, 128, 193);
@@ -30,6 +31,9 @@
   --color-bg-1: #f7fafca8;
   --color-bg-2: #2068af;
   --color-background-white:white;
+  /* variables para botones de paginas como hifu */
+  --init-gradiant-button-views:  rgba(172,218,143,1) 38%;
+  --end-gradiant-button-views:  rgba(159,85,181,1) 100%; 
   background: rgb(255, 255, 255);
   background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(233, 250, 225, 1) 35%, rgba(244, 206, 255, 1) 100%);
 }
@@ -169,4 +173,5 @@
 .animate-fly {
   animation: fly 10s linear infinite;
 }
+
 

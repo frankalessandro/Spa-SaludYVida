@@ -130,7 +130,7 @@ export const Home = () => {
 
       <div
         ref={svgRef}
-        className="absolute right-[-50px] opacity-40 md:right-0 bottom-[-15vh] md:bottom-[-25vh] z-[0] w-[40vw] md:w-[20vw] md:h-[30vh]"
+        className="absolute right-[-50px] opacity-40 md:right-0 bottom-[-15vh] md:bottom-[-25vh] w-[40vw] md:w-[20vw] md:h-[30vh]"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
