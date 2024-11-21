@@ -17,11 +17,11 @@ import {
   HamburgerMenuIcon,
   Cross1Icon,
   SunIcon,
-} from "@radix-ui/react-icons"; // Importamos los íconos de Radix UI
+} from "@radix-ui/react-icons";
 import Logo from '../assets/SpaLogo.svg';
 import { Link } from "react-router-dom";
 
-// Items for "Servicios Faciales"
+// [Previous menu items remain the same...]
 const facialServicesMenuItems = [
   {
     title: "HIFU 7D",
@@ -43,7 +43,6 @@ const facialServicesMenuItems = [
   },
 ];
 
-// Items for "Servicios Corporales"
 const bodyServicesMenuItems = [
   {
     title: "Criolipolisis",
@@ -71,7 +70,6 @@ const bodyServicesMenuItems = [
   },
 ];
 
-// Cuida tu Salud submenu
 const healthMenuItems = [
   {
     title: "Colonterapia",
@@ -94,7 +92,7 @@ function NavListMenu({ title, items }) {
   const renderItems = items.map(({ icon, title, description, to }, key) => (
     <Link to={to} key={key}>
       <MenuItem className="flex items-center gap-3 rounded-lg">
-        <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2 ">
+        <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2">
           {React.createElement(icon, {
             className: "h-6 text-textGray w-6",
           })}
@@ -153,10 +151,34 @@ function NavListMenu({ title, items }) {
           <ul className="grid grid-cols-2 gap-y-2 outline-none outline-0">
             {renderItems}
           </ul>
+
         </MenuList>
       </Menu>
       <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
+        <Collapse open={isMobileMenuOpen}>
+          {renderItems}
+          <div className="mt-4 bg-purple-100 p-4 rounded-lg mx-2">
+            <a 
+              href="https://wa.me/+yourphonenumber" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="block text-center"
+            >
+              <Typography
+                variant="h6"
+                className="text-purple-800 font-bold mb-1"
+              >
+                Valoración gratis en el centro estético
+              </Typography>
+              <Typography
+                variant="small"
+                className="text-purple-700"
+              >
+                Agenda tu cita ahora
+              </Typography>
+            </a>
+          </div>
+        </Collapse>
       </div>
     </React.Fragment>
   );
@@ -204,7 +226,7 @@ export function NavbarWithMegaMenu() {
   }, []);
 
   return (
-    <Navbar className="mx-auto w-full px-4 py-2 z-50">
+    <Navbar className="mx-auto w-full px-4 py-2 z-50 supports-[backdrop-filter]:bg-white/60 backdrop-blur-lg">
       <div className="flex items-center justify-between text-textDark">
         <Link to="/">
           <img

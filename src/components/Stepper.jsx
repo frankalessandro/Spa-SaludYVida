@@ -31,99 +31,99 @@ const sections = [
   }
 ];
 
-const BackgroundShapes = () => {
-  const shapes = [
-    { type: 'circle', size: { desktop: 600, mobile: 250 }, color: colors.accentColor, delay: 0, top: '10%', left: '-10%' },
-    { type: 'circle', size: { desktop: 400, mobile: 150 }, color: colors.secondaryBackground, delay: 0.5, top: '70%', right: '-5%' },
-    { type: 'circle', size: { desktop: 800, mobile: 350 }, color: colors.primaryBackground, delay: 1, bottom: '-20%', left: '5%' },
-    { type: 'triangle', size: { desktop: 300, mobile: 100 }, color: colors.accentColor, delay: 0.2, top: '30%', right: '10%' },
-    { type: 'diamond', size: { desktop: 250, mobile: 125 }, color: colors.secondaryBackground, delay: 0.7, bottom: '10%', right: '20%' }
-  ];
+// const BackgroundShapes = () => {
+//   const shapes = [
+//     { type: 'circle', size: { desktop: 600, mobile: 250 }, color: colors.accentColor, delay: 0, top: '10%', left: '-10%' },
+//     { type: 'circle', size: { desktop: 400, mobile: 150 }, color: colors.secondaryBackground, delay: 0.5, top: '70%', right: '-5%' },
+//     { type: 'circle', size: { desktop: 800, mobile: 350 }, color: colors.primaryBackground, delay: 1, bottom: '-20%', left: '5%' },
+//     { type: 'triangle', size: { desktop: 300, mobile: 100 }, color: colors.accentColor, delay: 0.2, top: '30%', right: '10%' },
+//     { type: 'diamond', size: { desktop: 250, mobile: 125 }, color: colors.secondaryBackground, delay: 0.7, bottom: '10%', right: '20%' }
+//   ];
 
-  return shapes.map((shape, index) => {
-    const AnimatedShape = () => {
-      // Determine shape size based on screen width
-      const shapeSize = window.innerWidth <= 768 ? shape.size.mobile : shape.size.desktop;
+//   return shapes.map((shape, index) => {
+//     const AnimatedShape = () => {
+//       // Determine shape size based on screen width
+//       const shapeSize = window.innerWidth <= 768 ? shape.size.mobile : shape.size.desktop;
 
-      switch (shape.type) {
-        case 'circle':
-          return (
-            <motion.div
-              className="absolute rounded-full opacity-30"
-              style={{
-                width: shapeSize,
-                height: shapeSize,
-                backgroundColor: shape.color,
-                top: shape.top,
-                left: shape.left,
-                right: shape.right,
-                bottom: shape.bottom,
-                zIndex: 0
-              }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.3 }}
-              transition={{
-                duration: window.innerWidth <= 768 ? 3 : 2,
-                delay: shape.delay,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            />
-          );
-        case 'triangle':
-          return (
-            <motion.div
-              className="absolute opacity-20"
-              style={{
-                width: 0,
-                height: 0,
-                borderLeft: `${shapeSize / 2}px solid transparent`,
-                borderRight: `${shapeSize / 2}px solid transparent`,
-                borderBottom: `${shapeSize}px solid ${shape.color}`,
-                top: shape.top,
-                right: shape.right,
-                zIndex: 0
-              }}
-              initial={{ rotate: 0, opacity: 0 }}
-              animate={{ rotate: 360, opacity: 0.2 }}
-              transition={{
-                duration: window.innerWidth <= 768 ? 4 : 3,
-                delay: shape.delay,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            />
-          );
-        case 'diamond':
-          return (
-            <motion.div
-              className="absolute opacity-20 transform rotate-45"
-              style={{
-                width: shapeSize,
-                height: shapeSize,
-                backgroundColor: shape.color,
-                bottom: shape.bottom,
-                right: shape.right,
-                zIndex: 0
-              }}
-              initial={{ scale: 0, opacity: 0 }}
-              animate={{ scale: 1, opacity: 0.2 }}
-              transition={{
-                duration: window.innerWidth <= 768 ? 3.5 : 2.5,
-                delay: shape.delay,
-                repeat: Infinity,
-                repeatType: "reverse"
-              }}
-            />
-          );
-        default:
-          return null;
-      }
-    };
+//       switch (shape.type) {
+//         case 'circle':
+//           return (
+//             <motion.div
+//               className="absolute rounded-full opacity-30"
+//               style={{
+//                 width: shapeSize,
+//                 height: shapeSize,
+//                 backgroundColor: shape.color,
+//                 top: shape.top,
+//                 left: shape.left,
+//                 right: shape.right,
+//                 bottom: shape.bottom,
+//                 zIndex: 0
+//               }}
+//               initial={{ scale: 0, opacity: 0 }}
+//               animate={{ scale: 1, opacity: 0.3 }}
+//               transition={{
+//                 duration: window.innerWidth <= 768 ? 3 : 2,
+//                 delay: shape.delay,
+//                 repeat: Infinity,
+//                 repeatType: "reverse"
+//               }}
+//             />
+//           );
+//         case 'triangle':
+//           return (
+//             <motion.div
+//               className="absolute opacity-20"
+//               style={{
+//                 width: 0,
+//                 height: 0,
+//                 borderLeft: `${shapeSize / 2}px solid transparent`,
+//                 borderRight: `${shapeSize / 2}px solid transparent`,
+//                 borderBottom: `${shapeSize}px solid ${shape.color}`,
+//                 top: shape.top,
+//                 right: shape.right,
+//                 zIndex: 0
+//               }}
+//               initial={{ rotate: 0, opacity: 0 }}
+//               animate={{ rotate: 360, opacity: 0.2 }}
+//               transition={{
+//                 duration: window.innerWidth <= 768 ? 4 : 3,
+//                 delay: shape.delay,
+//                 repeat: Infinity,
+//                 repeatType: "reverse"
+//               }}
+//             />
+//           );
+//         case 'diamond':
+//           return (
+//             <motion.div
+//               className="absolute opacity-20 transform rotate-45"
+//               style={{
+//                 width: shapeSize,
+//                 height: shapeSize,
+//                 backgroundColor: shape.color,
+//                 bottom: shape.bottom,
+//                 right: shape.right,
+//                 zIndex: 0
+//               }}
+//               initial={{ scale: 0, opacity: 0 }}
+//               animate={{ scale: 1, opacity: 0.2 }}
+//               transition={{
+//                 duration: window.innerWidth <= 768 ? 3.5 : 2.5,
+//                 delay: shape.delay,
+//                 repeat: Infinity,
+//                 repeatType: "reverse"
+//               }}
+//             />
+//           );
+//         default:
+//           return null;
+//       }
+//     };
 
-    return <AnimatedShape key={index} />;
-  });
-};
+//     return <AnimatedShape key={index} />;
+//   });
+// };
 
 export const SpaAppointmentStepper = () => {
   const scrollRevealRef = useRef(null);
@@ -156,7 +156,7 @@ export const SpaAppointmentStepper = () => {
           backgroundPosition: 'center'
         }}
       >
-        <BackgroundShapes />
+        {/* <BackgroundShapes /> */}
 
         <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
           <div className="w-full flex flex-col md:flex-row items-center justify-center p-6 space-y-6 md:space-y-0 md:space-x-12">
