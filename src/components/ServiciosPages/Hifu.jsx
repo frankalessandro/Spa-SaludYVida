@@ -96,7 +96,7 @@ export const Hifu = () => {
   return (
     <>
       <NavbarWithMegaMenu />
-      <AnimatedBackground />
+      {/* <AnimatedBackground /> */}
       <div className="min-h-screen absolute bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 top-[-70px] z-0">
         {/* Hero Section - Preserved Original Design with Enhanced Interactions */}
         <motion.section
