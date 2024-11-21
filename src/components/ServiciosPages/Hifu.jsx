@@ -7,6 +7,7 @@ import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { RealResultsTimeline } from "../RealResultsTimeline";
 
 // Image imports
 import img1 from "../../assets/img/hifu/hifu4.webp";
@@ -141,44 +142,9 @@ export const Hifu = () => {
           </div>
         </motion.section>
 
-        {/* Antes/Después Gallery - Preserved Original Design */}
-        <section className="py-20 px-4">
-          <h2 className="text-4xl font-bold text-center text-textDark mb-16">Resultados Reales</h2>
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            {images.map((image, index) => (
-              <motion.div
-                key={index}
-                ref={processRef}
-                className="relative group cursor-pointer"
-                data-aos={index % 2 === 0 ? "fade-up-right" : "fade-up-left"}
-                data-aos-delay={index * 100}
-                whileHover={{
-                  scale: 1.05,
-                  rotate: index % 2 === 0 ? -2 : 2
-                }}
-                transition={{ duration: 0.3 }}
-              >
-                <div className="relative h-96 overflow-hidden rounded-xl">
-                  <img
-                    src={image}
-                    alt={`Resultado ${index + 1}`}
-                    className={`w-full h-full object-cover transform transition-transform duration-1000 ${processInView ? 'scale-110' : 'group-hover:scale-110'}`}
-                  />
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-t from-black/70 to-transparent transition-opacity duration-300 ${processInView ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                  />
-                  <div
-                    className={`absolute bottom-4 left-4 text-textDark text-lg font-semibold transition-opacity duration-300 ${processInView ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`}
-                  >
-                    {textImages[index]}
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </section>
-
-        {/* Proceso de Tratamiento - Enhanced Interactions */}
+        {/* Antes/Después Gallery - Enhanced Timeline */}
+        <RealResultsTimeline />
+        
         <motion.section
           ref={processRef}
           className="py-20 px-4 bg-slate-800/50"

@@ -77,6 +77,7 @@ export default withMT({
       }
     },
   },
-  plugins: [scrollbarHide],
+  plugins: [scrollbarHide, require('daisyui'),
+  ],
 
 });
