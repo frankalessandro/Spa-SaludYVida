@@ -10,7 +10,7 @@ import img_spa_ambiente from "../assets/img/home/spaAmbiente.webp";
 import { FloatButtons } from "../components/FloatButtons";
 import { FooterWithLogo } from "../components/Footer";
 import { AnimatedBackground } from "../components/AnimatedBackground";
-
+import { WhatsAppButton } from "../components/WhatsappButton";
 const commonRevealConfig = {
   duration: 1000,
   distance: "50px",
@@ -100,20 +100,22 @@ export const Home = () => {
           <div className="space-y-8">
             <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)]  mb-6 reveal-title">Proceso de Reserva</h2>
             {[
-              { step: 1, title: "Busca el servicio que deseas", description: "Explora nuestra amplia gama de servicios holísticos" },
-              { step: 2, title: "Envíanos un mensaje por WhatsApp", description: "Contacta con nosotros de manera rápida y sencilla" },
-              { step: 3, title: "Una asesora te guiará paso a paso", description: "Recibe atención personalizada para tu reserva" }
+              { step: 1, title: "Busca el servicio que deseas", description: "" },
+              { step: 2, title: "Envíanos un mensaje por WhatsApp", description: "" },
+              { step: 3, title: "Una asesora te guiará paso a paso", description: "" }
             ].map((step, index) => (
               <div key={index} className="flex flex-col sm:flex-row sm:items-start gap-4 reveal-service">
                 <div className="w-12 h-12  rounded-full flex-shrink-0 flex items-center justify-center text-white bg-[var(--color-button-alternative)] font-bold text-lg">
                   {step.step}
                 </div>
                 <div>
-                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{step.title}</h3>
-                  <p className="text-[var(--color-text-gray)] ">{step.description}</p>
+                  <h3 className="text-xl relative font-semibold top-2 text-gray-800 mb-2">{step.title}</h3>
+                  {/* <p className="text-[var(--color-text-gray)] ">{step.description}</p> */}
                 </div>
               </div>
             ))}
+            <WhatsAppButton />
+
           </div>
           <div className="relative">
             <img src={img_spa_ambiente} alt="Spa ambiente" className="rounded-lg shadow-2xl w-full transform hover:scale-105 transition-all duration-500" />
