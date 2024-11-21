@@ -135,14 +135,12 @@ function NavListMenu({ title, items }) {
             >
               {title}
               <ChevronDownIcon
-                className={`hidden h-3 w-3 transition-transform lg:block ${
-                  isMenuOpen ? "rotate-180" : ""
-                }`}
+                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""
+                  }`}
               />
               <ChevronDownIcon
-                className={`block h-3 w-3 transition-transform lg:hidden ${
-                  isMobileMenuOpen ? "rotate-180" : ""
-                }`}
+                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""
+                  }`}
               />
             </ListItem>
           </Typography>
@@ -157,27 +155,7 @@ function NavListMenu({ title, items }) {
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>
           {renderItems}
-          <div className="mt-4 bg-purple-100 p-4 rounded-lg mx-2">
-            <a 
-              href="https://wa.me/+yourphonenumber" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="block text-center"
-            >
-              <Typography
-                variant="h6"
-                className="text-purple-800 font-bold mb-1"
-              >
-                Valoración gratis en el centro estético
-              </Typography>
-              <Typography
-                variant="small"
-                className="text-purple-700"
-              >
-                Agenda tu cita ahora
-              </Typography>
-            </a>
-          </div>
+
         </Collapse>
       </div>
     </React.Fragment>
@@ -226,7 +204,10 @@ export function NavbarWithMegaMenu() {
   }, []);
 
   return (
-    <Navbar className="mx-auto w-full px-4 py-2 z-50 supports-[backdrop-filter]:bg-white/60 backdrop-blur-lg">
+    <Navbar className="mx-auto fixed left-0 w-[100vw] md:w-[70vw] md:left-[15vw] md:px-4 md:py-2 z-50   supports-[backdrop-filter]:bg-white/60 backdrop-blur-lg">
+      <div className="relative min-w-[100vw] md:min-w-[70vw] left-[-9vw] md:left-[-1vw] top-[-2.4vh] md:top-[-1vh] bg-purple-200 h-10 text-center py-2 md:rounded-t-lg text-[.7em] md:text-sm">
+        Valoración gratis en el centro estético. Agenda tu cita ahora
+      </div>
       <div className="flex items-center justify-between text-textDark">
         <Link to="/">
           <img

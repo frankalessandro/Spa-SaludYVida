@@ -67,12 +67,12 @@ export const Home = () => {
         */}
       <NavbarWithMegaMenu />
       {/* Slider */}
-      <section className="w-full h-[90vh] flex items-center justify-center reveal-section scroll-snap-align-start relative overflow-hidden">
+      <section className="max-w-full h-[150vh] lg:h-[80vh] flex items-center justify-center reveal-section scroll-snap-align-start relative overflow-hidden top-[10vh] mb-10">
         <SliderMain />
       </section>
 
       {/* Servicios */}
-      <section className="w-full py-16 reveal-section scroll-snap-align-start">
+      <section className="relative w-full py-16 reveal-section scroll-snap-align-start">
         <div className="max-w-7xl mx-auto px-4 text-center ">
           <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)]  mb-6 reveal-title ">Servicios Holísticos</h2>
           <p className="text-xl text-[var(--color-text-gray)] mb-12">Descubre nuestro enfoque integral para tu bienestar</p>
@@ -97,31 +97,38 @@ export const Home = () => {
       {/* Proceso de Reserva */}
       <section className="w-full py-16 flex items-center justify-center reveal-section scroll-snap-align-start">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-          <div className="space-y-8">
-            <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)]  mb-6 reveal-title">Proceso de Reserva</h2>
+          <div className="space-y-8 p-10">
+            <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)] mb-6 reveal-title text-center md:text-left">Proceso de Reserva</h2>
             {[
               { step: 1, title: "Busca el servicio que deseas", description: "" },
               { step: 2, title: "Envíanos un mensaje por WhatsApp", description: "" },
               { step: 3, title: "Una asesora te guiará paso a paso", description: "" }
             ].map((step, index) => (
-              <div key={index} className="flex flex-col sm:flex-row sm:items-start gap-4 reveal-service">
-                <div className="w-12 h-12  rounded-full flex-shrink-0 flex items-center justify-center text-white bg-[var(--color-button-alternative)] font-bold text-lg">
+              <div
+                key={index}
+                className="flex flex-col items-center sm:flex-row sm:items-start gap-4 reveal-service p-4 rounded-lg border bg-[var(--color-light-gray)]"
+              >
+                <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center text-white bg-[var(--color-button-alternative)] font-bold text-lg">
                   {step.step}
                 </div>
-                <div>
-                  <h3 className="text-xl relative font-semibold top-2 text-gray-800 mb-2">{step.title}</h3>
-                  {/* <p className="text-[var(--color-text-gray)] ">{step.description}</p> */}
+                <div className="text-center sm:text-left">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-2">{step.title}</h3>
+                  {/* <p className="text-[var(--color-text-gray)]">{step.description}</p> */}
                 </div>
               </div>
             ))}
             <WhatsAppButton />
-
           </div>
           <div className="relative">
-            <img src={img_spa_ambiente} alt="Spa ambiente" className="rounded-lg shadow-2xl w-full transform hover:scale-105 transition-all duration-500" />
+            <img
+              src={img_spa_ambiente}
+              alt="Spa ambiente"
+              className="rounded-lg shadow-2xl w-full transform hover:scale-105 transition-all duration-500"
+            />
           </div>
         </div>
       </section>
+
 
       {/* Stepper */}
       <section className="w-full h-[100vh] py-16 reveal-section scroll-snap-align-start">

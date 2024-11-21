@@ -36,6 +36,7 @@
   --end-gradiant-button-views:  rgba(159,85,181,1) 100%; 
   background: rgb(255, 255, 255);
   background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(233, 250, 225, 1) 35%, rgba(244, 206, 255, 1) 100%);
+  overflow-x: hidden;
 }
 
 @layer base {
