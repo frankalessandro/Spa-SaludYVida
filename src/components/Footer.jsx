@@ -3,8 +3,8 @@ import Logo from '../assets/SpaLogo.svg';
 
 export const FooterWithLogo = () => {
   return (
-    <footer className="relative w-full bg-white p-8 z-[50]">
-      <div className="flex flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between">
+    <footer className="relative top-[70vh] md:top-0 w-full bg-white p-8 z-[50]">
+      <div className="flex  relative flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between">
         <img src={Logo} alt="logo-ct" className="w-10" />
         <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
           <li>
