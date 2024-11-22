@@ -111,8 +111,8 @@ export const Home = () => {
 
           {/* Elementos decorativos de fondo */}
           <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-purple-500 rounded-full blur-xl"></div>
-            <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500 rounded-full blur-xl"></div>
+            <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-purple-500 rounded-full blur-xl animate-float-rotate-left"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500 rounded-full blur-xl animate-float-rotate-right"></div>
           </div>
 
           {/* Separador de ola */}
