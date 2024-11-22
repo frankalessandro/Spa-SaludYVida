@@ -234,16 +234,17 @@ export function NavbarWithMegaMenu() {
 
   const bannerClasses = `
     transform transition-all duration-300 ease-in-out
-    relative min-w-[100vw] md:min-w-[70vw] 
-    left-[-9vw] md:left-[-1vw] 
+    relative min-w-[100vw] md:min-w-[70.1vw] 
+    left-[-9vw] md:left-[-1vw] lg:left-[-.7vw]
     ${showBanner ? 'top-[-2.4vh] md:top-[-1vh]' : 'top-[-100%]'}
     bg-purple-200 h-10 text-center py-2 md:rounded-t-lg 
     text-[.7em] md:text-sm
   `;
 
   const navbarClasses = `
+  overflow-hidden
     mx-auto fixed left-0 
-    w-[100vw] md:w-[70vw] md:left-[15vw] 
+    w-[100vw] md:w-[70vw] lg:min-w-[70vw] md:left-[15vw] 
     md:px-4 md:py-2 z-50
     transform transition-all duration-300 ease-in-out
     ${scrolled ? 'shadow-md' : ''}

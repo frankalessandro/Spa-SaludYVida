@@ -98,7 +98,7 @@ export const Home = () => {
             </div>
 
             {/* Lado derecho - Imagen ajustada */}
-            <div className="w-full lg:w-1/2 absolute md:relative bottom-[30vh] md:bottom-[-5vh] flex justify-center items-end lg:h-full">
+            <div className="w-full lg:w-1/2 absolute md:relative bottom-[30vh] md:bottom-[-5vh] lg:bottom-[2vh] flex justify-center items-end lg:h-full">
               <div className="w-[80vw] md:w-[60vw] lg:w-[40vw] h-auto max-w-2xl relative">
                 <img
                   src="/home/welcome.webp"
