@@ -66,14 +66,19 @@ export default withMT({
           '75%': {
             transform: 'translateY(-40%) translateX(-10px) rotate(-5deg)',
           }
-        }
+        },
+        waves: {
+          '0%': { transform: 'rotate(180deg) translateY(-10px)' }, // Rotación inicial
+          '50%': { transform: 'rotate(180deg) translateY(-5px)' }, // Altura máxima
+          '100%': { transform: 'rotate(180deg) translateY(-10px)' }, // Rotación final
+        },
       },
       animation: {
         fly: 'fly 10s linear infinite',
         'float-rotate-left': 'float-rotate-left 6s ease-in-out infinite',
         'float-rotate-right': 'float-rotate-right 6s ease-in-out infinite',
-        'slide-in-bottom-left': 'slide-in-bottom-left 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards' //animacion de hoja en el home
-
+        'slide-in-bottom-left': 'slide-in-bottom-left 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards', //animacion de hoja en el home
+        'waves': 'waves 3s ease-in-out infinite', // Ciclo infinito
       }
     },
   },

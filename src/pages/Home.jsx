@@ -11,6 +11,7 @@ import { FloatButtons } from "../components/FloatButtons";
 import { FooterWithLogo } from "../components/Footer";
 import { AnimatedBackground } from "../components/AnimatedBackground";
 import { WhatsAppButton } from "../components/WhatsappButton";
+
 const commonRevealConfig = {
   duration: 1000,
   distance: "50px",
@@ -67,6 +68,69 @@ export const Home = () => {
         */}
       <NavbarWithMegaMenu />
       <main className="flex-grow relative">
+
+        <section className="w-full h-screen bg-gradient-to-br from-black via-black to-purple-800 relative overflow-hidden">
+          {/* Contenedor principal con mejor organización espacial */}
+          <div className="h-[140vh] md:h-full container mx-auto flex flex-col lg:flex-row items-center justify-between px-4 pt-16 lg:pt-0">
+            {/* Lado izquierdo - Textos */}
+            <div className="w-full mt-20 md:mt-0 lg:w-1/2 flex flex-col justify-center space-y-6 lg:space-y-8 z-10 mb-8 lg:mb-0">
+              <div className="text-white">
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                  Bienvenido a tu
+                  <span className="text-purple-400"> Oasis</span> de Bienestar
+                </h1>
+                <p className="text-lg md:text-xl text-gray-300 max-w-xl">
+                  Descubre la armonía perfecta entre cuerpo, mente y espíritu
+                </p>
+              </div>
+
+              <div className="relative hidden lg:block">
+                <p className="absolute left-[-20vw] top-[-15vh] transform -rotate-90 text-purple-400 text-lg text-[1em] whitespace-nowrap">
+                  Transforma tu vida • Renueva tu energía • Encuentra tu equilibrio
+                </p>
+              </div>
+
+              <div className="block lg:hidden">
+                <p className="text-purple-400 text-lg font-medium text-center">
+                  Transforma tu vida • Renueva tu energía • Encuentra tu equilibrio
+                </p>
+              </div>
+            </div>
+
+            {/* Lado derecho - Imagen ajustada */}
+            <div className="w-full lg:w-1/2 absolute md:relative bottom-[30vh] md:bottom-[-5vh] flex justify-center items-end lg:h-full">
+              <div className="w-[80vw] md:w-[60vw] lg:w-[40vw] h-auto max-w-2xl relative">
+                <img
+                  src="/home/welcome.webp"
+                  alt="Spa Holístico 3D"
+                  className="object-contain w-full h-full"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Elementos decorativos de fondo */}
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-purple-500 rounded-full blur-xl"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500 rounded-full blur-xl"></div>
+          </div>
+
+          {/* Separador de ola */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg
+              className={`relative block w-full h-[4vh] md:h-[10vh] rotate-180 animate-waves`}
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                className="fill-white"
+              />
+            </svg>
+          </div>
+        </section>
         {/* Slider */}
         <section className="w-full h-[150vh] lg:h-[80vh] flex items-center justify-center reveal-section scroll-snap-align-start relative overflow-hidden top-[10vh]">
           <SliderMain />
