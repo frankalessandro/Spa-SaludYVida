@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Navbar,
   Collapse,
@@ -196,30 +196,95 @@ function NavList() {
 
 export function NavbarWithMegaMenu() {
   const [openNav, setOpenNav] = React.useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
-  React.useEffect(() => {
-    window.addEventListener("resize", () =>
+  useEffect(() => {
+    const handleScroll = () => {
+      lastScrollY.current = window.scrollY;
+
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          if (lastScrollY.current > 10) {
+            setScrolled(true);
+            setShowBanner(false);
+          } else {
+            setScrolled(false);
+            setShowBanner(true);
+          }
+          ticking.current = false;
+        });
+
+        ticking.current = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", () => 
       window.innerWidth >= 960 && setOpenNav(false)
     );
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", () => setOpenNav(false));
+    };
   }, []);
 
+  const bannerClasses = `
+    transform transition-all duration-300 ease-in-out
+    relative min-w-[100vw] md:min-w-[70vw] 
+    left-[-9vw] md:left-[-1vw] 
+    ${showBanner ? 'top-[-2.4vh] md:top-[-1vh]' : 'top-[-100%]'}
+    bg-purple-200 h-10 text-center py-2 md:rounded-t-lg 
+    text-[.7em] md:text-sm
+  `;
+
+  const navbarClasses = `
+    mx-auto fixed left-0 
+    w-[100vw] md:w-[70vw] md:left-[15vw] 
+    md:px-4 md:py-2 z-50
+    transform transition-all duration-300 ease-in-out
+    ${scrolled ? 'shadow-md' : ''}
+    supports-[backdrop-filter]:bg-white/60 backdrop-blur-lg
+  `;
+
   return (
-    <Navbar className="mx-auto fixed left-0 w-[100vw] md:w-[70vw] md:left-[15vw] md:px-4 md:py-2 z-50   supports-[backdrop-filter]:bg-white/60 backdrop-blur-lg">
-      <div className="relative min-w-[100vw] md:min-w-[70vw] left-[-9vw] md:left-[-1vw] top-[-2.4vh] md:top-[-1vh] bg-purple-200 h-10 text-center py-2 md:rounded-t-lg text-[.7em] md:text-sm">
-        Valoración gratis en el centro estético. Agenda tu cita ahora
+    <Navbar className={navbarClasses}>
+      <div className={bannerClasses}>
+        <a 
+          href="https://wa.me/+yourphonenumber"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full h-full hover:bg-purple-300 transition-colors duration-200"
+        >
+          Valoración gratis en el centro estético. Agenda tu cita ahora
+        </a>
       </div>
+      
       <div className="flex items-center justify-between text-textDark">
         <Link to="/">
           <img
             src={Logo}
             alt="Logo"
-            className="w-12 h-12 cursor-pointer hover:bg-blue-gray-50 hover:rounded-md"
+            className="w-12 h-12 cursor-pointer hover:bg-blue-gray-50 hover:rounded-md transition-all duration-200"
           />
         </Link>
         <div className="hidden lg:block">
           <NavList />
         </div>
-        <button className="align-middle select-none font-sans font-bold text-center uppercase disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-Botones text-white shadow-md shadow-purple-500/20 hover:shadow-xl hover:bg-BotonesHover focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none transform transition-all duration-300 ease-out translate-y-0 opacity-100">
+        <button className="
+          align-middle select-none font-sans font-bold text-center uppercase 
+          disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none 
+          text-xs py-3 px-6 rounded-lg bg-Botones text-white 
+          shadow-md shadow-purple-500/20 
+          hover:shadow-xl hover:bg-BotonesHover 
+          focus:opacity-[0.85] focus:shadow-none 
+          active:opacity-[0.85] active:shadow-none 
+          transform transition-all duration-200 ease-out 
+          translate-y-0 opacity-100
+        ">
           Contactanos
         </button>
         <IconButton

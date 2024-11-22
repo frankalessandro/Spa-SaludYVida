@@ -69,9 +69,9 @@ export const Home = () => {
       <NavbarWithMegaMenu />
       <main className="flex-grow relative">
 
-        <section className="w-full h-screen bg-gradient-to-br from-black via-black to-purple-800 relative overflow-hidden">
+        <section className="w-full h-[90vh] bg-gradient-to-br from-black via-black to-purple-800 relative overflow-hidden">
           {/* Contenedor principal con mejor organización espacial */}
-          <div className="h-[140vh] md:h-full container mx-auto flex flex-col lg:flex-row items-center justify-between px-4 pt-16 lg:pt-0">
+          <div className="h-[120vh] md:h-full container mx-auto flex flex-col lg:flex-row items-center justify-between px-4 pt-16 lg:pt-0">
             {/* Lado izquierdo - Textos */}
             <div className="w-full mt-20 md:mt-0 lg:w-1/2 flex flex-col justify-center space-y-6 lg:space-y-8 z-10 mb-8 lg:mb-0">
               <div className="text-white">
