@@ -137,7 +137,7 @@ export const Hifu = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Agenda tu consulta gratuita
+              Consulta gratuita
             </motion.button>
           </div>
         </motion.section>

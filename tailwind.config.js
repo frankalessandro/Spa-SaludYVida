@@ -1,3 +1,5 @@
+import { transform } from "lodash";
+
 const withMT = require("@material-tailwind/react/utils/withMT");
 const scrollbarHide = require("tailwind-scrollbar-hide");
 export default withMT({
@@ -72,6 +74,18 @@ export default withMT({
           '50%': { transform: 'rotate(180deg) translateY(-5px)' }, // Altura máxima
           '100%': { transform: 'rotate(180deg) translateY(-10px)' }, // Rotación final
         },
+        ocultar: {
+          '0%': {
+            transform: 'translateX(0)', // El elemento empieza en su lugar
+          },
+          '50%': {
+            transform: 'translateX(-100%)', // Se mueve fuera de la pantalla
+          },
+          '100%': {
+            transform: 'translateX(-100%)', // Sigue fuera de la pantalla
+            opacity: '0', // Se desvanece
+          },
+        },
       },
       animation: {
         fly: 'fly 10s linear infinite',
@@ -79,6 +93,7 @@ export default withMT({
         'float-rotate-right': 'float-rotate-right 6s ease-in-out infinite',
         'slide-in-bottom-left': 'slide-in-bottom-left 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards', //animacion de hoja en el home
         'waves': 'waves 3s ease-in-out infinite', // Ciclo infinito
+        'ocultar': 'ocultar 2s forwards', // Definimos la animación llamada 'ocultar'
       }
     },
   },

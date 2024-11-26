@@ -17,11 +17,12 @@ import img4 from "../../assets/img/hifu/hifu1.webp";
 
 const images = [img1, img2, img3, img4];
 const textImages = [
-  '💡 Innovación que inspira',
-  '🎯 Precisión en cada detalle',
-  '🛡️ Tu seguridad, nuestra prioridad',
-  '⚡ Resultados efectivos garantizados'
+  '💉 Plasma: Regeneración desde el interior',
+  '✨ Estimula colágeno, mejora tu piel',
+  '🛡️ Tratamiento seguro y efectivo',
+  '🌟 Resultados visibles y naturales'
 ];
+
 
 const whatsappLink = "https://wa.me/1234567890";
 
@@ -121,7 +122,7 @@ export const Plasma = () => {
               }}
               className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
             >
-              HIFU 7D
+              Plasma
             </motion.h1>
             <motion.p
               className="text-xl md:text-3xl text-white max-w-3xl mx-auto "
@@ -129,7 +130,7 @@ export const Plasma = () => {
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.5 }}
             >
-              Rejuvenecimiento facial sin cirugía con tecnología de última generación
+              Rejuvenece tu piel con plasma: luminosidad y firmeza sin cirugía.
             </motion.p>
 
             <motion.button
@@ -137,7 +138,7 @@ export const Plasma = () => {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              Agenda tu consulta gratuita
+              Consulta gratuita
             </motion.button>
           </div>
         </motion.section>
@@ -200,37 +201,37 @@ export const Plasma = () => {
               transition={{ duration: 0.8, ease: 'easeOut' }}
             >
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
-                Tratamiento HIFU Avanzado
+                Tratamiento con Plasma Rico en Plaquetas
               </h2>
               <p className="text-lg text-gray-700 leading-relaxed">
-                El tratamiento HIFU utiliza ultrasonido focalizado para estimular la
-                producción de colágeno, logrando una piel más firme, tonificada y
-                rejuvenecida sin necesidad de cirugía.
+                El tratamiento con plasma estimula la regeneración celular y la producción
+                de colágeno, mejorando la calidad, luminosidad y firmeza de tu piel de forma
+                natural y no invasiva.
               </p>
               <ul className="space-y-4">
                 <li className="flex items-start space-x-4">
                   <span className="block w-4 h-4 bg-blue-500 rounded-full"></span>
                   <span className="text-gray-700">
-                    Rejuvenecimiento facial y corporal no invasivo.
+                    Rejuvenecimiento facial con resultados visibles en pocos días.
                   </span>
                 </li>
                 <li className="flex items-start space-x-4">
                   <span className="block w-4 h-4 bg-blue-500 rounded-full"></span>
                   <span className="text-gray-700">
-                    Sin tiempo de recuperación.
+                    Procedimiento seguro y personalizado.
                   </span>
                 </li>
                 <li className="flex items-start space-x-4">
                   <span className="block w-4 h-4 bg-blue-500 rounded-full"></span>
                   <span className="text-gray-700">
-                    Resultados duraderos y visibles.
+                    Piel más luminosa, tersa y de mejor calidad.
                   </span>
                 </li>
               </ul>
             </motion.div>
+
           </div>
         </section>
-
         {/* Proceso del tratamiento */}
         <motion.section
           ref={processRef}
@@ -247,19 +248,19 @@ export const Plasma = () => {
                 {
                   step: 1,
                   title: "Evaluación Inicial",
-                  description: "Valoración personalizada de tu piel y objetivos",
+                  description: "Valoración personalizada para determinar tu tipo de piel y necesidades.",
                   icon: Target
                 },
                 {
                   step: 2,
-                  title: "Tratamiento HIFU",
-                  description: "Aplicación precisa de ultrasonido focalizado",
+                  title: "Extracción de Plasma",
+                  description: "Se realiza una extracción de sangre para obtener el plasma rico en plaquetas.",
                   icon: Wand2
                 },
                 {
                   step: 3,
-                  title: "Seguimiento",
-                  description: "Monitoreo de resultados y cuidados posteriores",
+                  title: "Aplicación de Plasma",
+                  description: "El plasma se inyecta en las zonas deseadas para estimular la regeneración celular.",
                   icon: Zap
                 }
               ].map((item) => (
@@ -288,6 +289,7 @@ export const Plasma = () => {
           </div>
         </motion.section>
 
+
         {/* Beneficios Section - Preserved Original Design with Subtle Enhancements */}
         <motion.section
           ref={benefitsRef}
@@ -298,15 +300,15 @@ export const Plasma = () => {
           variants={staggerContainer}
         >
           <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center text-textDark mb-16">Beneficios del Tratamiento</h2>
+            <h2 className="text-4xl font-bold text-center text-textDark mb-16">Beneficios del Tratamiento con Plasma</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
-                "Rejuvenecimiento facial sin cirugía",
-                "Estimulación natural del colágeno",
-                "Sin tiempo de recuperación",
-                "Resultados duraderos",
+                "Rejuvenecimiento facial y corporal sin cirugía",
+                "Estimulación natural de la producción de colágeno y elastina",
                 "Procedimiento no invasivo",
-                "Mejora visible de la flacidez"
+                "Mejora de la textura y luminosidad de la piel",
+                "Resultados visibles desde los primeros días",
+                "Sin tiempo de recuperación, solo cuidados mínimos"
               ].map((benefit, index) => (
                 <motion.div
                   key={index}
@@ -325,6 +327,7 @@ export const Plasma = () => {
             </div>
           </div>
         </motion.section>
+
         {/* Antes/Después Gallery - Enhanced Timeline */}
         <RealResultsTimeline />
 
@@ -343,20 +346,20 @@ export const Plasma = () => {
               {[
                 {
                   title: "Sesión Individual",
-                  price: "$1,000,000",
+                  price: "$200,000",
                   gradient: "from-blue-900/40 to-purple-900/40",
                   features: [
-                    "1 sesión completa de HIFU 7D",
+                    "1 sesión de plasma",
                     "Valoración personalizada",
                     "Seguimiento post-tratamiento"
                   ]
                 },
                 {
                   title: "Tratamiento Completo",
-                  price: "$2,500,000",
+                  price: "$600,000",
                   gradient: "from-purple-900/40 to-pink-900/40",
                   features: [
-                    "Múltiples sesiones de HIFU 7D",
+                    "2 a 4 sesiones de plasma",
                     "Plasma rico en plaquetas",
                     "Limpieza facial profunda",
                     "Plan de cuidado personalizado"
@@ -389,6 +392,7 @@ export const Plasma = () => {
           </div>
         </motion.section>
 
+
         {/* CTA Final Section - Preserved Original Design */}
         <motion.section
           className="py-20 px-4 relative overflow-hidden"
@@ -403,10 +407,10 @@ export const Plasma = () => {
 
           <div className="relative z-10 max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-textDark mb-8">
-              La Belleza Está en Tus Manos
+              ¡Recupera tu Juventud de Manera Natural!
             </h2>
             <p className="text-lg md:text-2xl text-textLight mb-12">
-              Descubre cómo el tratamiento HIFU 7D puede transformar tu apariencia y confianza.
+              Descubre cómo el tratamiento con plasma puede regenerar tu piel y combatir los signos del envejecimiento.
               Agenda tu consulta gratuita hoy mismo.
             </p>
             <motion.button
@@ -419,6 +423,7 @@ export const Plasma = () => {
             </motion.button>
           </div>
         </motion.section>
+
         {/* Footer */}
         <FooterWithLogo />
       </div>
