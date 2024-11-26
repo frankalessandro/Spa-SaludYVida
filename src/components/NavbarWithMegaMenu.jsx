@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Navbar,
   Collapse,
@@ -14,86 +14,74 @@ import {
 } from "@material-tailwind/react";
 import {
   ChevronDownIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
-import {
-  Bars4Icon,
-  GlobeAmericasIcon,
-  NewspaperIcon,
-  PhoneIcon,
-  RectangleGroupIcon,
-  SquaresPlusIcon,
+  HamburgerMenuIcon,
+  Cross1Icon,
   SunIcon,
-  TagIcon,
-  UserGroupIcon,
-} from "@heroicons/react/24/solid";
-import Logo from '../assets/SpaLogo.svg'
+} from "@radix-ui/react-icons";
+import Logo from '../assets/SpaLogo.svg';
 import { Link } from "react-router-dom";
 
-// Items for "Servicios Faciales"
+// [Previous menu items remain the same...]
 const facialServicesMenuItems = [
   {
     title: "HIFU 7D",
     description: "Tratamiento no quirúrgico de ultrasonido para un lifting facial y estimulación de colágeno.",
     icon: SunIcon,
-    to: "/hifu-7d", // Ruta correcta para el servicio HIFU
+    to: "/hifu-7d",
   },
   {
     title: "Plasma",
     description: "Inyección de plasma para regenerar tejidos y combatir el envejecimiento.",
-    icon: GlobeAmericasIcon,
-    to: "/plasma", // Ruta para Plasma
+    icon: SunIcon,
+    to: "/plasma",
   },
   {
     title: "Dermapen",
     description: "Micropunciones para estimular la producción de colágeno y mejorar la textura de la piel.",
-    icon: TagIcon,
-    to: "/dermapen", // Ruta correcta para el servicio Dermapen
+    icon: SunIcon,
+    to: "/dermapen",
   },
 ];
 
-// Items for "Servicios Corporales"
 const bodyServicesMenuItems = [
   {
     title: "Criolipolisis",
     description: "Tratamiento no quirúrgico para eliminar grasa localizada mediante enfriamiento controlado.",
-    icon: Bars4Icon,
-    to: "/criolipolisis", // Ruta para Criolipolisis
+    icon: SunIcon,
+    to: "/criolipolisis",
   },
   {
     title: "Max Muscle",
     description: "Simula abdominales y convierte grasa en músculo. Ideal para complementar el ejercicio.",
-    icon: RectangleGroupIcon,
-    to: "/max-muscle", // Ruta para Max Muscle
+    icon: SunIcon,
+    to: "/max-muscle",
   },
   {
     title: "Biosueros",
     description: "Bioestimulante inyectado para aumentar masa muscular y reafirmar la piel.",
-    icon: TagIcon,
-    to: "/biosueros", // Ruta para Biosueros
+    icon: SunIcon,
+    to: "/biosueros",
   },
   {
     title: "Tensamax",
     description: "Radiofrecuencia monopolar para regenerar colágeno y reafirmar la piel.",
-    icon: TagIcon,
-    to: "/tensamax", // Ruta para Tensamax
+    icon: SunIcon,
+    to: "/tensamax",
   },
 ];
 
-// Cuida tu Salud submenu
 const healthMenuItems = [
   {
     title: "Colonterapia",
     description: "Limpieza profunda del intestino grueso para mejorar la salud digestiva.",
-    icon: RectangleGroupIcon,
-    to: "/colonterapia", // Ruta para Colonterapia
+    icon: SunIcon,
+    to: "/colonterapia",
   },
   {
     title: "Drenajes",
     description: "Tratamiento postquirúrgico para eliminar líquidos acumulados y reducir inflamación.",
-    icon: UserGroupIcon,
-    to: "/drenajes", // Ruta para Drenajes
+    icon: SunIcon,
+    to: "/drenajes",
   },
 ];
 
@@ -101,12 +89,11 @@ function NavListMenu({ title, items }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  const renderItems = items.map(({ icon, title, description, to }, key) => ( // Usamos 'to' en lugar de 'href'
-    <Link to={to} key={key}>  {/* Usamos Link en lugar de <a> */}
+  const renderItems = items.map(({ icon, title, description, to }, key) => (
+    <Link to={to} key={key}>
       <MenuItem className="flex items-center gap-3 rounded-lg">
         <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2">
           {React.createElement(icon, {
-            strokeWidth: 2,
             className: "h-6 text-textGray w-6",
           })}
         </div>
@@ -148,12 +135,12 @@ function NavListMenu({ title, items }) {
             >
               {title}
               <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""}`}
+                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""
+                  }`}
               />
               <ChevronDownIcon
-                strokeWidth={2.5}
-                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""}`}
+                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""
+                  }`}
               />
             </ListItem>
           </Typography>
@@ -162,15 +149,18 @@ function NavListMenu({ title, items }) {
           <ul className="grid grid-cols-2 gap-y-2 outline-none outline-0">
             {renderItems}
           </ul>
+
         </MenuList>
       </Menu>
       <div className="block lg:hidden">
-        <Collapse open={isMobileMenuOpen}>{renderItems}</Collapse>
+        <Collapse open={isMobileMenuOpen}>
+          {renderItems}
+
+        </Collapse>
       </div>
     </React.Fragment>
   );
 }
-
 
 function NavList() {
   return (
@@ -181,14 +171,13 @@ function NavList() {
           color="blue-gray"
           className="text-gray-900"
         >
-          <ListItem className="flex items-center gap-2 py-2 pr-4 text-textDark">Inicio</ListItem>
+          <ListItem className="flex items-center gap-2 py-2 pr-4 text-textDark">
+            Inicio
+          </ListItem>
         </Typography>
       </Link>
-      {/* Menu for Servicios Faciales */}
       <NavListMenu title="Servicios Faciales" items={facialServicesMenuItems} />
-      {/* Menu for Servicios Corporales */}
       <NavListMenu title="Servicios Corporales" items={bodyServicesMenuItems} />
-      {/* Cuida tu Salud */}
       <NavListMenu title="Cuida tu Salud" items={healthMenuItems} />
       <Typography
         as="a"
@@ -207,28 +196,98 @@ function NavList() {
 
 export function NavbarWithMegaMenu() {
   const [openNav, setOpenNav] = React.useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
+  const lastScrollY = useRef(0);
+  const ticking = useRef(false);
 
-  React.useEffect(() => {
-    window.addEventListener(
-      "resize",
-      () => window.innerWidth >= 960 && setOpenNav(false),
+  useEffect(() => {
+    const handleScroll = () => {
+      lastScrollY.current = window.scrollY;
+
+      if (!ticking.current) {
+        window.requestAnimationFrame(() => {
+          if (lastScrollY.current > 10) {
+            setScrolled(true);
+            setShowBanner(false);
+          } else {
+            setScrolled(false);
+            setShowBanner(true);
+          }
+          ticking.current = false;
+        });
+
+        ticking.current = true;
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", () => 
+      window.innerWidth >= 960 && setOpenNav(false)
     );
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", () => setOpenNav(false));
+    };
   }, []);
 
+  const bannerClasses = `
+    transform transition-all duration-300 ease-in-out
+    relative min-w-[100vw] md:min-w-[70.1vw] 
+    left-[-9vw] md:left-[-1vw] lg:left-[-.7vw]
+    ${showBanner ? 'top-[-2.4vh] md:top-[-1vh]' : 'top-[-100%]'}
+    bg-purple-200 h-10 text-center py-2 md:rounded-t-lg 
+    text-[.7em] md:text-sm
+  `;
+
+  const navbarClasses = `
+  overflow-hidden
+    mx-auto fixed left-0 
+    w-[100vw] md:w-[70vw] lg:min-w-[70vw] md:left-[15vw] 
+    md:px-4 md:py-2 z-50
+    transform transition-all duration-300 ease-in-out
+    ${scrolled ? 'shadow-md' : ''}
+    supports-[backdrop-filter]:bg-white/60 backdrop-blur-lg
+  `;
+
   return (
-    <Navbar className="mx-auto w-full px-4 py-2">
+    <Navbar className={navbarClasses}>
+      <div className={bannerClasses}>
+        <a 
+          href="https://wa.me/+yourphonenumber"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="block w-full h-full hover:bg-purple-300 transition-colors duration-200"
+        >
+          Valoración gratis en el centro estético. Agenda tu cita ahora
+        </a>
+      </div>
+      
       <div className="flex items-center justify-between text-textDark">
-        <Link to={'/'}>
-          <img src={Logo} alt="Logo" className="w-12 h-12 cursor-pointer hover:bg-blue-gray-50 hover:rounded-md" />
+        <Link to="/">
+          <img
+            src={Logo}
+            alt="Logo"
+            className="w-12 h-12 cursor-pointer hover:bg-blue-gray-50 hover:rounded-md transition-all duration-200"
+          />
         </Link>
         <div className="hidden lg:block">
           <NavList />
         </div>
-        <button className="align-middle select-none font-sans font-bold text-center uppercase disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-Botones text-white shadow-md shadow-purple-500/20 hover:shadow-xl hover:bg-BotonesHover focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none transform transition-all duration-300 ease-out translate-y-0 opacity-100">
+        <button className="
+          align-middle select-none font-sans font-bold text-center uppercase 
+          disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none 
+          text-xs py-3 px-6 rounded-lg bg-Botones text-white 
+          shadow-md shadow-purple-500/20 
+          hover:shadow-xl hover:bg-BotonesHover 
+          focus:opacity-[0.85] focus:shadow-none 
+          active:opacity-[0.85] active:shadow-none 
+          transform transition-all duration-200 ease-out 
+          translate-y-0 opacity-100
+        ">
           Contactanos
         </button>
-
-
         <IconButton
           variant="text"
           color="blue-gray"
@@ -236,9 +295,9 @@ export function NavbarWithMegaMenu() {
           onClick={() => setOpenNav(!openNav)}
         >
           {openNav ? (
-            <XMarkIcon className="h-6 w-6" strokeWidth={2} />
+            <Cross1Icon className="h-6 w-6" />
           ) : (
-            <Bars3Icon className="h-6 w-6" strokeWidth={2} />
+            <HamburgerMenuIcon className="h-6 w-6" />
           )}
         </IconButton>
       </div>

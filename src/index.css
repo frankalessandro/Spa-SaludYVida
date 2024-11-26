@@ -14,6 +14,7 @@
   flex-direction: column;
   align-items: center;
   --color-button-light: rgba(198, 111, 197, 0.865);
+  --bg-gradient: rgba(255, 255, 255, 0.296);
   /*color de boton navbar CONTACTANOS*/
   --color-button-light-hover: rgba(183, 228, 205, 0.865);
   --color-button-alternative: rgb(201, 128, 193);
@@ -29,8 +30,15 @@
   /*aun no se usa*/
   --color-bg-1: #f7fafca8;
   --color-bg-2: #2068af;
-  background: rgb(255,255,255);
-  background: linear-gradient(45deg, rgba(255,255,255,1) 0%, rgba(233,250,225,1) 35%, rgba(244,206,255,1) 100%);
+  --color-background-white:white;
+  /* variables para botones de paginas como hifu */
+  --init-gradiant-button-views:  rgba(172,218,143,1) 38%;
+  --end-gradiant-button-views:  rgba(159,85,181,1) 100%; 
+  background: rgb(255, 255, 255);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(233, 250, 225, 1) 35%, rgba(244, 206, 255, 1) 100%);
+  overflow-x: none;
+  max-width: 100%;;
+
 }
 
 @layer base {
@@ -43,4 +51,130 @@
       url('/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
   }
 
+  /* Configuración de Tailwind para el scroll */
+  .reveal-section {
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-snap-align-start {
+    scroll-snap-align: start;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thumb-purple-500 {
+    scrollbar-color: #9b4de0 #f7fafc;
+  }
+
+  .scrollbar-track-gray-200 {
+    scrollbar-color: #f7fafc #e2e8f0;
+  }
+  
 }
+
+
+.animated-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+}
+
+.animated-container::before,
+.animated-container::after {
+  content: "";
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  width: 200px;
+  height: 200px;
+  background-image: url('/path/to/leaf-image.webp');
+  background-size: cover;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transform: translateY(50%) rotate(0deg);
+  transition: opacity 1s, transform 1.5s ease-in-out;
+}
+
+.animated-container::before {
+  transform-origin: center;
+  animation: floatLeaves 3s ease-in-out infinite alternate;
+}
+
+.animated-container::after {
+  animation: floatLeavesReverse 3s ease-in-out infinite alternate;
+}
+
+/* Mostrar cuando se activa ScrollReveal */
+.animated-container.show::before,
+.animated-container.show::after {
+  opacity: 1;
+  top: 20%;
+  transform: translateY(0) rotate(45deg);
+}
+
+/* Animaciones */
+@keyframes floatLeaves {
+  0% {
+    transform: translateY(50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(60%) rotate(20deg);
+  }
+}
+
+@keyframes floatLeavesReverse {
+  0% {
+    transform: translateY(50%) rotate(0deg);
+  }
+  100% {
+    transform: translateY(40%) rotate(-20deg);
+  }
+}
+  
+
+
+ /* Animación de batir las alas */
+@keyframes flap {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Estilo para las alas */
+.wing-left, .wing-right {
+  animation: flap 1s infinite ease-in-out;
+}
+
+.wing-left {
+  animation-delay: 0s;
+}
+
+.wing-right {
+  animation-delay: 0.5s; /* Retraso para que las alas se muevan en un ciclo alterno */
+}
+
+/* Animación de vuelo para los pájaros */
+@keyframes fly {
+  0% {
+    transform: rotate(1deg);
+  }
+  100% {
+    transform: rotate(1deg);
+  }
+}
+
+.animate-fly {
+  animation: fly 10s linear infinite;
+}
+
+
