@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { NavbarWithMegaMenu } from '../NavbarWithMegaMenu';
-import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu ,ScanEye, History, PersonStanding, HandCoins ,SmilePlus} from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu, ScanEye, History, PersonStanding, HandCoins, SmilePlus } from 'lucide-react';
 import { AnimatedBackground } from "../AnimatedBackground";
 import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
@@ -90,7 +90,15 @@ export const Hifu = () => {
       ]
     }
   ];
-
+  // lista de por que elegirnos
+  const whyChooseUs = [
+    "Más de 10 años de experiencia en terapias holísticas",
+    "Terapeutas certificados y altamente capacitados",
+    "Ambiente de paz y tranquilidad para tu bienestar",
+    "Tratamientos personalizados para cada cliente",
+    "Productos naturales y orgánicos",
+    "Técnicas ancestrales combinadas con tecnología moderna"
+  ];
 
   useEffect(() => {
     AOS.init({
@@ -473,36 +481,50 @@ export const Hifu = () => {
           </div>
         </motion.section>
 
-        {/* CTA Final Section - Preserved Original Design */}
-        <motion.section
-          className="py-20 px-4 relative overflow-hidden"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={fadeInUp}
-        >
-          <ParallaxImage scrollYProgress={scrollYProgress}>
-            <div className="absolute inset-0 bg-[url('/api/placeholder/1920/1080')] bg-cover bg-center opacity-20" />
-          </ParallaxImage>
-
-          <div className="relative z-10 max-w-4xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-textDark mb-8">
-              La Belleza Está en Tus Manos
-            </h2>
-            <p className="text-lg md:text-2xl text-textLight mb-12">
-              Descubre cómo el tratamiento HIFU 7D puede transformar tu apariencia y confianza.
-              Agenda tu consulta gratuita hoy mismo.
-            </p>
-            <motion.button
-              className="mt-8 px-8 py-4 rounded-full bg-gradient-to-r from-initBackgroundButtonViewsGradient to-endBackgroundButtonViewsGradient text-textLight font-semibold text-lg hover:shadow-lg hover:shadow-BotonesHover transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.open(whatsappLink, "_blank")}
+        <section className="relative md:h-[70vh] py-20 px-4 bg-[var(--bg-dark-slider)]">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+            <motion.div
+              className="text-white relative top-[10vh]"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeInUp}
             >
-              ¡Agenda Ahora!
-            </motion.button>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8">¿Por qué Elegirnos?</h2>
+              <ul className="space-y-4">
+                {whyChooseUs.map((benefit, index) => (
+                  <motion.li
+                    key={index}
+                    className="flex items-start space-x-3"
+                    variants={fadeInUp}
+                    custom={index}
+                  >
+                    <span className="text-purple-300 mt-1">•</span>
+                    <span className="text-lg">{benefit}</span>
+                  </motion.li>
+                ))}
+              </ul>
+            </motion.div>
+
+            <div className="relative min-h-[80vh] md:w-[50vw] md:min-h-[80vh]">
+              {/* Gradiente de fondo */}
+              <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-dark-slider)] via-transparent to-transparent z-10"></div>
+              <motion.div
+                className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0"
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <img
+                  src="/hifu/image.webp"
+                  alt="Spa Holístico"
+                  className="w-full h-full object-cover rounded-lg"
+                />
+              </motion.div>
+            </div>
           </div>
-        </motion.section>
+        </section>
+
         {/* Footer */}
         <FooterWithLogo />
       </div>
