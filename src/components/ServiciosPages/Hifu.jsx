@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { NavbarWithMegaMenu } from '../NavbarWithMegaMenu';
-import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu ,ScanEye, History, PersonStanding, HandCoins ,SmilePlus} from 'lucide-react';
 import { AnimatedBackground } from "../AnimatedBackground";
 import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
@@ -44,30 +44,49 @@ export const Hifu = () => {
   const [processRef, processInView] = useInView({ threshold: 0.2 });
   const [pricingRef, pricingInView] = useInView({ threshold: 0.2 });
   const [currentSlide, setCurrentSlide] = useState(0);
+
+  // funciones del slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % benefits.length);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % benefits.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + benefits.length) % benefits.length);
+  };
+
+
   // lista de slider beneficios
   const benefits = [
     {
       image: "/hifu/hifu_tool.webp",
       items: [
-        { text: "Rejuvenecimiento facial sin cirugía", icon: Shell },
-        { text: "Tecnología HIFU avanzada", icon: Shell },
-        { text: "Resultados visibles", icon: Shell }
+        { text: "Rejuvenecimiento facial sin cirugía", icon: Smile },
+        { text: "Tecnología HIFU avanzada", icon: Cpu },
+        { text: "Resultados visibles", icon: ScanEye }
       ]
     },
     {
       image: "/hifu/hifu_tool.webp",
       items: [
-        { text: "Sin tiempo de recuperación", icon: Shell },
-        { text: "Tratamiento no invasivo", icon: Shell },
-        { text: "Estimulación de colágeno", icon: Shell }
+        { text: "Sin tiempo de recuperación", icon: History },
+        { text: "Tratamiento no invasivo", icon: PersonStanding },
+        { text: "Estimulación de colágeno", icon: HandCoins }
       ]
     },
     {
       image: "/hifu/hifu_tool.webp",
       items: [
-        { text: "Sin tiempo de recuperación", icon: Shell },
-        { text: "Tratamiento no invasivo", icon: Shell },
-        { text: "Estimulación de colágeno", icon: Shell }
+        { text: "Sin tiempo de recuperación", icon: SmilePlus },
+        { text: "Tratamiento no invasivo", icon: PersonStanding },
+        { text: "Estimulación de colágeno", icon: HandCoins }
       ]
     }
   ];
@@ -256,6 +275,8 @@ export const Hifu = () => {
           </div>
         </section>
 
+
+        {/* beneficios */}
         <motion.section
           className="h-screen bg-[var(--bg-dark-slider)] relative overflow-hidden"
           initial={{ opacity: 0 }}
@@ -268,6 +289,26 @@ export const Hifu = () => {
             </h2>
 
             <div className="flex-grow relative">
+              {/* Navigation Buttons - Desktop */}
+              <div className="hidden md:block">
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-[2vw] top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-2 rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-[2vw] top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-2 rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
               <div className="absolute left-1/2 bottom-0 -translate-x-[18vw] w-[500px] transform translate-y-[15%]">
                 <motion.img
                   src={benefits[currentSlide].image}
@@ -317,21 +358,43 @@ export const Hifu = () => {
                 })}
               </div>
 
-              <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 space-y-4">
-                {benefits[currentSlide].items.map((benefit, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex items-center space-x-4 bg-white/5 backdrop-blur-sm rounded-lg p-4"
-                    initial={{ opacity: 0, x: -50 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 }}
+              <div className="md:hidden">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 space-y-4">
+                  {benefits[currentSlide].items.map((benefit, index) => (
+                    <motion.div
+                      key={index}
+                      className="flex items-center space-x-4 bg-white/5 backdrop-blur-sm rounded-lg p-4"
+                      initial={{ opacity: 0, x: -50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      {React.createElement(benefit.icon, {
+                        className: "text-white w-6 h-6"
+                      })}
+                      <span className="text-white text-lg">{benefit.text}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Navigation Buttons - Mobile */}
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-4">
+                  <button
+                    onClick={prevSlide}
+                    className="bg-white/10 hover:bg-white/20 p-2 rounded-full"
                   >
-                    {React.createElement(benefit.icon, {
-                      className: "text-white w-6 h-6"
-                    })}
-                    <span className="text-white text-lg">{benefit.text}</span>
-                  </motion.div>
-                ))}
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="bg-white/10 hover:bg-white/20 p-2 rounded-full"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
               </div>
             </div>
           </div>
