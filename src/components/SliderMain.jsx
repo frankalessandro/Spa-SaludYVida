@@ -109,20 +109,20 @@ export const SliderMain = () => {
     return (
         <div className="container lg:max-w-screen-2xl max-w-[100vw]">
             <section className='content-info relative'>
-                <div className="container-title text-textDark relative ">
-                    <span className='text-textDark'>Nuestros Tratamientos</span>
+                <div className="container-title text-white relative ">
+                    <span className='text-white'>Nuestros Tratamientos</span>
                     <div className="buttons">
                         <span className="text-textDark prev"><ChevronLeftIcon width={30} height={30} /></span>
                         <span className="next"><ChevronRightIcon width={30} height={30} /></span>
                     </div>
                 </div>
-                <div className={`text-textLight content ${isSliding ? '' : 'active'}`}>
+                <div className={`text-textWhite content ${isSliding ? '' : 'active'}`}>
                     <span className='text-md'>{slides[currentSlide].title}</span>
                     <span className='md:text-9xl' style={{fontSize:'.8em'}}>{slides[currentSlide].ReqConsulta === 'Si' ? 'Requiere consulta' : 'No requiere consulta'}</span>
                     <div className="btn-info">
-                        <div className="btn-info-child"><TimerIcon width={30} height={30} /><div className='child-info'><div>Tiempo:</div><div>{slides[currentSlide].duracion}</div></div></div>
-                        <div className="btn-info-child"><HobbyKnifeIcon width={30} height={30} /><div className='child-info'><div>Invasión:</div><div>{slides[currentSlide].invasion}</div></div></div>
-                        <div className="btn-info-child"><PersonIcon width={30} height={30} /><div className='child-info'><div>Edad Mínima:</div><div>{slides[currentSlide].edadMinima}</div></div></div>
+                        <div className="btn-info-child text-textWhite"><TimerIcon width={30} height={30} /><div className='child-info'><div>Tiempo:</div><div>{slides[currentSlide].duracion}</div></div></div>
+                        <div className="btn-info-child text-textWhite"><HobbyKnifeIcon width={30} height={30} /><div className='child-info'><div>Invasión:</div><div>{slides[currentSlide].invasion}</div></div></div>
+                        <div className="btn-info-child text-textWhite"><PersonIcon width={30} height={30} /><div className='child-info'><div>Edad Mínima:</div><div>{slides[currentSlide].edadMinima}</div></div></div>
                     </div>
                     <div className='content-descr text-[.8em]'><div>{slides[currentSlide].description}</div></div>
                     <div className='container-btn-showmore'>

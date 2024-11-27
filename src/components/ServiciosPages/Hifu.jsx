@@ -98,138 +98,136 @@ export const Hifu = () => {
       <NavbarWithMegaMenu />
       {/* <AnimatedBackground /> */}
       <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]">
-        {/* Hero Section - Preserved Original Design with Enhanced Interactions */}
-        <motion.section
-          ref={heroRef}
-          className="relative min-w-[100vw] top-0 h-screen flex items-center justify-center overflow-hidden bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${img1})`,
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="relative z-10 text-center px-4">
-            <motion.h1
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{
-                duration: 0.8,
-                type: "spring",
-                stiffness: 120
-              }}
-              className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent"
-            >
-              HIFU 7D
-            </motion.h1>
-            <motion.p
-              className="text-xl md:text-3xl text-white max-w-3xl mx-auto "
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              Rejuvenecimiento facial sin cirugía con tecnología de última generación
-            </motion.p>
+        <section className="w-full h-[90vh] bg-gradient-to-br from-black via-black to-purple-800 relative overflow-hidden">
+          {/* Contenedor principal con mejor organización espacial */}
+          <div className="h-[120vh] md:h-full container mx-auto flex flex-col lg:flex-row items-center justify-between px-4 pt-16 lg:pt-0">
+            {/* Lado izquierdo - Textos */}
+            <div className="w-full lg:w-[35vw] absolute md:relative bottom-[30vh] md:bottom-[-5vh] lg:left-[-10vw] lg:bottom-[20vh] flex justify-center items-end lg:h-full">
+              <div className="w-[80vw] md:w-[60vw] lg:w-[40vw] h-auto max-w-2xl relative">
+                <img
+                  src="/hifu/hifu_tool.webp"
+                  alt="Spa Holístico 3D"
+                  className="object-contain w-full h-full"
+                />
+              </div>
+            </div>
+            {/* Lado derecho - Imagen ajustada */}
+            <div className="w-full mt-20 md:mt-0 lg:w-[40vw] flex flex-col justify-center space-y-6 lg:space-y-8 z-10 mb-8 lg:mb-0">
+              <div className="text-white">
+                <h1 className="text-4xl md:text-5xl lg:text-8xl font-bold mb-4 leading-tight p-2">
+                  <span className="vertical-gradient-text block">ULTHERAPY</span>
+                  <span className="block">
+                    <span className="vertical-gradient-text">Tecnología</span>
+                    <span className="text-purple-400"> Hifu</span>
+                  </span>
+                </h1>
+                <p className="text-lg md:text-xl text-gray-300 max-w-xl">
+                  Mínima invasividad para combatir el envejecimiento
+                </p>
+              </div>
 
-            <motion.button
-              className="mt-8 px-8 py-4 bg-gradient-to-r from-initBackgroundButtonViewsGradient to-endBackgroundButtonViewsGradient rounded-full text-textDark font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Consulta gratuita
-            </motion.button>
+              <div className="block lg:hidden">
+                <p className="text-purple-400 text-lg font-medium text-center">
+                  Transforma tu vida • Renueva tu energía • Encuentra tu equilibrio
+                </p>
+              </div>
+            </div>
+
+
           </div>
-        </motion.section>
+
+          {/* Elementos decorativos de fondo */}
+          <div className="absolute inset-0 opacity-20 pointer-events-none">
+            <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-purple-500 rounded-full blur-xl animate-float-rotate-left"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500 rounded-full blur-xl animate-float-rotate-right"></div>
+          </div>
+
+          {/* Separador de ola */}
+          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+            <svg
+              className={`relative block w-full h-[4vh] md:h-[10vh] rotate-180 animate-waves`}
+              data-name="Layer 1"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 1200 120"
+              preserveAspectRatio="none"
+            >
+              <path
+                d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+                className="fill-white"
+              />
+            </svg>
+          </div>
+        </section>
 
         {/* Tratamiento avanzado HIFU */}
         <section
-          ref={ref}
-          className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-blue-100 to-blue-300 overflow-hidden"
+          className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-white to-gray-300 overflow-hidden"
         >
-          {/* Fondo de Olas - Figura Grande y Blanca */}
+          {/* Fondo de Olas */}
           <div className="absolute inset-0 pointer-events-none">
             <svg
-              className="absolute top-[-20%] right-[-20%] w-[200%] md:w-[150%]" // Más grande
+              className="absolute top-[-20%] right-[-20%] w-[200%] md:w-[150%]"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 1440 320"
             >
               <path
                 fill="var(--bg-gradient)"
-                d="M0,160L40,170.7C80,181,160,203,240,224C320,245,400,267,480,266.7C560,267,640,245,720,234.7C800,224,880,224,960,197.3C1040,171,1120,117,1200,112C1280,107,1360,149,1400,170.7L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z">
-              </path>
+                d="M0,160L40,170.7C80,181,160,203,240,224C320,245,400,267,480,266.7C560,267,640,245,720,234.7C800,224,880,224,960,197.3C1040,171,1120,117,1200,112C1280,107,1360,149,1400,170.7L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
+              ></path>
             </svg>
           </div>
 
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
-            {/* Imagen encapsulada en SVG */}
-            <motion.div
-              className="relative flex justify-center items-center"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : -50 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-            >
-              <svg
-                viewBox="0 0 200 200"
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-[80%] md:w-full"
-              >
-                <path
-                  fill="#167364"
-                  d="M43.5,-55.2C58.1,-45.5,70.5,-32.4,75.3,-17.9C80,-3.3,77,13.6,68.6,27C60.3,40.5,46.5,50.6,32.3,59.5C18.2,68.3,3.6,76,-11.5,78.1C-26.5,80.3,-52.9,76.9,-63.8,63.7C-74.7,50.6,-70.1,27.7,-71.6,6.6C-73.1,-14.5,-80.6,-33.8,-74.6,-46.7C-68.6,-59.7,-49.1,-66.3,-31.6,-73.5C-14.1,-80.6,-7,-88.2,5.2,-95.1C17.4,-102.1,34.8,-108.3,43.5,-55.2Z"
-                  transform="translate(100 100)"
-                />
-                <image
-                  className="rounded"
-                  href={img1} /* Ruta de la imagen */
-                  x="35"
-                  y="30"
-                  width="130"
-                  height="130"
-                  clipPath="path('M43.5,-55.2...')" /* Clipping opcional */
-                  preserveAspectRatio="xMidYMid slice"
-                />
-              </svg>
-            </motion.div>
+          {/* Texto centrado */}
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
+              HIFU y renueva la piel sin cirugías.
+            </h1>
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+              Lift-!N es la más reciente tecnología estética HIFU (High-Intensity Focused
+              Ultrasound) que focaliza toda su energía en un haz de ultrasonido de alta
+              frecuencia a una zona específica de la piel, sin hacer incisiones o
+              utilizar agujas en el paciente, con el fin de remodelar su tejido
+              mediante ablación térmica.
+            </p>
+          </div>
 
-            {/* Información del Tratamiento */}
-            <motion.div
-              className="space-y-6"
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: inView ? 1 : 0, x: inView ? 0 : 50 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-            >
-              <h2 className="text-3xl md:text-5xl font-bold text-gray-900">
+          {/* Contenido principal */}
+          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
+            {/* Galería derecha */}
+            <div className="grid grid-cols-2 gap-4">
+              <img
+                src={img1}
+                alt="Tratamiento facial"
+                className="rounded-lg shadow-lg"
+              />
+              <img
+                src={img1}
+                alt="Equipo de HIFU"
+                className="rounded-lg shadow-lg"
+              />
+              <img
+                src={img1}
+                alt="Aplicación HIFU"
+                className="col-span-2 rounded-lg shadow-lg"
+              />
+            </div>
+
+            {/* Texto adicional */}
+            <div>
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
                 Tratamiento HIFU Avanzado
-              </h2>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                El tratamiento HIFU utiliza ultrasonido focalizado para estimular la
-                producción de colágeno, logrando una piel más firme, tonificada y
-                rejuvenecida sin necesidad de cirugía.
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+                Lift-!N es la más reciente tecnología estética HIFU (High-Intensity
+                Focused Ultrasound) que focaliza toda su energía en un haz de ultrasonido
+                de alta frecuencia a una zona específica de la piel, sin hacer incisiones
+                o utilizar agujas en el paciente, con el fin de remodelar su tejido
+                mediante ablación térmica.
               </p>
-              <ul className="space-y-4">
-                <li className="flex items-start space-x-4">
-                  <span className="block w-4 h-4 bg-blue-500 rounded-full"></span>
-                  <span className="text-gray-700">
-                    Rejuvenecimiento facial y corporal no invasivo.
-                  </span>
-                </li>
-                <li className="flex items-start space-x-4">
-                  <span className="block w-4 h-4 bg-blue-500 rounded-full"></span>
-                  <span className="text-gray-700">
-                    Sin tiempo de recuperación.
-                  </span>
-                </li>
-                <li className="flex items-start space-x-4">
-                  <span className="block w-4 h-4 bg-blue-500 rounded-full"></span>
-                  <span className="text-gray-700">
-                    Resultados duraderos y visibles.
-                  </span>
-                </li>
-              </ul>
-            </motion.div>
+            </div>
           </div>
         </section>
+
 
         {/* Proceso del tratamiento */}
         <motion.section
@@ -422,7 +420,6 @@ export const Hifu = () => {
         {/* Footer */}
         <FooterWithLogo />
       </div>
-
     </>
   );
 };

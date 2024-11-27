@@ -9,6 +9,24 @@
   font-family: "Montserrat", sans-serif;
 }
 
+.vertical-gradient-text {
+  background: linear-gradient(to bottom, rgb(227, 219, 219) 20%, gray 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: vertical-shine 2s infinite ease-in-out;
+}
+
+@keyframes vertical-shine {
+  0% {
+    background-position: top;
+  }
+  100% {
+    background-position: bottom;
+  }
+}
+
+
 :root {
   display: flex;
   flex-direction: column;
@@ -20,9 +38,10 @@
   --color-button-alternative: rgb(201, 128, 193);
   /*color de boton saber mas en slider*/
   --color-button-alternative-hover: rgb(88, 157, 217);
-  --color-tittle: rgb(150, 60, 140);
+  --color-tittle: rgb(191, 132, 184);
   /*color de TEXTO saber mas en slider*/
   --color-text-light: #000000;
+  --color-text-white:#fff;
   /*color de texto*/
   --color-text-dark: #180530;
   --color-text-gray: #919191;

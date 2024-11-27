@@ -20,7 +20,8 @@ export default withMT({
         bgGreenLight: "var(--color-bg-green-light)", // rgba(209, 250, 229, 0.5)
         fillGreenDark: "var(--color-fill-green-dark)", // #167364
         initBackgroundButtonViewsGradient: "var(--init-gradiant-button-views)", //fondo plano para botones paginas secundaria
-        endBackgroundButtonViewsGradient: "var(--end-gradiant-button-views)" //fondo plano para botones paginas secundaria
+        endBackgroundButtonViewsGradient: "var(--end-gradiant-button-views)", //fondo plano para botones paginas secundaria
+        textWhite: "var(--color-text-white)"
       },
       keyframes: {
         fly: {
