@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { NavbarWithMegaMenu } from '../NavbarWithMegaMenu';
-import { Check, ArrowRight, Sparkles, Wand2, Target, Zap } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell } from 'lucide-react';
 import { AnimatedBackground } from "../AnimatedBackground";
 import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
@@ -43,6 +43,35 @@ export const Hifu = () => {
   const [benefitsRef, benefitsInView] = useInView({ threshold: 0.2 });
   const [processRef, processInView] = useInView({ threshold: 0.2 });
   const [pricingRef, pricingInView] = useInView({ threshold: 0.2 });
+  const [currentSlide, setCurrentSlide] = useState(0);
+  // lista de slider beneficios
+  const benefits = [
+    {
+      image: "/hifu/hifu_tool.webp",
+      items: [
+        { text: "Rejuvenecimiento facial sin cirugía", icon: Shell },
+        { text: "Tecnología HIFU avanzada", icon: Shell },
+        { text: "Resultados visibles", icon: Shell }
+      ]
+    },
+    {
+      image: "/hifu/hifu_tool.webp",
+      items: [
+        { text: "Sin tiempo de recuperación", icon: Shell },
+        { text: "Tratamiento no invasivo", icon: Shell },
+        { text: "Estimulación de colágeno", icon: Shell }
+      ]
+    },
+    {
+      image: "/hifu/hifu_tool.webp",
+      items: [
+        { text: "Sin tiempo de recuperación", icon: Shell },
+        { text: "Tratamiento no invasivo", icon: Shell },
+        { text: "Estimulación de colágeno", icon: Shell }
+      ]
+    }
+  ];
+
 
   useEffect(() => {
     AOS.init({
@@ -102,7 +131,7 @@ export const Hifu = () => {
           {/* Contenedor principal con mejor organización espacial */}
           <div className="h-[120vh] md:h-full container mx-auto flex flex-col lg:flex-row items-center justify-between px-4 pt-16 lg:pt-0">
             {/* Lado izquierdo - Textos */}
-            <div className="w-full lg:w-[35vw] absolute md:relative bottom-[30vh] md:bottom-[-5vh] lg:left-[-10vw] lg:bottom-[20vh] flex justify-center items-end lg:h-full">
+            <div className="w-full lg:w-[35vw] absolute md:relative bottom-[30vh] md:bottom-[-5vh] lg:left-[-6vw] lg:bottom-[20vh] flex justify-center items-end lg:h-full">
               <div className="w-[80vw] md:w-[60vw] lg:w-[40vw] h-auto max-w-2xl relative">
                 <img
                   src="/hifu/hifu_tool.webp"
@@ -126,7 +155,7 @@ export const Hifu = () => {
                 </p>
               </div>
 
-              <div className="block lg:hidden">
+              <div className="hidden lg:block">
                 <p className="text-purple-400 text-lg font-medium text-center">
                   Transforma tu vida • Renueva tu energía • Encuentra tu equilibrio
                 </p>
@@ -158,7 +187,6 @@ export const Hifu = () => {
             </svg>
           </div>
         </section>
-
         {/* Tratamiento avanzado HIFU */}
         <section
           className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-white to-gray-300 overflow-hidden"
@@ -228,101 +256,96 @@ export const Hifu = () => {
           </div>
         </section>
 
-
-        {/* Proceso del tratamiento */}
         <motion.section
-          ref={processRef}
-          className="py-20 px-4 bg-slate-800/50"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
+          className="h-screen bg-[var(--bg-dark-slider)] relative overflow-hidden"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center text-textDark mb-16">Proceso del Tratamiento</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {[
-                {
-                  step: 1,
-                  title: "Evaluación Inicial",
-                  description: "Valoración personalizada de tu piel y objetivos",
-                  icon: Target
-                },
-                {
-                  step: 2,
-                  title: "Tratamiento HIFU",
-                  description: "Aplicación precisa de ultrasonido focalizado",
-                  icon: Wand2
-                },
-                {
-                  step: 3,
-                  title: "Seguimiento",
-                  description: "Monitoreo de resultados y cuidados posteriores",
-                  icon: Zap
-                }
-              ].map((item) => (
-                <motion.div
-                  key={item.step}
-                  className="relative p-6 bg-gradient-to-br rounded-xl backdrop-blur-sm"
-                  variants={fadeInUp}
-                  whileHover={{
-                    scale: 1.05,
-                    transition: { duration: 0.3 }
-                  }}
-                >
+          <div className="h-full flex flex-col">
+            <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 vertical-gradient-text">
+              Beneficios del Tratamiento
+            </h2>
+
+            <div className="flex-grow relative">
+              <div className="absolute left-1/2 bottom-0 -translate-x-[18vw] w-[500px] transform translate-y-[15%]">
+                <motion.img
+                  src={benefits[currentSlide].image}
+                  alt="HIFU Device"
+                  className="min-w-[35vw] h-[80vh] object-contain"
+                  initial={{ opacity: 0, y: 100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                />
+
+                <div className="flex justify-center mt-4 space-x-2">
+                  {benefits.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-3 h-3 rounded-full transition-all ${currentSlide === index ? 'bg-white scale-125' : 'bg-white/30'
+                        }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              <div className="hidden md:block">
+                {benefits[currentSlide].items.map((benefit, index) => {
+                  const positions = [
+                    "top-[30%] left-[25vw]",
+                    "top-[60%] left-[28vw]",
+                    "top-[30%] right-[24vw]"
+                  ];
+
+                  return (
+                    <motion.div
+                      key={index}
+                      className={`absolute ${positions[index]} max-w-[250px]`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.2 }}
+                    >
+                      <div className="flex flex-col items-center text-center">
+                        {React.createElement(benefit.icon, {
+                          className: "text-white w-8 h-8 mb-3"
+                        })}
+                        <span className="text-white text-4xl">{benefit.text}</span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <div className="md:hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 space-y-4">
+                {benefits[currentSlide].items.map((benefit, index) => (
                   <motion.div
-                    variants={iconHoverVariants}
-                    initial="rest"
-                    whileHover="hover"
-                    className="absolute -top-4 -left-4 w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center"
+                    key={index}
+                    className="flex items-center space-x-4 bg-white/5 backdrop-blur-sm rounded-lg p-4"
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
                   >
-                    <item.icon className="w-8 h-8 text-blue-400" />
+                    {React.createElement(benefit.icon, {
+                      className: "text-white w-6 h-6"
+                    })}
+                    <span className="text-white text-lg">{benefit.text}</span>
                   </motion.div>
-                  <h3 className="text-2xl font-semibold text-textDark mt-8 mb-4">{item.title}</h3>
-                  <div className="text-textLight">{item.description}</div>
-                </motion.div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
+
+          <motion.div
+            className="absolute w-full h-full top-0 left-0 pointer-events-none"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          >
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-pink-200/10" />
+            <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full bg-pink-200/10" />
+          </motion.div>
         </motion.section>
 
-        {/* Beneficios Section - Preserved Original Design with Subtle Enhancements */}
-        <motion.section
-          ref={benefitsRef}
-          className="py-20 px-4"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-        >
-          <div className="max-w-6xl mx-auto">
-            <h2 className="text-4xl font-bold text-center text-textDark mb-16">Beneficios del Tratamiento</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {[
-                "Rejuvenecimiento facial sin cirugía",
-                "Estimulación natural del colágeno",
-                "Sin tiempo de recuperación",
-                "Resultados duraderos",
-                "Procedimiento no invasivo",
-                "Mejora visible de la flacidez"
-              ].map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  className="flex items-center space-x-4 p-6 rounded-lg"
-                  variants={fadeInUp}
-                  whileHover={{
-                    scale: 1.05,
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)'
-                  }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <Check className="text-blue-400 flex-shrink-0" />
-                  <div className="text-textLight text-lg">{benefit}</div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.section>
         {/* Antes/Después Gallery - Enhanced Timeline */}
         <RealResultsTimeline />
 

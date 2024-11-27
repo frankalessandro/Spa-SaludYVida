@@ -33,6 +33,7 @@
   align-items: center;
   --color-button-light: rgba(198, 111, 197, 0.865);
   --bg-gradient: rgba(255, 255, 255, 0.296);
+  --bg-dark-slider:rgb(27, 5, 41);
   /*color de boton navbar CONTACTANOS*/
   --color-button-light-hover: rgba(183, 228, 205, 0.865);
   --color-button-alternative: rgb(201, 128, 193);
