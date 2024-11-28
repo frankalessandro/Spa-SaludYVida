@@ -153,7 +153,8 @@ export const Hifu = () => {
     <>
       <NavbarWithMegaMenu />
       {/* <AnimatedBackground /> */}
-      <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]">
+      {/* <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]"> */}
+      <div className="min-h-screen overflow-x-hidden overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]">
         <section className="w-full h-[90vh] bg-gradient-to-br from-black via-black to-purple-800 relative overflow-hidden">
           {/* Contenedor principal con mejor organización espacial */}
           <div className="h-[120vh] md:h-full container mx-auto flex flex-col lg:flex-row items-center justify-between px-4 pt-16 lg:pt-0">
@@ -481,10 +482,12 @@ export const Hifu = () => {
           </div>
         </motion.section>
 
-        <section className="relative md:h-[70vh] py-20 px-4 bg-[var(--bg-dark-slider)]">
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
+        <section className="relative md:h-[70vh] py-20 px-4 bg-[var(--bg-dark-slider)]" style={{
+          clipPath: "inset(-300px 0 0 0)", // Recorta solo la parte inferior
+        }}>
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 ">
             <motion.div
-              className="text-white relative top-[10vh]"
+              className="text-white relative top-[10vh] "
               initial="hidden"
               whileInView="visible"
               viewport={{ once: true }}
@@ -505,12 +508,11 @@ export const Hifu = () => {
                 ))}
               </ul>
             </motion.div>
-
             <div className="relative min-h-[80vh] md:w-[50vw] md:min-h-[80vh]">
               {/* Gradiente de fondo */}
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-dark-slider)] via-transparent to-transparent z-10"></div>
               <motion.div
-                className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0"
+                className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0 overflow-x-hidden"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
@@ -523,10 +525,11 @@ export const Hifu = () => {
               </motion.div>
             </div>
           </div>
-        </section>
 
-        {/* Footer */}
-        <FooterWithLogo />
+        </section>
+        <footer className="relative top-[30vh] md:top-[10vh]">
+          <FooterWithLogo />
+        </footer>
       </div>
     </>
   );

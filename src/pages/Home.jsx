@@ -63,7 +63,7 @@ export const Home = () => {
 
   return (
 
-    <div className=" flex flex-col min-h-screen overflow-y-auto scroll-smooth w-[100vw] scroll-snap-y-mandatory scrollbar-hide  bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]">
+    <div className=" flex flex-col min-h-screen overflow-y-auto scroll-smooth w-[100vw] scroll-snap-y-mandatory scrollbar-hide  bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10] ">
       {/* Navbar */}
       <NavbarWithMegaMenu />
       <main className="flex-grow relative">
@@ -183,7 +183,7 @@ export const Home = () => {
         </section>
       </main>
       {/* Footer siempre al final */}
-      <footer className="realtive mt-auto top-[40vh]">
+      <footer className="relative top-[30vh] md:top-0">
         <FooterWithLogo />
       </footer>
 
