@@ -1,38 +1,48 @@
 import { Typography } from "@material-tailwind/react";
 import Logo from '../assets/SpaLogo.svg';
+import Team from '../assets/img/Equipo_Trabajo.png';
 
 export const FooterWithLogo = () => {
   return (
-    <footer className="relative top-[30vh] md:top-0 w-full bg-white p-8 z-[50]">
-      <div className="flex  relative flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12 bg-white text-center md:justify-between">
-        <img src={Logo} alt="logo-ct" className="w-10" />
-        <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
-          <li>
-            <Typography
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
-              Sobre nosotros
-            </Typography>
-          </li>
-          <li>
-            <Typography
-              as="a"
-              href="#"
-              color="blue-gray"
-              className="font-normal transition-colors hover:text-blue-500 focus:text-blue-500"
-            >
-              Contactanos
-            </Typography>
-          </li>
-        </ul>
+    <footer className="relative w-full bg-purple-600">
+      {/* Imagen superpuesta */}
+      <div className="relative w-full">
+        <img
+          src={Team}
+          alt="Equipo de trabajo"
+          className="absolute right-0 -top-24 md:-top-32 lg:-top-40 w-[60%] sm:w-[50%] md:w-[40%] lg:w-[35%] max-w-[600px]"
+        />
       </div>
-      <hr className="my-8 border-blue-gray-50" />
-      <Typography color="blue-gray" className="text-center font-normal">
-        &copy; 2024 Spa Holistico
-      </Typography>
+
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between p-8 text-white z-10 relative gap-8 lg:gap-0">
+        {/* Logo e información */}
+        <div className="flex items-start gap-4 lg:gap-6">
+          <img src={Logo} alt="Spa logo" className="w-16 md:w-20 lg:w-28" />
+          <div>
+            <Typography className="text-lg font-medium mb-2">Horarios de atención</Typography>
+            <ul className="text-sm leading-6">
+              <li>Lunes a Viernes: 8:00 AM - 8:00 PM</li>
+              <li>Sábado: 9:00 AM - 6:00 PM</li>
+              <li>Domingo: Cerrado</li>
+            </ul>
+          </div>
+        </div>
+
+        {/* Texto del medio */}
+        <div className="flex flex-col items-center text-center w-full md:w-auto">
+          <Typography className="text-xl md:text-2xl font-bold">
+            Spa Salud y Vida
+          </Typography>
+        </div>
+
+        {/* Espacio para imagen */}
+        <div className="hidden lg:block w-72"></div>
+      </div>
+
+      {/* Barra inferior del footer */}
+      <div className="bg-purple-700 text-white text-center py-2">
+        <Typography className="text-sm">&copy; 2024 Spa Holístico</Typography>
+      </div>
     </footer>
   );
-}
+};

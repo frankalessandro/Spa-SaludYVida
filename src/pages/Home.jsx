@@ -90,11 +90,7 @@ export const Home = () => {
               </p>
             </div>
 
-            <div className="relative hidden lg:block">
-              <p className="absolute left-[-20vw] top-[-5vh] transform -rotate-90 text-white-200 text-lg text-[1em] whitespace-nowrap">
-                Transforma tu vida • Renueva tu energía • Encuentra tu equilibrio
-              </p>
-            </div>
+
             <motion.button
               className="mt-8 px-8 py-4 bg-gradient-to-r from-initBackgroundButtonViewsGradient to-endBackgroundButtonViewsGradient rounded-full text-textDark font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all"
               whileHover={{ scale: 1.05 }}
@@ -141,8 +137,11 @@ export const Home = () => {
         {/* Proceso de Reserva */}
         <section className="w-full py-16 flex items-center justify-center reveal-section scroll-snap-align-start">
           <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8 p-10">
-              <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)] mb-6 reveal-title text-center md:text-left">Proceso de Reserva</h2>
+            {/* Columna de texto */}
+            <div className="space-y-8 p-6 md:p-10">
+              <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)] mb-6 reveal-title text-center md:text-left">
+                Proceso de Reserva
+              </h2>
               {[
                 { step: 1, title: "Busca el servicio que deseas", description: "" },
                 { step: 2, title: "Envíanos un mensaje por WhatsApp", description: "" },
@@ -150,28 +149,32 @@ export const Home = () => {
               ].map((step, index) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center sm:flex-row sm:items-start gap-4 reveal-service p-4 rounded-lg border bg-[var(--color-light-gray)]"
+                  className="flex flex-col sm:flex-row items-center sm:items-start gap-4 reveal-service p-4 rounded-lg border bg-[var(--color-light-gray)] shadow-md"
                 >
                   <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center text-white bg-[var(--color-button-alternative)] font-bold text-lg">
                     {step.step}
                   </div>
-                  <div className="text-center sm:text-left">
-                    <h3 className="text-xl font-semibold text-gray-800 mb-2">{step.title}</h3>
-                    {/* <p className="text-[var(--color-text-gray)]">{step.description}</p> */}
+                  <div className="py-2 text-center sm:text-left">
+                    <h3 className="text-xl font-semibold text-gray-800">{step.title}</h3>
                   </div>
                 </div>
               ))}
-              <WhatsAppButton />
+              <div className="flex justify-center md:justify-start">
+                <WhatsAppButton />
+              </div>
             </div>
-            <div className="relative">
+
+            {/* Columna de imagen */}
+            <div className="relative p-6 md:p-0">
               <img
                 src={img_spa_ambiente}
                 alt="Spa ambiente"
-                className="rounded-lg shadow-2xl w-full transform hover:scale-105 transition-all duration-500"
+                className="rounded-lg shadow-2xl w-full transform hover:scale-105 transition-transform duration-500"
               />
             </div>
           </div>
         </section>
+
 
 
         {/* Stepper */}

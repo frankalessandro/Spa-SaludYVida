@@ -253,17 +253,6 @@ export function NavbarWithMegaMenu() {
 
   return (
     <Navbar className={navbarClasses}>
-      <div className={bannerClasses}>
-        <a 
-          href="https://wa.me/+yourphonenumber"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="block w-full h-full hover:bg-purple-300 transition-colors duration-200"
-        >
-          Valoración gratis en el centro estético. Agenda tu cita ahora
-        </a>
-      </div>
-      
       <div className="flex items-center justify-between text-textDark">
         <Link to="/">
           <img

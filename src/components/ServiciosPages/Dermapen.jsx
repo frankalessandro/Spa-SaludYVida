@@ -23,7 +23,7 @@ const textImages = [
   '✨ Resultados visibles'
 ];
 
-const whatsappLink = "https://wa.me/1234567890";
+const whatsappLink = "https://wa.me/573226030044";
 
 const ParallaxImage = ({ scrollYProgress, children }) => {
   const y = useTransform(scrollYProgress, [0, 1], [0, 300]);

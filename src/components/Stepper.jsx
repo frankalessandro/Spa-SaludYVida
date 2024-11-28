@@ -162,7 +162,7 @@ export const SpaAppointmentStepper = () => {
           <div className="w-full flex flex-col md:flex-row items-center justify-center p-6 space-y-6 md:space-y-0 md:space-x-12">
             <div className="w-full md:w-1/2 text-center md:text-left reveal-content md:bg-white/70 p-8 rounded-xl shadow-2xl backdrop-blur-sm">
               <h2 className="text-2xl md:text-4xl font-bold mb-6 flex items-center justify-center md:justify-start gap-3" style={{ color: colors.textPrimary }}>
-                <MapPin className="text-teal-500 w-6 md:w-9 h-6 md:h-9" />
+                <MapPin className="text-purple-500 w-6 md:w-9 h-6 md:h-9" />
                 {section.title}
               </h2>
               <p className="text-base md:text-lg mb-6" style={{ color: colors.textSecondary }}>
@@ -171,20 +171,20 @@ export const SpaAppointmentStepper = () => {
 
               <div className="mt-6 text-gray-700 space-y-4">
                 <div className="flex items-center gap-3">
-                  <Phone className="text-teal-500 w-5 md:w-6 h-5 md:h-6" />
+                  <Phone className="text-purple-500 w-5 md:w-6 h-5 md:h-6" />
                   <span className="text-sm md:text-base">{section.contactDetails.phone}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Mail className="text-teal-500 w-5 md:w-6 h-5 md:h-6" />
+                  <Mail className="text-purple-500 w-5 md:w-6 h-5 md:h-6" />
                   <a
                     href={`mailto:${section.contactDetails.email}`}
-                    className="text-teal-600 hover:underline text-sm md:text-base"
+                    className="text-purple-600 hover:underline text-sm md:text-base"
                   >
                     {section.contactDetails.email}
                   </a>
                 </div>
                 <div className="flex items-center gap-3" style={{ color: colors.textSecondary }}>
-                  <MapPin className="text-teal-500 w-5 md:w-6 h-5 md:h-6" />
+                  <MapPin className="text-purple-500 w-5 md:w-6 h-5 md:h-6" />
                   <span className="text-sm md:text-base">{section.contactDetails.address}</span>
                 </div>
               </div>

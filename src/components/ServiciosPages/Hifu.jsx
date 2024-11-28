@@ -23,7 +23,7 @@ const textImages = [
   '⚡ Resultados efectivos garantizados'
 ];
 
-const whatsappLink = "https://wa.me/1234567890";
+const whatsappLink = "https://wa.me/573226030044";
 
 const ParallaxImage = ({ scrollYProgress, children }) => {
   const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
@@ -199,7 +199,7 @@ export const Hifu = () => {
           </div>
 
           {/* Separador de ola */}
-          <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
+          {/* <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none">
             <svg
               className={`relative block w-full h-[4vh] md:h-[10vh] rotate-180 animate-waves`}
               data-name="Layer 1"
@@ -212,7 +212,7 @@ export const Hifu = () => {
                 className="fill-white"
               />
             </svg>
-          </div>
+          </div> */}
         </section>
         {/* Tratamiento avanzado HIFU */}
         <section
