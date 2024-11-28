@@ -42,7 +42,6 @@ export const Home = () => {
     };
   }, []);
 
-
   useEffect(() => {
     scrollRevealRef.current = ScrollReveal();
 

@@ -11,6 +11,7 @@ import { Colonterapia } from "./components/ServiciosPages/Colonterapia"; // Pág
 import { Drenajes } from "./components/ServiciosPages/Drenajes"; // Página para Drenajes
 
 export default function App() {
+  
   return (
     <Router>
       {/* Aquí se definirán las rutas */}

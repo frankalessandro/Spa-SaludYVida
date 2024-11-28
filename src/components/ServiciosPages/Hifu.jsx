@@ -15,6 +15,34 @@ import img2 from "../../assets/img/hifu/hifu2.webp";
 import img3 from "../../assets/img/hifu/hifu3.webp";
 import img4 from "../../assets/img/hifu/hifu1.webp";
 
+// resultados
+const timelineItems = [
+  {
+    time: "Antes",
+    title: "Estado Inicial",
+    description: "Signos visibles de envejecimiento y pérdida de elasticidad",
+    image: img4
+  },
+  {
+    time: "Después",
+    title: "Transformación HIFU",
+    description: "Piel rejuvenecida, más firme y luminosa",
+    image: img1
+  },
+  {
+    time: "Detalle",
+    title: "Contorno Facial",
+    description: "Definición mejorada y lifting natural sin cirugía",
+    image: img2
+  },
+  {
+    time: "Resultado Final",
+    title: "Resultado Integral",
+    description: "Rejuvenecimiento completo con técnica no invasiva",
+    image: img3
+  }
+];
+
 const images = [img1, img2, img3, img4];
 const textImages = [
   '💡 Innovación que inspira',
@@ -419,7 +447,7 @@ export const Hifu = () => {
         </motion.section>
 
         {/* Antes/Después Gallery - Enhanced Timeline */}
-        <RealResultsTimeline />
+        <RealResultsTimeline timelineItems={timelineItems} />
 
         {/* Precios Section - Preserved Original Design */}
         <motion.section

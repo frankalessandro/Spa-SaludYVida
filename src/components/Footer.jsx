@@ -4,7 +4,8 @@ import Team from '../assets/img/Equipo_Trabajo.png';
 
 export const FooterWithLogo = () => {
   return (
-    <footer className="relative min-w-[100vw] bg-purple-600 min-h-full">
+    <footer className="relative min-w-[100vw] bg-white min-h-full border-t border-t-purple-500">
+
       {/* Imagen superpuesta */}
       <div className="relative w-full overflow-visible">
         <img
@@ -13,7 +14,7 @@ export const FooterWithLogo = () => {
           className="absolute right-0 -top-24 md:-top-32 lg:-top-40 w-[60%] sm:w-[50%] md:w-[40%] lg:w-[35%] max-w-[600px]"
         />
       </div>
-      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between p-8 text-white z-10 relative gap-8 lg:gap-0">
+      <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between p-8 text-textDark z-10 relative gap-8 lg:gap-0">
         {/* Logo e información */}
         <div className="flex items-start gap-4 lg:gap-6">
           <img src={Logo} alt="Spa logo" className="w-16 md:w-20 lg:w-28" />
@@ -37,7 +38,7 @@ export const FooterWithLogo = () => {
         <div className="hidden lg:block w-72"></div>
       </div>
       {/* Barra inferior del footer */}
-      <div className="bg-purple-700 text-white text-center py-2">
+      <div className="bg-white text-textDark text-center py-2">
         <Typography className="text-sm">&copy; 2024 Spa Holístico</Typography>
       </div>
     </footer>

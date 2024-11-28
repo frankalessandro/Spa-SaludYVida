@@ -9,6 +9,10 @@
   font-family: "Montserrat", sans-serif;
 }
 
+html, body {
+  overscroll-behavior-x: none;
+}
+
 .vertical-gradient-text {
   background: linear-gradient(to bottom, rgb(227, 219, 219) 20%, gray 80%);
   background-clip: text;

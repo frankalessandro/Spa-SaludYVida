@@ -8,33 +8,7 @@ import img2 from "../assets/img/hifu/hifu2.webp";
 import img3 from "../assets/img/hifu/hifu3.webp";
 import img4 from "../assets/img/hifu/hifu1.webp";
 
-export const RealResultsTimeline = () => {
-  const timelineItems = [
-    {
-      time: "Antes",
-      title: "Estado Inicial",
-      description: "Signos visibles de envejecimiento y pérdida de elasticidad",
-      image: img4
-    },
-    {
-      time: "Después",
-      title: "Transformación HIFU",
-      description: "Piel rejuvenecida, más firme y luminosa",
-      image: img1
-    },
-    {
-      time: "Detalle",
-      title: "Contorno Facial",
-      description: "Definición mejorada y lifting natural sin cirugía",
-      image: img2
-    },
-    {
-      time: "Resultado Final",
-      title: "Resultado Integral",
-      description: "Rejuvenecimiento completo con técnica no invasiva",
-      image: img3
-    }
-  ];
+export const RealResultsTimeline = ({ timelineItems }) => {
 
   useEffect(() => {
     ScrollReveal().reveal('.timeline-item', {
@@ -51,10 +25,10 @@ export const RealResultsTimeline = () => {
       <h2 className="text-4xl font-bold text-center text-textDark mb-16">
         Resultados Reales
       </h2>
-      
+
       <div className="max-w-4xl mx-auto space-y-12">
         {timelineItems.map((item, index) => (
-          <div 
+          <div
             key={index}
             className={`
               timeline-item 
@@ -73,9 +47,9 @@ export const RealResultsTimeline = () => {
           >
             {/* Imagen */}
             <div className="w-full md:w-1/2 rounded-xl overflow-hidden">
-              <img 
-                src={item.image} 
-                alt={`Resultado ${index + 1}`} 
+              <img
+                src={item.image}
+                alt={`Resultado ${index + 1}`}
                 className="w-full h-64 object-cover transition-transform duration-300"
               />
             </div>
@@ -88,11 +62,11 @@ export const RealResultsTimeline = () => {
                 </span>
                 <div className="flex-grow h-0.5 bg-blue-500/30"></div>
               </div>
-              
+
               <h3 className="text-2xl font-bold text-textDark">
                 {item.title}
               </h3>
-              
+
               <p className="text-textLight leading-relaxed">
                 {item.description}
               </p>
