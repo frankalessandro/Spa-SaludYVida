@@ -237,7 +237,7 @@ export function NavbarWithMegaMenu() {
     relative min-w-[100vw] md:min-w-[70.1vw] 
     left-[-9vw] md:left-[-1vw] lg:left-[-.7vw]
     ${showBanner ? 'top-[-2.4vh] md:top-[-1vh]' : 'top-[-100%]'}
-    bg-purple-200 h-10 text-center py-2 md:rounded-t-lg 
+    b-200 h-10 text-center py-2 md:rounded-t-lg 
     text-[.7em] md:text-sm
   `;
 
@@ -267,8 +267,8 @@ export function NavbarWithMegaMenu() {
         <button className="
           align-middle select-none font-sans font-bold text-center uppercase 
           disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none 
-          text-xs py-3 px-6 rounded-lg bg-Botones text-white 
-          shadow-md shadow-purple-500/20 
+          text-xs py-3 px-6 rounded-lg bg-gradient-to-r from-yellow-700 via-yellow-700 via-yellow-800 to-yellow-800  text-white 
+          shadow-md shadow-yellow-500/20 
           hover:shadow-xl hover:bg-BotonesHover 
           focus:opacity-[0.85] focus:shadow-none 
           active:opacity-[0.85] active:shadow-none 

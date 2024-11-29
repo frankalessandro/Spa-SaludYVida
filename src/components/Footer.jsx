@@ -4,7 +4,7 @@ import Team from '../assets/img/Equipo_Trabajo.png';
 
 export const FooterWithLogo = () => {
   return (
-    <footer className="relative min-w-[100vw] bg-purple-600" style={{
+    <footer className="relative min-w-[100vw] bg-black" style={{
       clipPath: "inset(-300px 0 0 0)", // Recorta solo la parte inferior
     }}>
       {/* Contenedor principal */}
@@ -23,12 +23,12 @@ export const FooterWithLogo = () => {
           />
         </div>
 
-        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between p-8 text-white z-10 relative gap-8 lg:gap-0">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between p-8  vertical-gradient-text  z-10 relative gap-8 lg:gap-0">
           {/* Logo e información */}
           <div className="flex items-start gap-4 lg:gap-6">
             <img src={Logo} alt="Spa logo" className="w-16 md:w-20 lg:w-28" />
             <div>
-              <Typography className="text-lg font-medium mb-2">Horarios de atención</Typography>
+              <Typography className="text-lg font-medium mb-2 text-yellow-600">Horarios de atención</Typography>
               <ul className="text-sm leading-6">
                 <li>Lunes a Viernes: 8:00 AM - 8:00 PM</li>
                 <li>Sábado: 9:00 AM - 6:00 PM</li>
@@ -50,7 +50,7 @@ export const FooterWithLogo = () => {
       </div>
 
       {/* Barra inferior del footer */}
-      <div className="bg-purple-700 text-white text-center py-2">
+      <div className="bg-black vertical-gradient-text  text-center py-2">
         <Typography className="text-sm">&copy; 2024 Spa Holístico</Typography>
       </div>
     </footer>

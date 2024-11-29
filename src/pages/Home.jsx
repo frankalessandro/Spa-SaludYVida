@@ -1,5 +1,7 @@
-import React, { useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import 'animate.css';
+
+import { Check, ArrowRight, BookCheck } from 'lucide-react';
 
 import { useInView } from 'react-intersection-observer';
 import ScrollReveal from "scrollreveal";
@@ -24,6 +26,51 @@ const commonRevealConfig = {
 
 export const Home = () => {
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
+  const [typedText, setTypedText] = useState("");
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
+  const typingSpeed = 50; // Velocidad de escritura en milisegundos por carácter
+  const [backgroundImage, setBackgroundImage] = useState(img1);
+
+  const texts = [
+    "Moldea tu figura con tecnología de última generación.",
+    "Resultados visibles y duraderos sin cirugía.",
+    "La excelencia en tratamientos corporales no invasivos."
+  ];
+  useEffect(() => {
+    let currentIndex = 0;
+    let timeout;
+
+    const typeNextCharacter = () => {
+      if (currentIndex <= texts[currentTextIndex].length) {
+        setTypedText(texts[currentTextIndex].substring(0, currentIndex));
+        currentIndex++;
+        timeout = setTimeout(typeNextCharacter, typingSpeed);
+      } else {
+        // Esperar antes de comenzar a borrar
+        timeout = setTimeout(startErasing, 2000);
+      }
+    };
+
+    const startErasing = () => {
+      const eraseText = () => {
+        if (currentIndex > 0) {
+          currentIndex--;
+          setTypedText(texts[currentTextIndex].substring(0, currentIndex));
+          timeout = setTimeout(eraseText, typingSpeed / 2);
+        } else {
+          // Cambiar al siguiente texto
+          setCurrentTextIndex((prev) => (prev + 1) % texts.length);
+          timeout = setTimeout(typeNextCharacter, typingSpeed);
+        }
+      };
+      eraseText();
+    };
+
+    timeout = setTimeout(typeNextCharacter, typingSpeed);
+
+    return () => clearTimeout(timeout);
+  }, [currentTextIndex]);
+
   const scrollRevealRef = useRef(null);
   const [svgRef, inView] = useInView({
     threshold: 0.2,
@@ -41,6 +88,7 @@ export const Home = () => {
       if (scrollRevealRef.current) scrollRevealRef.current.destroy();
     };
   }, []);
+
 
   useEffect(() => {
     scrollRevealRef.current = ScrollReveal();
@@ -69,46 +117,66 @@ export const Home = () => {
         {/* welcome */}
         <motion.section
           ref={heroRef}
-          className="relative min-w-[100vw] top-0 h-screen flex items-center justify-center overflow-hidden bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${img1})`,
-          }}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          className="relative h-screen flex items-center justify-center overflow-hidden"
         >
-          <div className="absolute inset-0 bg-black/50" />
-          <div className="relative z-10 text-center px-4">
-            <div className="text-white">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
-                Bienvenido a tu
-                <span className="text-purple-400"> Oasis</span> de Bienestar
-              </h1>
-              <p className="text-lg md:text-xl text-gray-300 max-w-xl">
-                Descubre la armonía perfecta entre cuerpo, mente y espíritu
-              </p>
-            </div>
-
-
-            <motion.button
-              className="mt-8 px-8 py-4 bg-gradient-to-r from-initBackgroundButtonViewsGradient to-endBackgroundButtonViewsGradient rounded-full text-textDark font-semibold text-lg hover:shadow-lg hover:shadow-blue-500/30 transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              Consulta gratuita
-            </motion.button>
+          {/* Background Image with Overlay */}
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
+            style={{ backgroundImage: `url(${backgroundImage})` }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-gray-900" />
           </div>
-          {/* Gradiente inferior */}
-          <div className="absolute bottom-0 left-0 w-full h-[40vh] bg-gradient-to-t from-purple-500 to-transparent pointer-events-none" />
-        </motion.section>
 
+          {/* Main Content */}
+          <div className="relative z-10 text-center px-8 max-w-4xl mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-yellow-600 font-serif text-xl mb-4 tracking-[0.3em] uppercase">
+                Experiencia Exclusiva
+              </h2>
+              <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 tracking-wider">
+                Bienvenido
+              </h1>
+              <div className="w-24 h-0.5 bg-yellow-600 mx-auto mb-8" />
+              <p className="text-xl md:text-2xl text-gray-300 font-light">
+                {typedText}
+              </p>
+
+              <motion.button
+                className="mt-12 px-12 py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                RESERVE SU CITA
+              </motion.button>
+            </motion.div>
+          </div>
+
+          {/* Elegant Scroll Indicator */}
+          <motion.div
+            className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          >
+            <div className="w-12 h-12 border border-yellow-600/50 rounded-full flex items-center justify-center">
+              <motion.div
+                animate={{ y: [0, 5, 0] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+              >
+                <ArrowRight className="w-6 h-6 text-yellow-600 transform rotate-90" />
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.section>
         {/* Slider */}
         <section
-          className="w-full h-[150vh] lg:h-[100vh] flex items-center justify-center scroll-snap-align-start relative overflow-hidden bg-gradient-to-b from-purple-500 to-black"
+          className="w-full h-[150vh] lg:h-[100vh] flex items-center justify-center scroll-snap-align-start relative overflow-hidden bg-gradient-to-b from-gray-900 via-gray-900 via-gray-800 to-white"
         >
           <SliderMain />
         </section>
-
 
         {/* Servicios */}
         <section className="relative w-full py-16 reveal-section scroll-snap-align-start">

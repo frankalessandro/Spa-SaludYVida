@@ -183,7 +183,8 @@ export const Hifu = () => {
       {/* <AnimatedBackground /> */}
       {/* <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]"> */}
       <div className="min-h-screen overflow-x-hidden overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]">
-        <section className="w-full h-[90vh] bg-gradient-to-br from-black via-black to-purple-800 relative overflow-hidden">
+        <section className="w-full h-[90vh] bg-gradient-to-br from-black  to-yellow-600 relative overflow-hidden" style={{ background: 'linear-gradient(to bottom right, #000, #000 70%, #fbbf24 90%)' }}>
+
           {/* Contenedor principal con mejor organización espacial */}
           <div className="h-[120vh] md:h-full container mx-auto flex flex-col lg:flex-row items-center justify-between px-4 pt-16 lg:pt-0">
             {/* Lado izquierdo - Textos */}
@@ -203,7 +204,7 @@ export const Hifu = () => {
                   <span className="vertical-gradient-text block">ULTHERAPY</span>
                   <span className="block">
                     <span className="vertical-gradient-text">Tecnología</span>
-                    <span className="text-purple-400"> Hifu</span>
+                    <span className="text-yellow-600"> Hifu</span>
                   </span>
                 </h1>
                 <p className="text-lg md:text-xl text-gray-300 max-w-xl">
@@ -212,7 +213,7 @@ export const Hifu = () => {
               </div>
 
               <div className="hidden lg:block">
-                <p className="text-purple-400 text-lg font-medium text-center">
+                <p className="text-yellow-400 text-lg font-medium text-center">
                   Transforma tu vida • Renueva tu energía • Encuentra tu equilibrio
                 </p>
               </div>
@@ -223,7 +224,7 @@ export const Hifu = () => {
 
           {/* Elementos decorativos de fondo */}
           <div className="absolute inset-0 opacity-20 pointer-events-none">
-            <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-purple-500 rounded-full blur-xl animate-float-rotate-left"></div>
+            <div className="absolute top-1/4 left-1/4 w-40 h-40 bg-yellow-500 rounded-full blur-xl animate-float-rotate-left"></div>
             <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-blue-500 rounded-full blur-xl animate-float-rotate-right"></div>
           </div>
 
@@ -263,7 +264,7 @@ export const Hifu = () => {
 
           {/* Texto centrado */}
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-700 mb-4">
               HIFU y renueva la piel sin cirugías.
             </h1>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -298,7 +299,7 @@ export const Hifu = () => {
 
             {/* Texto adicional */}
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-600 mb-4">
                 Tratamiento HIFU Avanzado
               </h1>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -321,7 +322,7 @@ export const Hifu = () => {
           transition={{ duration: 0.5 }}
         >
           <div className="h-full flex flex-col">
-            <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 vertical-gradient-text">
+            <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 vertical-gradient-text-gray">
               Beneficios del Tratamiento
             </h2>
 
@@ -386,9 +387,9 @@ export const Hifu = () => {
                     >
                       <div className="flex flex-col items-center text-center">
                         {React.createElement(benefit.icon, {
-                          className: "text-white w-8 h-8 mb-3"
+                          className: "text-yellow-800 w-8 h-8 mb-3"
                         })}
-                        <span className="text-white text-4xl">{benefit.text}</span>
+                        <span className="vertical-gradient-text text-4xl">{benefit.text}</span>
                       </div>
                     </motion.div>
                   );
@@ -452,7 +453,7 @@ export const Hifu = () => {
         {/* Precios Section - Preserved Original Design */}
         <motion.section
           ref={pricingRef}
-          className="py-20 px-4"
+          className="py-20 px-4 bg-gradient-to-b from-white to-black"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -465,7 +466,7 @@ export const Hifu = () => {
                 {
                   title: "Sesión Individual",
                   price: "$1,000,000",
-                  gradient: "from-blue-900/40 to-purple-900/40",
+                  gradient: "from-blue-900/40 to-yellow-900/40",
                   features: [
                     "1 sesión completa de HIFU 7D",
                     "Valoración personalizada",
@@ -475,7 +476,7 @@ export const Hifu = () => {
                 {
                   title: "Tratamiento Completo",
                   price: "$2,500,000",
-                  gradient: "from-purple-900/40 to-pink-900/40",
+                  gradient: "from-yellow-900/40 to-pink-900/40",
                   features: [
                     "Múltiples sesiones de HIFU 7D",
                     "Plasma rico en plaquetas",
@@ -493,7 +494,7 @@ export const Hifu = () => {
                     rotate: index % 2 === 0 ? -1 : 1
                   }}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-purple-500/10 transform -skew-y-12 translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-yellow-500/10 transform -skew-y-12 translate-y-full group-hover:translate-y-0 transition-transform duration-700" />
                   <h3 className="text-2xl font-semibold text-textDark mb-4">{plan.title}</h3>
                   <div className="text-5xl font-bold text-textDark mb-6">{plan.price}</div>
                   <ul className="text-textLight space-y-4">
@@ -510,7 +511,7 @@ export const Hifu = () => {
           </div>
         </motion.section>
 
-        <section className="relative md:h-[85vh] py-20 px-4 bg-[var(--bg-dark-slider)]" style={{
+        <section className="relative md:h-[85vh] py-20 px-4 bg-black" style={{
           clipPath: "inset(-300px 0 0 0)", // Recorta solo la parte inferior
         }}>
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 ">

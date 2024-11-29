@@ -9,12 +9,21 @@
   font-family: "Montserrat", sans-serif;
 }
 
-html, body {
+html,
+body {
   overscroll-behavior-x: none;
 }
 
 .vertical-gradient-text {
-  background: linear-gradient(to bottom, rgb(227, 219, 219) 20%, gray 80%);
+  background: linear-gradient(to bottom, rgb(253, 252, 252) 20%, rgb(222, 193, 88) 80%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  animation: vertical-shine 2s infinite ease-in-out;
+}
+
+.vertical-gradient-text-gray {
+  background: linear-gradient(to bottom, rgb(253, 252, 252) 20%, rgb(64, 64, 64) 80%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
@@ -25,6 +34,7 @@ html, body {
   0% {
     background-position: top;
   }
+
   100% {
     background-position: bottom;
   }
@@ -35,34 +45,35 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  --color-button-light: rgba(198, 111, 197, 0.865);
+  --color-button-light: #f5d20ccd;
   --bg-gradient: rgba(255, 255, 255, 0.296);
-  --bg-dark-slider:rgb(27, 5, 41);
+  --bg-dark-slider: rgba(0, 0, 0, 0.926);
   /*color de boton navbar CONTACTANOS*/
-  --color-button-light-hover: rgba(183, 228, 205, 0.865);
-  --color-button-alternative: rgb(201, 128, 193);
+  --color-button-light-hover: rgba(245, 210, 12, 0.865);
+  --color-button-alternative: rgb(194, 146, 41);
   /*color de boton saber mas en slider*/
-  --color-button-alternative-hover: rgb(88, 157, 217);
-  --color-tittle: rgb(191, 132, 184);
+  --color-button-alternative-hover: rgb(245, 210, 12);
+  --color-tittle: rgb(245, 210, 12);
   /*color de TEXTO saber mas en slider*/
   --color-text-light: #000000;
-  --color-text-white:#fff;
+  --color-text-white: #fff;
   /*color de texto*/
-  --color-text-dark: #180530;
-  --color-text-gray: #919191;
-  --color-underline: #00bcd4;
+  --color-text-dark: #5e4c03;
+  --color-text-gray: #a19345;
+  --color-underline: #FFD700;
   /*aun no se usa*/
   --color-bg-1: #f7fafca8;
-  --color-bg-2: #2068af;
-  --color-background-white:white;
+  --color-bg-2: #b8a426;
+  --color-background-white: white;
   /* variables para botones de paginas como hifu */
-  --init-gradiant-button-views:  rgba(172,218,143,1) 38%;
-  --end-gradiant-button-views:  rgba(159,85,181,1) 100%; 
+  --init-gradiant-button-views: rgba(245, 210, 12, 1) 38%;
+  --end-gradiant-button-views: #FFD700;
   background: rgb(255, 255, 255);
-  background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(233, 250, 225, 1) 35%, rgba(244, 206, 255, 1) 100%);
+  background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(233, 250, 225, 1) 35%, rgba(245, 210, 12, 1) 100%);
   overflow-x: none;
   max-width: 100%;
 }
+
 
 @layer base {
   @font-face {
@@ -95,7 +106,7 @@ html, body {
   .scrollbar-track-gray-200 {
     scrollbar-color: #f7fafc #e2e8f0;
   }
-  
+
 }
 
 
@@ -144,6 +155,7 @@ html, body {
   0% {
     transform: translateY(50%) rotate(0deg);
   }
+
   100% {
     transform: translateY(60%) rotate(20deg);
   }
@@ -153,28 +165,32 @@ html, body {
   0% {
     transform: translateY(50%) rotate(0deg);
   }
+
   100% {
     transform: translateY(40%) rotate(-20deg);
   }
 }
-  
 
 
- /* Animación de batir las alas */
+
+/* Animación de batir las alas */
 @keyframes flap {
   0% {
     transform: rotate(0deg);
   }
+
   50% {
     transform: rotate(5deg);
   }
+
   100% {
     transform: rotate(0deg);
   }
 }
 
 /* Estilo para las alas */
-.wing-left, .wing-right {
+.wing-left,
+.wing-right {
   animation: flap 1s infinite ease-in-out;
 }
 
@@ -183,7 +199,8 @@ html, body {
 }
 
 .wing-right {
-  animation-delay: 0.5s; /* Retraso para que las alas se muevan en un ciclo alterno */
+  animation-delay: 0.5s;
+  /* Retraso para que las alas se muevan en un ciclo alterno */
 }
 
 /* Animación de vuelo para los pájaros */
@@ -191,6 +208,7 @@ html, body {
   0% {
     transform: rotate(1deg);
   }
+
   100% {
     transform: rotate(1deg);
   }
