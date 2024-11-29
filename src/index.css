@@ -200,4 +200,15 @@ html, body {
   animation: fly 10s linear infinite;
 }
 
+/* responsive de top en footer */
+@media (max-height: 667px) {
+  .footer-top-75vh {
+    top: 75vh !important;
+  }
+}
 
+@media (min-height: 668px) and (max-height: 915px) {
+  .footer-top-22vh {
+    top: 45vh !important;
+  }
+}

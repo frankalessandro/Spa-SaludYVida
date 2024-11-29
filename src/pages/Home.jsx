@@ -182,9 +182,10 @@ export const Home = () => {
         </section>
       </main>
       {/* Footer siempre al final */}
-      <footer className="relative top-[30vh] md:top-0">
+      <footer className="relative top-[22vh] md:top-0 footer-top-22vh footer-top-75vh">
         <FooterWithLogo />
       </footer>
+
 
 
       <FloatButtons />
