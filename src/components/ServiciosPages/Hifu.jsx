@@ -510,7 +510,7 @@ export const Hifu = () => {
           </div>
         </motion.section>
 
-        <section className="relative md:h-[70vh] py-20 px-4 bg-[var(--bg-dark-slider)]" style={{
+        <section className="relative md:h-[85vh] py-20 px-4 bg-[var(--bg-dark-slider)]" style={{
           clipPath: "inset(-300px 0 0 0)", // Recorta solo la parte inferior
         }}>
           <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 ">
@@ -537,7 +537,6 @@ export const Hifu = () => {
               </ul>
             </motion.div>
             <div className="relative min-h-[80vh] md:w-[50vw] md:min-h-[80vh]">
-              {/* Gradiente de fondo */}
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-dark-slider)] via-transparent to-transparent z-10"></div>
               <motion.div
                 className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0 overflow-x-hidden"
@@ -545,17 +544,20 @@ export const Hifu = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <img
-                  src="/hifu/image.webp"
-                  alt="Spa Holístico"
-                  className="w-full h-full object-cover rounded-lg"
-                />
+                <div className="relative w-full h-full">
+                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[var(--bg-dark-slider)] to-transparent z-10"></div>
+                  <img
+                    src="/hifu/image.webp"
+                    alt="Spa Holístico"
+                    className="w-full h-full object-cover rounded-lg"
+                  />
+                </div>
               </motion.div>
             </div>
           </div>
 
         </section>
-        <footer className="relative top-[30vh] md:top-[10vh]">
+        <footer className="relative top-[30vh] md:top-[0vh]">
           <FooterWithLogo />
         </footer>
       </div>
