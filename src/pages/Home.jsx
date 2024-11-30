@@ -157,7 +157,7 @@ export const Home = () => {
 
           {/* Elegant Scroll Indicator */}
           <motion.div
-            className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-12 left-[48.5vw] transform -translate-x-1/2"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
@@ -173,15 +173,15 @@ export const Home = () => {
         </motion.section>
         {/* Slider */}
         <section
-          className="w-full h-[150vh] lg:h-[100vh] flex items-center justify-center scroll-snap-align-start relative overflow-hidden bg-gradient-to-b from-gray-900 via-gray-900 via-gray-800 to-white"
+          className="w-full h-[150vh] lg:h-[100vh] flex items-center justify-center scroll-snap-align-start relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-900"
         >
           <SliderMain />
         </section>
 
         {/* Servicios */}
-        <section className="relative w-full py-16 reveal-section scroll-snap-align-start">
+        <section className="relative w-full py-16  bg-gradient-to-b from-gray-900 via-gray-900 to-white">
           <div className="max-w-7xl mx-auto px-4 text-center ">
-            <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)]  mb-6 reveal-title ">Servicios Holísticos</h2>
+            <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)] mb-6 text-yellow-600">Servicios Holísticos</h2>
             <p className="text-xl text-[var(--color-text-gray)] mb-12">Descubre nuestro enfoque integral para tu bienestar</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[

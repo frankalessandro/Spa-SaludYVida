@@ -109,7 +109,7 @@ export const SliderMain = () => {
     return (
         <div className="container lg:max-w-screen-2xl max-w-[100vw]">
             <section className='content-info relative'>
-                <div className="container-title text-white relative ">
+                <div className="container-title text-white relative">
                     <span className='text-white'>Nuestros Tratamientos</span>
                     <div className="buttons">
                         <span className="text-textDark prev"><ChevronLeftIcon width={30} height={30} /></span>

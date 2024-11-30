@@ -24,6 +24,11 @@ export default withMT({
         textWhite: "var(--color-text-white)"
       },
       keyframes: {
+        shine: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
         fly: {
           '0%': { transform: 'translateX(-100%)' },
           '100%': { transform: 'translateX(100%)' },
@@ -95,10 +100,18 @@ export default withMT({
         'slide-in-bottom-left': 'slide-in-bottom-left 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards', //animacion de hoja en el home
         'waves': 'waves 3s ease-in-out infinite', // Ciclo infinito
         'ocultar': 'ocultar 2s forwards', // Definimos la animación llamada 'ocultar'
-      }
+        shine: 'shine 3s infinite linear',
+      },
+      backgroundImage: {
+        'gold-gradient': 'linear-gradient(90deg, #ffcc33, #ff9900, #ffcc33)',
+      },
+      textShadow: {
+        gold: '0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 5px rgba(255, 204, 0, 0.6)',
+      },
     },
   },
   plugins: [scrollbarHide, require('daisyui'),
+    require('tailwindcss-textshadow'), //
   ],
 
 });

@@ -21,8 +21,8 @@ export const RealResultsTimeline = ({ timelineItems }) => {
   }, []);
 
   return (
-    <section className="py-20 px-4 bg-slate-900">
-      <h2 className="text-4xl font-bold text-center text-textDark mb-16">
+    <section className="py-20 px-4 bg-white">
+      <h2 className="text-4xl font-bold text-center text-yellow-800 mb-16">
         Resultados Reales
       </h2>
 
@@ -57,10 +57,10 @@ export const RealResultsTimeline = ({ timelineItems }) => {
             {/* Contenido de texto */}
             <div className="w-full md:w-1/2 space-y-4">
               <div className="flex items-center space-x-4">
-                <span className="text-blue-500 font-mono italic text-lg">
+                <span className="text-yellow-800 font-mono italic text-lg">
                   {item.time}
                 </span>
-                <div className="flex-grow h-0.5 bg-blue-500/30"></div>
+                <div className="flex-grow h-0.5 bg-yellow-900"></div>
               </div>
 
               <h3 className="text-2xl font-bold text-textDark">

@@ -30,6 +30,28 @@ body {
   animation: vertical-shine 2s infinite ease-in-out;
 }
 
+.golden-text {
+  font-size: 3rem; /* Ajusta el tamaño según sea necesario */
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #ffd700; /* Color dorado base */
+  background: linear-gradient(90deg, #ffcc33, #ff9900, #ffcc33);
+  background-size: 200%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 
+               0px 2px 5px rgba(255, 204, 0, 0.6);
+  animation: shine 3s infinite linear;
+}
+
+@keyframes shine {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+
 @keyframes vertical-shine {
   0% {
     background-position: top;
@@ -59,7 +81,7 @@ body {
   --color-text-white: #fff;
   /*color de texto*/
   --color-text-dark: #5e4c03;
-  --color-text-gray: #a19345;
+  --color-text-gray: #b8a124;
   --color-underline: #FFD700;
   /*aun no se usa*/
   --color-bg-1: #f7fafca8;
