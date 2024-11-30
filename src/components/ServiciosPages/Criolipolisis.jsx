@@ -8,10 +8,8 @@ import { ResultsTimeline } from "../ResultsTimelineCriolipolisis";
 import { PricingSection } from '../PricesSectionTemplate';
 
 // Image imports
-import img1 from "../../assets/img/hifu/hifu4.webp";
-import img2 from "../../assets/img/hifu/hifu2.webp";
-import img3 from "../../assets/img/hifu/hifu3.webp";
-import img4 from "../../assets/img/hifu/hifu1.webp";
+import img1 from "../../assets/img/criolipolisis/criolipolisis_bg.webp";
+import img2 from "../../assets/img/criolipolisis/criolipolisis_bg2.webp";
 
 const whatsappLink = "https://wa.me/573226030044";
 
@@ -143,7 +141,7 @@ export const Criolipolisis = () => {
 
           {/* Elegant Scroll Indicator */}
           <motion.div
-            className="absolute bottom-12 left-1/2 transform -translate-x-1/2"
+            className="absolute bottom-12 left-[49vw] transform -translate-x-1/2"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >

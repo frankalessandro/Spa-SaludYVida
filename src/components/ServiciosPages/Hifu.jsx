@@ -488,7 +488,7 @@ export const Hifu = () => {
                   {benefits[currentSlide].items.map((benefit, index) => (
                     <motion.div
                       key={index}
-                      className="flex items-center space-x-4 bg-yellow-700 backdrop-blur-sm rounded-lg p-4"
+                      className="flex items-center space-x-4 bg- backdrop-blur-sm rounded-lg p-4"
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
