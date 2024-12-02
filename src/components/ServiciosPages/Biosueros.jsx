@@ -192,7 +192,7 @@ export const Biosueros = () => {
   return (
     <>
       <NavbarWithMegaMenu />
-      <div className="min-h-screen bg-black">
+      <div className="min-h-screen bg-black max-w-[100vw] overflow-x-hidden">
         {/* Hero Section */}
         <motion.section
           ref={heroRef}
