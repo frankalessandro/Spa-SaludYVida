@@ -194,7 +194,7 @@ export const Colonterapia = () => {
   return (
     <>
       <NavbarWithMegaMenu />
-      <div className="min-h-screen bg-black max-w-[100vw] overflow-x-hidden">
+      <div className="min-h-screen bg-black max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
         {/* Hero Section */}
         <motion.section
           ref={heroRef}
