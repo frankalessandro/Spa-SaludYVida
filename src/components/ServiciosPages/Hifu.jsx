@@ -119,6 +119,7 @@ export const Hifu = () => {
       ]
     }
   ];
+
   // lista de por que elegirnos
   const whyChooseUs = [
     "Más de 10 años de experiencia en terapias holísticas",
