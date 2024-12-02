@@ -88,7 +88,7 @@ export const ResultsTimeline = ({ timelineItems, title, description }) => {
       `}</style>
 
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl font-bold text-center text-gray-800 mb-4">
+        <h2 className="text-5xl font-bold text-center dark-gold-text mb-4">
           {title}
         </h2>
         <p className="text-center text-purple-600 mb-16 text-xl">
@@ -122,10 +122,10 @@ export const ResultsTimeline = ({ timelineItems, title, description }) => {
                   {/* Panel principal */}
                   <div className="w-full lg:w-2/3 space-y-6">
                     <div className="flex items-center space-x-4">
-                      <span className="text-purple-600 font-mono text-lg font-semibold">
+                      <span className="text-white gold-background my-2 px-2 rounded-full font-mono text-lg font-semibold">
                         {item.time}
                       </span>
-                      <div className="flex-grow h-0.5 bg-purple-200"></div>
+                      <div className="flex-grow h-0.5 gold-background"></div>
                     </div>
 
                     <h3 className="text-3xl font-bold text-gray-800">

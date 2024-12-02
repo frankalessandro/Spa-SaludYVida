@@ -109,15 +109,15 @@ export const SliderMain = () => {
     return (
         <div className="container lg:max-w-screen-2xl max-w-[100vw]">
             <section className='content-info relative'>
-                <div className="container-title text-white relative">
-                    <span className='text-white'>Nuestros Tratamientos</span>
+                <div className="container-title relative">
+                    <span className='gold-text'>Nuestros Tratamientos</span>
                     <div className="buttons">
-                        <span className="text-white prev"><ChevronLeftIcon width={30} height={30} /></span>
-                        <span className="text-white next"><ChevronRightIcon width={30} height={30} /></span>
+                        <span className="text-white prev"><ChevronLeftIcon className='text-white' width={30} height={30} /></span>
+                        <span className="text-white next"><ChevronRightIcon  className='text-white' width={30} height={30} /></span>
                     </div>
                 </div>
                 <div className={`text-textWhite content ${isSliding ? '' : 'active'}`}>
-                    <span className='text-md'>{slides[currentSlide].title}</span>
+                    <span className='text-md gold-text'>{slides[currentSlide].title}</span>
                     <span className='md:text-9xl' style={{fontSize:'.8em'}}>{slides[currentSlide].ReqConsulta === 'Si' ? 'Requiere consulta' : 'No requiere consulta'}</span>
                     <div className="btn-info">
                         <div className="btn-info-child text-textWhite"><TimerIcon width={30} height={30} /><div className='child-info'><div>Tiempo:</div><div>{slides[currentSlide].duracion}</div></div></div>

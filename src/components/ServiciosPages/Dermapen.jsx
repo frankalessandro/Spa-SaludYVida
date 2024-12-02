@@ -311,7 +311,7 @@ export const Dermapen = () => {
                   <span className="block font-serif">Dermapen</span>
                   <span className="block">
                     <span className="font-light">Tecnica</span>
-                    <span className="text-yellow-400 font-serif"> Avanzada</span>
+                    <span className="text-yellow-400 font-serif gold-text"> Avanzada</span>
                   </span>
                 </h1>
 
@@ -323,7 +323,7 @@ export const Dermapen = () => {
               <div className="block">
                 <div className="flex items-center space-x-4">
                   <div className="hidden lg:block h-[1px] w-12 bg-yellow-400"></div>
-                  <p className="text-yellow-400 text-base lg:text-lg font-light tracking-wider">
+                  <p className="text-yellow-400 text-base lg:text-lg font-light tracking-wider gold-text">
                     Redefine tu belleza • Renueva tu piel • Logra resultados visibles
                   </p>
                 </div>
@@ -351,7 +351,7 @@ export const Dermapen = () => {
 
           {/* Texto centrado */}
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-700 mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl gold-text mb-4">
               DERMAPEN y rejuvenece la piel sin cirugías
             </h1>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -382,7 +382,7 @@ export const Dermapen = () => {
 
             {/* Texto adicional */}
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-600 mb-4">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold gold-text mb-4">
                 Tratamiento DERMAPEN Avanzado
               </h1>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -548,7 +548,7 @@ export const Dermapen = () => {
                 className="text-5xl md:text-6xl font-light mb-4"
                 variants={fadeInUp}
               >
-                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent gold-text">
                   Inversión en tu Belleza
                 </span>
               </motion.h2>
@@ -617,7 +617,7 @@ export const Dermapen = () => {
                       </ul>
 
                       {/* Button */}
-                      <button className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
+                      <button className="w-full mt-8 px-6 py-3 gold-background text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
                         Reservar Ahora
                       </button>
                     </div>

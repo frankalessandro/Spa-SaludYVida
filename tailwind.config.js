@@ -24,6 +24,30 @@ export default withMT({
         textWhite: "var(--color-text-white)"
       },
       keyframes: {
+        'shine-text': {
+          '0%': {
+            backgroundPosition: '200% 0, -200% 0'
+          },
+          '100%': {
+            backgroundPosition: '-200% 0, 200% 0'
+          }
+        },
+        'shine-bg': {
+          '0%': {
+            backgroundPosition: '0% 0%'
+          },
+          '100%': {
+            backgroundPosition: '200% 200%'
+          }
+        },
+        'rotate-shine': {
+          '0%': {
+            transform: 'rotate(0deg)'
+          },
+          '100%': {
+            transform: 'rotate(360deg)'
+          }
+        },
         shine: {
           '0%': { backgroundPosition: '0% 50%' },
           '50%': { backgroundPosition: '100% 50%' },
@@ -94,6 +118,9 @@ export default withMT({
         },
       },
       animation: {
+        'shine-text': 'shine-text 6s linear infinite',
+        'shine-bg': 'shine-bg 8s linear infinite',
+        'rotate-shine': 'rotate-shine 8s linear infinite',
         fly: 'fly 10s linear infinite',
         'float-rotate-left': 'float-rotate-left 6s ease-in-out infinite',
         'float-rotate-right': 'float-rotate-right 6s ease-in-out infinite',
@@ -101,6 +128,18 @@ export default withMT({
         'waves': 'waves 3s ease-in-out infinite', // Ciclo infinito
         'ocultar': 'ocultar 2s forwards', // Definimos la animación llamada 'ocultar'
         shine: 'shine 3s infinite linear',
+      },
+      utilities: {
+        '.gold-text': {
+          '@media screen and (-webkit-min-device-pixel-ratio: 0)': {
+            backgroundAttachment: 'fixed'
+          }
+        },
+        '.gold-background': {
+          '@media screen and (-webkit-min-device-pixel-ratio: 0)': {
+            transform: 'translateZ(0)'
+          }
+        }
       },
       backgroundImage: {
         'gold-gradient': 'linear-gradient(90deg, #ffcc33, #ff9900, #ffcc33)',

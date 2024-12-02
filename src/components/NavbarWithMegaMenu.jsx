@@ -16,29 +16,52 @@ import {
   ChevronDownIcon,
   HamburgerMenuIcon,
   Cross1Icon,
-  SunIcon,
 } from "@radix-ui/react-icons";
+import { 
+  Sparkles, 
+  Zap, 
+  FlaskConical, 
+  Scan, 
+  Snowflake,
+  Dumbbell,
+  Syringe,
+  Radio,
+  HeartPulse,
+  ScrollText,
+  Home,
+  Users,
+  Contact,
+  ArrowRight,
+  Stethoscope,
+  Droplets,
+  Bath,
+  Waves,
+  Eye,
+  ThermometerSun,
+  Brain,
+  Trophy,
+  Clock
+} from 'lucide-react';
 import Logo from '../assets/SpaLogo.svg';
 import { Link } from "react-router-dom";
 
-// [Previous menu items remain the same...]
 const facialServicesMenuItems = [
   {
     title: "HIFU 7D",
     description: "Tratamiento no quirúrgico de ultrasonido para un lifting facial y estimulación de colágeno.",
-    icon: SunIcon,
+    icon: Waves,
     to: "/hifu-7d",
   },
   {
     title: "Plasma",
     description: "Inyección de plasma para regenerar tejidos y combatir el envejecimiento.",
-    icon: SunIcon,
+    icon: FlaskConical,
     to: "/plasma",
   },
   {
     title: "Dermapen",
     description: "Micropunciones para estimular la producción de colágeno y mejorar la textura de la piel.",
-    icon: SunIcon,
+    icon: Scan,
     to: "/dermapen",
   },
 ];
@@ -47,25 +70,25 @@ const bodyServicesMenuItems = [
   {
     title: "Criolipolisis",
     description: "Tratamiento no quirúrgico para eliminar grasa localizada mediante enfriamiento controlado.",
-    icon: SunIcon,
+    icon: Snowflake,
     to: "/criolipolisis",
   },
   {
     title: "Max Muscle",
     description: "Simula abdominales y convierte grasa en músculo. Ideal para complementar el ejercicio.",
-    icon: SunIcon,
+    icon: Trophy,
     to: "/max-muscle",
   },
   {
     title: "Biosueros",
     description: "Bioestimulante inyectado para aumentar masa muscular y reafirmar la piel.",
-    icon: SunIcon,
+    icon: ThermometerSun,
     to: "/biosueros",
   },
   {
     title: "Tensamax",
     description: "Radiofrecuencia monopolar para regenerar colágeno y reafirmar la piel.",
-    icon: SunIcon,
+    icon: Radio,
     to: "/tensamax",
   },
 ];
@@ -74,30 +97,28 @@ const healthMenuItems = [
   {
     title: "Colonterapia",
     description: "Limpieza profunda del intestino grueso para mejorar la salud digestiva.",
-    icon: SunIcon,
+    icon: Brain,
     to: "/colonterapia",
   },
   {
     title: "Drenajes",
     description: "Tratamiento postquirúrgico para eliminar líquidos acumulados y reducir inflamación.",
-    icon: SunIcon,
+    icon: Droplets,
     to: "/drenajes",
   },
 ];
 
-function NavListMenu({ title, items }) {
+function NavListMenu({ title, items, icon: SectionIcon }) {
   const [isMenuOpen, setIsMenuOpen] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
 
-  const renderItems = items.map(({ icon, title, description, to }, key) => (
+  const renderItems = items.map(({ icon: ItemIcon, title, description, to }, key) => (
     <Link to={to} key={key}>
-      <MenuItem className="flex items-center gap-3 rounded-lg">
+      <MenuItem className="flex items-center gap-3 rounded-lg hover:bg-gray-50">
         <div className="flex items-center justify-center rounded-lg !bg-blue-gray-50 p-2">
-          {React.createElement(icon, {
-            className: "h-6 text-textGray w-6",
-          })}
+          <ItemIcon className="h-5 w-5 text-gray-600" strokeWidth={1.5} />
         </div>
-        <div>
+        <div className="flex-grow">
           <Typography
             variant="h6"
             color="blue-gray"
@@ -107,11 +128,12 @@ function NavListMenu({ title, items }) {
           </Typography>
           <Typography
             variant="paragraph"
-            className="text-xs !font-medium text-black"
+            className="text-xs !font-medium text-gray-600"
           >
             {description}
           </Typography>
         </div>
+        <ArrowRight className="h-4 w-4 text-gray-400" />
       </MenuItem>
     </Link>
   ));
@@ -124,23 +146,22 @@ function NavListMenu({ title, items }) {
         offset={{ mainAxis: 20 }}
         placement="bottom"
         allowHover={true}
-        className="z-1"
+        className="z-50"
       >
         <MenuHandler>
           <Typography as="div" variant="small" className="font-medium">
             <ListItem
-              className="flex items-center gap-2 py-2 pr-4 font-medium text-textDark"
+              className="flex items-center gap-2 py-2 pr-4 font-medium text-black hover:bg-gray-50"
               selected={isMenuOpen || isMobileMenuOpen}
               onClick={() => setIsMobileMenuOpen((cur) => !cur)}
             >
+              {SectionIcon && <SectionIcon className="h-5 w-5" strokeWidth={1.5} />}
               {title}
               <ChevronDownIcon
-                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""
-                  }`}
+                className={`hidden h-3 w-3 transition-transform lg:block ${isMenuOpen ? "rotate-180" : ""}`}
               />
               <ChevronDownIcon
-                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""
-                  }`}
+                className={`block h-3 w-3 transition-transform lg:hidden ${isMobileMenuOpen ? "rotate-180" : ""}`}
               />
             </ListItem>
           </Typography>
@@ -149,13 +170,11 @@ function NavListMenu({ title, items }) {
           <ul className="grid grid-cols-2 gap-y-2 outline-none outline-0">
             {renderItems}
           </ul>
-
         </MenuList>
       </Menu>
       <div className="block lg:hidden">
         <Collapse open={isMobileMenuOpen}>
           {renderItems}
-
         </Collapse>
       </div>
     </React.Fragment>
@@ -171,14 +190,27 @@ function NavList() {
           color="blue-gray"
           className="text-gray-900"
         >
-          <ListItem className="flex items-center gap-2 py-2 pr-4 text-textDark">
+          <ListItem className="flex items-center gap-2 py-2 pr-4 text-black hover:bg-gray-50">
+            <Home className="h-5 w-5" strokeWidth={1.5} />
             Inicio
           </ListItem>
         </Typography>
       </Link>
-      <NavListMenu title="Servicios Faciales" items={facialServicesMenuItems} />
-      <NavListMenu title="Servicios Corporales" items={bodyServicesMenuItems} />
-      <NavListMenu title="Cuida tu Salud" items={healthMenuItems} />
+      <NavListMenu 
+        title="Servicios Faciales" 
+        items={facialServicesMenuItems} 
+        icon={Eye}
+      />
+      <NavListMenu 
+        title="Servicios Corporales" 
+        items={bodyServicesMenuItems}
+        icon={Bath}
+      />
+      <NavListMenu 
+        title="Cuida tu Salud" 
+        items={healthMenuItems}
+        icon={HeartPulse}
+      />
       <Typography
         as="a"
         href="#"
@@ -186,13 +218,15 @@ function NavList() {
         color="blue-gray"
         className="font-medium"
       >
-        <ListItem className="flex items-center gap-2 py-2 pr-4">
+        <ListItem className="flex items-center gap-2 py-2 pr-4 hover:bg-gray-50">
+          <Users className="h-5 w-5" strokeWidth={1.5} />
           Sobre Nosotros
         </ListItem>
       </Typography>
     </List>
   );
 }
+// NavbarWithMegaMenu component remains the same...
 
 export function NavbarWithMegaMenu() {
   const [openNav, setOpenNav] = React.useState(false);
@@ -253,7 +287,7 @@ export function NavbarWithMegaMenu() {
 
   return (
     <Navbar className={navbarClasses}>
-      <div className="flex items-center justify-between text-textDark">
+      <div className="flex items-center justify-between text-black">
         <Link to="/">
           <img
             src={Logo}
@@ -274,6 +308,7 @@ export function NavbarWithMegaMenu() {
           active:opacity-[0.85] active:shadow-none 
           transform transition-all duration-200 ease-out 
           translate-y-0 opacity-100
+          gold-background
         ">
           Contactanos
         </button>

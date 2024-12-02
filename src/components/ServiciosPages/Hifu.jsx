@@ -312,7 +312,7 @@ export const Hifu = () => {
                   <span className="block font-serif">ULTHERAPY</span>
                   <span className="block">
                     <span className="font-light">Tecnología</span>
-                    <span className="text-yellow-400 font-serif"> Hifu</span>
+                    <span className="text-yellow-400 font-serif gold-text"> Hifu</span>
                   </span>
                 </h1>
 
@@ -324,7 +324,7 @@ export const Hifu = () => {
               <div className="block">
                 <div className="flex items-center space-x-4">
                   <div className="hidden lg:block h-[1px] w-12 bg-yellow-400"></div>
-                  <p className="text-yellow-400 text-base lg:text-lg font-light tracking-wider">
+                  <p className="text-yellow-400 text-base lg:text-lg font-light tracking-wider gold-text">
                     Transformación • Renovación • Equilibrio
                   </p>
                 </div>
@@ -352,7 +352,7 @@ export const Hifu = () => {
 
           {/* Texto centrado */}
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-700 mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-700 mb-4 bg-gray-200/50 text-white rounded-full">
               HIFU y renueva la piel sin cirugías.
             </h1>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -387,7 +387,7 @@ export const Hifu = () => {
 
             {/* Texto adicional */}
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-600 mb-4">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold gold-text mb-4">
                 Tratamiento HIFU Avanzado
               </h1>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -626,7 +626,7 @@ export const Hifu = () => {
                       </ul>
 
                       {/* Button */}
-                      <button className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
+                      <button className="w-full mt-8 px-6 py-3 gold-background to-yellow-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
                         Reservar Ahora
                       </button>
                     </div>
@@ -648,7 +648,7 @@ export const Hifu = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">¿Por qué Elegirnos?</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 gold-text p-4">¿Por qué Elegirnos?</h2>
               <ul className="space-y-4">
                 {whyChooseUs.map((benefit, index) => (
                   <motion.li
@@ -657,7 +657,7 @@ export const Hifu = () => {
                     variants={fadeInUp}
                     custom={index}
                   >
-                    <span className="text-purple-300 mt-1">•</span>
+                    <span className="gold-text mt-1">•</span>
                     <span className="text-lg">{benefit}</span>
                   </motion.li>
                 ))}

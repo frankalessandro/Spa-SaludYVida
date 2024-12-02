@@ -219,7 +219,7 @@ export const Biosueros = () => {
                   transition={{ duration: 0.8 }}
                   className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
                 >
-                  <h2 className="text-lg lg:text-xl font-serif tracking-[0.3em] uppercase text-yellow-600">
+                  <h2 className="text-lg lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
                     Experiencia Exclusiva
                   </h2>
                   <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif text-white tracking-wider">
@@ -230,7 +230,7 @@ export const Biosueros = () => {
                     {typedText}
                   </p>
                   <motion.button
-                    className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-base lg:text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300"
+                    className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-yellow-600 dark-gold-text text-base lg:text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                   >
@@ -277,7 +277,7 @@ export const Biosueros = () => {
               <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
                 EXCELENCIA EN CADA DETALLE
               </h2>
-              <div className="w-24 h-0.5 bg-yellow-600 mx-auto" />
+              <div className="w-24 h-0.5 gold-background mx-auto" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -289,7 +289,7 @@ export const Biosueros = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.2 }}
                 >
-                  <h3 className="text-yellow-600 font-serif text-xl mb-4">
+                  <h3 className="dark-gold-text font-serif text-xl mb-4">
                     {benefit.title}
                   </h3>
                   <p className="text-gray-400">
@@ -308,7 +308,7 @@ export const Biosueros = () => {
               <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
                 EL PROCESO
               </h2>
-              <div className="w-24 h-0.5 bg-yellow-600 mx-auto" />
+              <div className="w-24 h-0.5 gold-background mx-auto" />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -337,7 +337,7 @@ export const Biosueros = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.2 }}
                 >
-                  <div className="text-yellow-600 font-serif text-4xl mb-4">
+                  <div className="gold-text font-serif text-4xl mb-4">
                     {item.step}
                   </div>
                   <h3 className="text-white font-serif text-xl mb-4">
@@ -381,7 +381,7 @@ export const Biosueros = () => {
                 className="text-5xl md:text-6xl font-light mb-4"
                 variants={fadeInUp}
               >
-                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text gold-text">
                   Inversión en tu Belleza
                 </span>
               </motion.h2>
@@ -451,7 +451,7 @@ export const Biosueros = () => {
                       </ul>
 
                       {/* Button */}
-                      <button className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
+                      <button className="w-full mt-8 px-6 py-3 gold-background text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
                         Reservar Ahora
                       </button>
                     </div>
@@ -465,16 +465,16 @@ export const Biosueros = () => {
         {/* Final CTA Section */}
         <section className="py-24 bg-black">
           <div className="max-w-4xl mx-auto text-center px-8">
-            <h2 className="text-3xl md:text-4xl font-serif text-white mb-8">
+            <h2 className="text-3xl md:text-4xl font-serif text-white mb-8 gold-text">
               EXPERIENCIA EXCLUSIVA
             </h2>
-            <div className="w-24 h-0.5 bg-yellow-600 mx-auto mb-8" />
+            <div className="w-24 h-0.5 gold-background mx-auto mb-8" />
             <p className="text-gray-400 text-lg mb-12">
               Descubra los beneficios de los biosueros para una piel más firme y un aumento natural de la masa muscular.
               Resultados visibles respaldados por un tratamiento especializado y personalizado.
             </p>
             <motion.button
-              className="px-12 py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300"
+              className="px-12 py-4 bg-transparent border-2 border-yellow-600  text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300 dark-gold-text"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => window.open(whatsappLink, "_blank")}
@@ -496,7 +496,7 @@ export const Biosueros = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">¿Por qué Elegirnos?</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 gold-text">¿Por qué Elegirnos?</h2>
               <ul className="space-y-4">
                 {whyChooseUs.map((benefit, index) => (
                   <motion.li
@@ -505,7 +505,7 @@ export const Biosueros = () => {
                     variants={fadeInUp}
                     custom={index}
                   >
-                    <span className="text-purple-300 mt-1">•</span>
+                    <span className="dark-gold-text mt-1">•</span>
                     <span className="text-lg">{benefit}</span>
                   </motion.li>
                 ))}

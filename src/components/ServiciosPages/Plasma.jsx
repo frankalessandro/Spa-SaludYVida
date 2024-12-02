@@ -311,7 +311,7 @@ export const Plasma = () => {
                   <span className="block font-serif">PLASMA</span>
                   <span className="block">
                     <span className="font-light">Regeneración</span>
-                    <span className="text-yellow-400 font-serif"> Celular</span>
+                    <span className="font-serif gold-text"> Celular</span>
                   </span>
                 </h1>
 
@@ -323,7 +323,7 @@ export const Plasma = () => {
               <div className="block">
                 <div className="flex items-center space-x-4">
                   <div className="hidden lg:block h-[1px] w-12 bg-yellow-400"></div>
-                  <p className="text-yellow-400 text-base lg:text-lg font-light tracking-wider">
+                  <p className="text-base lg:text-lg font-light tracking-wider gold-text">
                     Rejuvenece naturalmente • Estimula tu piel • Resultados visibles y duraderos
                   </p>
                 </div>
@@ -351,7 +351,7 @@ export const Plasma = () => {
 
           {/* Texto centrado */}
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-700 mb-4">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-700 mb-4 bg-gray-200/50 p-4 rounder-full gold-text">
               PLASMA y rejuvenece la piel de forma natural.
             </h1>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -382,7 +382,7 @@ export const Plasma = () => {
 
             {/* Texto adicional */}
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-600 mb-4">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold dark-gold-text mb-4">
                 Tratamiento de Plasma Rico en Plaquetas (PRP) Avanzado
               </h1>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -548,7 +548,7 @@ export const Plasma = () => {
                 className="text-5xl md:text-6xl font-light mb-4"
                 variants={fadeInUp}
               >
-                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent gold-text">
                   Inversión en tu Belleza
                 </span>
               </motion.h2>
@@ -617,7 +617,7 @@ export const Plasma = () => {
                       </ul>
 
                       {/* Button */}
-                      <button className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
+                      <button className="w-full mt-8 px-6 py-3 gold-background text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
                         Reservar Ahora
                       </button>
                     </div>
@@ -639,7 +639,7 @@ export const Plasma = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">¿Por qué Elegirnos?</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 dark-gold-text p-4">¿Por qué Elegirnos?</h2>
               <ul className="space-y-4">
                 {whyChooseUs.map((benefit, index) => (
                   <motion.li
@@ -648,7 +648,7 @@ export const Plasma = () => {
                     variants={fadeInUp}
                     custom={index}
                   >
-                    <span className="text-purple-300 mt-1">•</span>
+                    <span className="gold-text mt-1">•</span>
                     <span className="text-lg">{benefit}</span>
                   </motion.li>
                 ))}

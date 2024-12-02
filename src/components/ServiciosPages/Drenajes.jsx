@@ -218,10 +218,10 @@ export const Drenajes = () => {
                 transition={{ duration: 0.8 }}
                 className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-6 pt-20"
               >
-                <h2 className="text-lg lg:text-xl font-serif tracking-[0.3em] uppercase text-yellow-600">
+                <h2 className="text-lg lg:text-xl font-serif tracking-[0.3em] uppercase text-yellow-600 gold-background rounded-full px-2">
                   Experiencia Exclusiva
                 </h2>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif text-white tracking-wider">
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif tracking-wider gold-text">
                   DRENAJES
                 </h1>
                 <div className="w-24 h-0.5 bg-yellow-600" />
@@ -229,7 +229,7 @@ export const Drenajes = () => {
                   {typedText}
                 </p>
                 <motion.button
-                  className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-base lg:text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300"
+                  className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-base lg:text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300 dark-gold-text"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -239,17 +239,18 @@ export const Drenajes = () => {
             </div>
           </div>
 
+          {/* Elegant Scroll Indicator */}
           <motion.div
-            className="absolute bottom-12 left-[45vw] md:left-[49vw] transform -translate-x-1/2"
+            className="absolute bottom-12 left-[43vw] md:left-[49vw] transform -translate-x-1/2"
             animate={{ y: [0, 10, 0] }}
             transition={{ repeat: Infinity, duration: 2 }}
           >
-            <div className="w-12 h-12 border border-yellow-600/50 rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 border border-yellow-600/50 rounded-full flex items-center justify-center gold-background">
               <motion.div
                 animate={{ y: [0, 5, 0] }}
                 transition={{ repeat: Infinity, duration: 1.5 }}
               >
-                <ArrowRight className="w-6 h-6 text-yellow-600 transform rotate-90" />
+                <ArrowRight className="w-6 h-6 text-black transform rotate-90" />
               </motion.div>
             </div>
           </motion.div>
@@ -258,7 +259,7 @@ export const Drenajes = () => {
         <section className="py-24 bg-black">
           <div className="max-w-6xl mx-auto px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-serif text-white mb-4 dark-gold-text">
                 EXCELENCIA EN DRENAJES
               </h2>
 
@@ -274,7 +275,7 @@ export const Drenajes = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.2 }}
                 >
-                  <h3 className="text-yellow-600 font-serif text-xl mb-4">
+                  <h3 className="gold-text font-serif text-xl mb-4">
                     {benefit.title}
                   </h3>
                   <p className="text-gray-400">
@@ -290,7 +291,7 @@ export const Drenajes = () => {
         <section className="py-24 bg-neutral-900">
           <div className="max-w-6xl mx-auto px-8">
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
+              <h2 className="text-3xl md:text-4xl font-serif dark-gold-text mb-4 ">
                 EL PROCESO
               </h2>
               <div className="w-24 h-0.5 bg-yellow-600 mx-auto" />
@@ -322,7 +323,7 @@ export const Drenajes = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.2 }}
                 >
-                  <div className="text-yellow-600 font-serif text-4xl mb-4">
+                  <div className="gold-text font-serif text-4xl mb-4">
                     {item.step}
                   </div>
                   <h3 className="text-white font-serif text-xl mb-4">
@@ -366,7 +367,7 @@ export const Drenajes = () => {
                 className="text-5xl md:text-6xl font-light mb-4"
                 variants={fadeInUp}
               >
-                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text gold-text">
                   Inversión en tu Bienestar
                 </span>
               </motion.h2>
@@ -436,7 +437,7 @@ export const Drenajes = () => {
                       </ul>
 
                       {/* Button */}
-                      <button className="w-full mt-8 px-6 py-3 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
+                      <button className="w-full mt-8 px-6 py-3 gold-background text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
                         Reservar Ahora
                       </button>
                     </div>
@@ -450,7 +451,7 @@ export const Drenajes = () => {
         {/* Final CTA Section */}
         <section className="py-24 bg-black">
           <div className="max-w-4xl mx-auto text-center px-8">
-            <h2 className="text-3xl md:text-4xl font-serif text-white mb-8">
+            <h2 className="text-3xl md:text-4xl font-serif text-white mb-8 dark-gold-text">
               EXPERIENCIA EXCLUSIVA
             </h2>
             <div className="w-24 h-0.5 bg-yellow-600 mx-auto mb-8" />
@@ -478,7 +479,7 @@ export const Drenajes = () => {
               viewport={{ once: true }}
               variants={fadeInUp}
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">¿Por qué Elegirnos?</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8 gold-text">¿Por qué Elegirnos?</h2>
               <ul className="space-y-4">
                 {whyChooseUs.map((benefit, index) => (
                   <motion.li
@@ -487,7 +488,7 @@ export const Drenajes = () => {
                     variants={fadeInUp}
                     custom={index}
                   >
-                    <span className="text-purple-300 mt-1">•</span>
+                    <span className="text-yellow-300 mt-1">•</span>
                     <span className="text-lg">{benefit}</span>
                   </motion.li>
                 ))}
@@ -506,7 +507,7 @@ export const Drenajes = () => {
                     src="/colonterapia/colonterapia.webp"
                     alt="Spa Holístico"
                     // className="w-full h-full object-cover rounded-lg z-[20]"
-                    className="relative w-full md:h-full bottom-[-40vh] md:bottom-0 h-[30vh] object-cover rounded-lg z-[20]"
+                    className="relative w-full md:h-full bottom-[-45vh] md:bottom-0 h-[40vh] object-cover rounded-lg z-[20]"
                   />
                 </div>
               </motion.div>

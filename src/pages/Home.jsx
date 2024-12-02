@@ -181,8 +181,8 @@ export const Home = () => {
         {/* Servicios */}
         <section className="relative w-full py-16  bg-gradient-to-b from-gray-900 via-gray-900 to-white">
           <div className="max-w-7xl mx-auto px-4 text-center ">
-            <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)] mb-6 text-yellow-600">Servicios Holísticos</h2>
-            <p className="text-xl text-[var(--color-text-gray)] mb-12">Descubre nuestro enfoque integral para tu bienestar</p>
+            <h2 className="text-4xl font-extrabold gold-text mb-6 text-yellow-600">Servicios Holísticos</h2>
+            <p className="text-xl text-white mb-12">Descubre nuestro enfoque integral para tu bienestar</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {[
                 { title: "Masajes Terapéuticos", description: "Técnicas ancestrales para equilibrar cuerpo y mente", image: "/home/happySpa.webp" },
@@ -206,7 +206,7 @@ export const Home = () => {
           <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
             {/* Columna de texto */}
             <div className="space-y-8 p-6 md:p-10">
-              <h2 className="text-4xl font-extrabold text-[var(--color-text-dark)] mb-6 reveal-title text-center md:text-left">
+              <h2 className="text-4xl font-extrabold gold-text mb-6 reveal-title text-center md:text-left">
                 Proceso de Reserva
               </h2>
               {[
@@ -218,10 +218,10 @@ export const Home = () => {
                   key={index}
                   className="flex flex-col sm:flex-row items-center sm:items-start gap-4 reveal-service p-4 rounded-lg border bg-[var(--color-light-gray)] shadow-md"
                 >
-                  <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center text-white bg-[var(--color-button-alternative)] font-bold text-lg">
+                  <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center text-white gold-background font-bold text-lg">
                     {step.step}
                   </div>
-                  <div className="py-2 text-center sm:text-left">
+                  <div className="py-2 text-center sm:text-left ">
                     <h3 className="text-xl font-semibold text-gray-800">{step.title}</h3>
                   </div>
                 </div>

@@ -22,6 +22,186 @@ body {
   animation: vertical-shine 2s infinite ease-in-out;
 }
 
+/* Efecto de Texto Dorado Realista */
+.gold-text {
+  font-weight: 700;
+  letter-spacing: 1px;
+  /* Gradiente principal usando los colores solicitados */
+  background: linear-gradient(45deg,
+      #bf953f,
+      /* Base dorada */
+      #fcf6ba 45%,
+      /* Brillo claro */
+      #b38728 50%,
+      /* Oro medio */
+      #fbf5b7 55%,
+      /* Otro brillo */
+      #aa771c
+      /* Oro oscuro */
+    );
+
+  /* Segundo gradiente para efecto metálico */
+  background-image: linear-gradient(45deg,
+      #bf953f,
+      #fbf5b7,
+      #aa771c);
+  background-size: 200% 100%;
+  animation: shine-text 9s infinite linear;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Efectos de profundidad */
+  filter:
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 5px rgba(255, 215, 0, 0.2));
+}
+
+/* Efecto de Fondo Dorado Refinado */
+.gold-background {
+  background: linear-gradient(5deg,
+      #bf953f,
+      /* Base dorada */
+      #fcf6ba 45%,
+      /* Brillo claro */
+      #b38728 50%,
+      /* Oro medio */
+      #fbf5b7 55%,
+      /* Otro brillo */
+      #aa771c
+      /* Oro oscuro */
+    );
+
+  /* Gradiente suave sin las líneas */
+  background-image: linear-gradient(to bottom,
+      #bf953f,
+      #fbf5b7,
+      #aa771c);
+  color: #583d0f;
+  /* Efecto de brillo móvil */
+  position: relative;
+  overflow: hidden;
+
+  /* Sombras para profundidad */
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.2),
+    0 0 10px rgba(255, 215, 0, 0.3);
+
+  animation: shine-bg 8s infinite linear;
+}
+
+/* Texto Dorado Oscuro */
+.dark-gold-text {
+  /* Color base dorado oscuro */
+  color: #aa771c;
+
+  /* Gradiente sutil sin animación */
+  background: linear-gradient(45deg,
+      #bf953f,
+      /* Base dorada */
+      #fcf6ba 45%,
+      /* Brillo claro */
+      #b38728 50%,
+      /* Oro medio */
+      #fbf5b7 55%,
+      /* Otro brillo */
+      #aa771c);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  /* Efectos sutiles de profundidad */
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.2);
+
+  /* Mejora de la legibilidad */
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+/* Optimización para navegadores específicos */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .dark-gold-text {
+    background-attachment: fixed;
+  }
+}
+
+/* Efecto de brillo móvil para el fondo */
+.gold-background::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle,
+      rgba(255, 255, 255, 0.3) 0%,
+      transparent 60%);
+  animation: rotate-shine 8s infinite linear;
+}
+
+@keyframes shine-bg {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+@keyframes rotate-shine {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animaciones */
+@keyframes shine-text {
+  0% {
+    background-position: 200% 0, -200% 0;
+  }
+
+  100% {
+    background-position: -200% 0, 200% 0;
+  }
+}
+
+@keyframes shine-bg {
+  0% {
+    background-position: 0% 0%;
+  }
+
+  100% {
+    background-position: 200% 200%;
+  }
+}
+
+@keyframes rotate-shine {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Optimizaciones para diferentes navegadores */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .gold-text {
+    background-attachment: fixed;
+  }
+
+  .gold-background {
+    transform: translateZ(0);
+  }
+}
+
 .vertical-gradient-text-gray {
   background: linear-gradient(to bottom, rgb(253, 252, 252) 20%, rgb(64, 64, 64) 80%);
   background-clip: text;
@@ -30,25 +210,18 @@ body {
   animation: vertical-shine 2s infinite ease-in-out;
 }
 
-.golden-text {
-  font-size: 3rem; /* Ajusta el tamaño según sea necesario */
-  font-weight: bold;
-  text-transform: uppercase;
-  color: #ffd700; /* Color dorado base */
-  background: linear-gradient(90deg, #ffcc33, #ff9900, #ffcc33);
-  background-size: 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  color: transparent;
-  text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.3), 
-               0px 2px 5px rgba(255, 204, 0, 0.6);
-  animation: shine 3s infinite linear;
-}
-
 @keyframes shine {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 
