@@ -271,7 +271,7 @@ export const Dermapen = () => {
       <NavbarWithMegaMenu />
       {/* <AnimatedBackground /> */}
       {/* <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]"> */}
-      <div className="min-h-screen overflow-x-hidden overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-black z-[10]">
+      <div className="h-screen max-h-screen bg-black max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
         <section className="w-full min-h-[90vh] relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
           {/* Canvas para las partículas */}
           <canvas

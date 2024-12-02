@@ -109,8 +109,7 @@ export const Home = () => {
   }, []);
 
   return (
-
-    <div className=" flex flex-col min-h-screen overflow-y-auto scroll-smooth w-[100vw] scroll-snap-y-mandatory scrollbar-hide  bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10] ">
+    <div className="h-screen max-h-screen bg-black max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
       {/* Navbar */}
       <NavbarWithMegaMenu />
       <main className="flex-grow relative">

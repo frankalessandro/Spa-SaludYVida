@@ -112,8 +112,8 @@ export const SliderMain = () => {
                 <div className="container-title relative">
                     <span className='gold-text'>Nuestros Tratamientos</span>
                     <div className="buttons">
-                        <span className="text-white prev"><ChevronLeftIcon className='text-white' width={30} height={30} /></span>
-                        <span className="text-white next"><ChevronRightIcon  className='text-white' width={30} height={30} /></span>
+                        <span className="text-white prev"><ChevronLeftIcon className='text-black' width={30} height={30} /></span>
+                        <span className="text-black next"><ChevronRightIcon  className='text-black' width={30} height={30} /></span>
                     </div>
                 </div>
                 <div className={`text-textWhite content ${isSliding ? '' : 'active'}`}>

@@ -5,8 +5,6 @@ import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu, Sca
 import { AnimatedBackground } from "../AnimatedBackground";
 import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
 import { RealResultsTimeline } from "../RealResultsTimeline";
 
 // Image imports
@@ -53,17 +51,7 @@ const textImages = [
 
 const whatsappLink = "https://wa.me/573226030044";
 
-const ParallaxImage = ({ scrollYProgress, children }) => {
-  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  return (
-    <motion.div style={{ y }} className="relative">
-      {children}
-    </motion.div>
-  );
-};
-
 export const Hifu = () => {
-  const { scrollYProgress } = useScroll();
   const [ref, inView] = useInView({ threshold: 0.2 });
 
   // Refs for intersection observation
@@ -217,15 +205,6 @@ export const Hifu = () => {
     };
   }, []);
 
-
-  useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      once: true,
-      easing: 'ease-in-out',
-    });
-  }, []);
-
   // Enhanced animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
@@ -271,9 +250,8 @@ export const Hifu = () => {
     <>
       <NavbarWithMegaMenu />
       {/* <AnimatedBackground /> */}
-      {/* <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]"> */}
-      <div className="min-h-screen overflow-x-hidden overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-black z-[10]">
-        <section className="w-full min-h-[90vh] relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
+      <div className="h-screen max-h-screen bg-black max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
+        <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
           {/* Canvas para las partículas */}
           <canvas
             ref={canvasRef}
@@ -289,9 +267,9 @@ export const Hifu = () => {
             }}
           />
 
-          <div className="min-h-[90vh] container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-8 py-16 lg:py-0">
+          <div className="h-screen container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-8">
             {/* Left Side - Image */}
-            <div className="w-full lg:w-[35vw] relative flex justify-center items-center mt-8 lg:mt-0">
+            <div className="w-full lg:w-[35vw] relative flex justify-center items-center">
               <div className="w-[80vw] md:w-[60vw] lg:w-[40vw] h-auto max-w-2xl relative">
                 <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
                 <img
@@ -303,7 +281,7 @@ export const Hifu = () => {
             </div>
 
             {/* Right Side - Content */}
-            <div className="w-full lg:w-[50vw] flex flex-col justify-center space-y-8 z-10 mb-8 lg:mb-0">
+            <div className="w-full lg:w-[50vw] flex flex-col justify-center space-y-8 z-10">
               <div className="text-white">
                 {/* Decorative Line */}
                 <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6"></div>
@@ -334,25 +312,11 @@ export const Hifu = () => {
         </section>
         {/* Tratamiento avanzado HIFU */}
         <section
-          className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-white to-gray-300 overflow-hidden"
+          className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-white to-gray-300"
         >
-          {/* Fondo de Olas */}
-          <div className="absolute inset-0 pointer-events-none">
-            <svg
-              className="absolute top-[-20%] right-[-20%] w-[200%] md:w-[150%]"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-            >
-              <path
-                fill="var(--bg-gradient)"
-                d="M0,160L40,170.7C80,181,160,203,240,224C320,245,400,267,480,266.7C560,267,640,245,720,234.7C800,224,880,224,960,197.3C1040,171,1120,117,1200,112C1280,107,1360,149,1400,170.7L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
-              ></path>
-            </svg>
-          </div>
-
           {/* Texto centrado */}
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-700 mb-4 bg-gray-200/50 text-white rounded-full">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-700 mb-4 bg-gray-200/50  rounded-full">
               HIFU y renueva la piel sin cirugías.
             </h1>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -401,10 +365,9 @@ export const Hifu = () => {
           </div>
         </section>
 
-
         {/* beneficios */}
         <motion.section
-          className="h-screen bg-[var(--bg-dark-slider)] relative overflow-hidden"
+          className="h-screen bg-[var(--bg-dark-slider)] relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -546,7 +509,7 @@ export const Hifu = () => {
           variants={staggerContainer}
         >
           {/* Decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0">
             <div className="absolute top-0 left-1/4 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl"></div>
           </div>
@@ -666,7 +629,7 @@ export const Hifu = () => {
             <div className="relative min-h-[80vh] md:w-[50vw] md:min-h-[80vh]">
               <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-dark-slider)] via-transparent to-transparent z-10"></div>
               <motion.div
-                className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0 overflow-x-hidden"
+                className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0"
                 initial={{ opacity: 0, x: 20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
