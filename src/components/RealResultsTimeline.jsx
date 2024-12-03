@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import ScrollReveal from 'scrollreveal';
+import React from 'react';
 import { Check } from 'lucide-react';
 
 // Image imports
@@ -9,17 +8,6 @@ import img3 from "../assets/img/hifu/hifu3.webp";
 import img4 from "../assets/img/hifu/hifu1.webp";
 
 export const RealResultsTimeline = ({ timelineItems }) => {
-
-  useEffect(() => {
-    ScrollReveal().reveal('.timeline-item', {
-      origin: 'bottom',
-      distance: '50px',
-      duration: 800,
-      easing: 'ease-in-out',
-      interval: 200,
-    });
-  }, []);
-
   return (
     <section className="py-20 px-4 bg-white">
       <h2 className="text-4xl font-bold text-center text-yellow-800 mb-16 gold-text">
@@ -31,7 +19,6 @@ export const RealResultsTimeline = ({ timelineItems }) => {
           <div
             key={index}
             className={`
-              timeline-item 
               flex flex-col 
               ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} 
               items-center 
@@ -57,7 +44,7 @@ export const RealResultsTimeline = ({ timelineItems }) => {
             {/* Contenido de texto */}
             <div className="w-full md:w-1/2 space-y-4">
               <div className="flex items-center space-x-4">
-                <span className="text-yellow-800 font-mono italic gold-background text-white px-4 rounded-full">
+                <span className="text-yellow-800 font-mono italic gold-background px-4 rounded-full">
                   {item.time}
                 </span>
                 <div className="flex-grow h-0.5 gold-background"></div>

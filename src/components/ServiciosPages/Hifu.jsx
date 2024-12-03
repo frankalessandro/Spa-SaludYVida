@@ -6,7 +6,8 @@ import { AnimatedBackground } from "../AnimatedBackground";
 import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
 import { RealResultsTimeline } from "../RealResultsTimeline";
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 // Image imports
 import img1 from "../../assets/img/hifu/hifu4.webp";
 import img2 from "../../assets/img/hifu/hifu2.webp";
@@ -78,7 +79,6 @@ export const Hifu = () => {
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + benefits.length) % benefits.length);
   };
-
 
   // lista de slider beneficios
   const benefits = [
@@ -205,6 +205,13 @@ export const Hifu = () => {
     };
   }, []);
 
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out',
+    });
+  }, []);
   // Enhanced animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
@@ -217,6 +224,7 @@ export const Hifu = () => {
       }
     }
   };
+
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -251,7 +259,7 @@ export const Hifu = () => {
       <NavbarWithMegaMenu />
       {/* <AnimatedBackground /> */}
       <div className="h-screen max-h-screen bg-black max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
-        <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
+        <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 z-[10]">
           {/* Canvas para las partículas */}
           <canvas
             ref={canvasRef}
@@ -498,7 +506,6 @@ export const Hifu = () => {
           </motion.div>
         </motion.section>
 
-        {/* Antes/Después Gallery - Enhanced Timeline */}
         <RealResultsTimeline timelineItems={timelineItems} />
 
         <motion.section

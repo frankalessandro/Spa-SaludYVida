@@ -279,6 +279,29 @@ body {
     src: url('/fonts/Montserrat/Montserrat-VariableFont_wght.woff2') format('woff2'),
       url('/fonts/Montserrat/Montserrat-VariableFont_wght.ttf') format('truetype');
   }
+
+  /* Configuración de Tailwind para el scroll */
+  .reveal-section {
+    scroll-snap-type: y mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-snap-align-start {
+    scroll-snap-align: start;
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+
+  .scrollbar-thumb-purple-500 {
+    scrollbar-color: #9b4de0 #f7fafc;
+  }
+
+  .scrollbar-track-gray-200 {
+    scrollbar-color: #f7fafc #e2e8f0;
+  }
+
 }
 
 
@@ -312,6 +335,82 @@ body {
 
 .animated-container::after {
   animation: floatLeavesReverse 3s ease-in-out infinite alternate;
+}
+
+/* Mostrar cuando se activa ScrollReveal */
+.animated-container.show::before,
+.animated-container.show::after {
+  opacity: 1;
+  top: 20%;
+  transform: translateY(0) rotate(45deg);
+}
+
+/* Animaciones */
+@keyframes floatLeaves {
+  0% {
+    transform: translateY(50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(60%) rotate(20deg);
+  }
+}
+
+@keyframes floatLeavesReverse {
+  0% {
+    transform: translateY(50%) rotate(0deg);
+  }
+
+  100% {
+    transform: translateY(40%) rotate(-20deg);
+  }
+}
+
+
+
+/* Animación de batir las alas */
+@keyframes flap {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+/* Estilo para las alas */
+.wing-left,
+.wing-right {
+  animation: flap 1s infinite ease-in-out;
+}
+
+.wing-left {
+  animation-delay: 0s;
+}
+
+.wing-right {
+  animation-delay: 0.5s;
+  /* Retraso para que las alas se muevan en un ciclo alterno */
+}
+
+/* Animación de vuelo para los pájaros */
+@keyframes fly {
+  0% {
+    transform: rotate(1deg);
+  }
+
+  100% {
+    transform: rotate(1deg);
+  }
+}
+
+.animate-fly {
+  animation: fly 10s linear infinite;
 }
 
 /* responsive de top en footer */
