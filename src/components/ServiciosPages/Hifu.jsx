@@ -346,7 +346,7 @@ export const Hifu = () => {
     <>
       <NavbarWithMegaMenu />
       {/* <AnimatedBackground /> */}
-      <div className="h-screen max-h-screen bg-black max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
+      <div className="h-screen max-h-screen bg-[#160520] max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
         <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 z-[10]">
           {/* Canvas para las partículas */}
           <canvas
@@ -472,7 +472,7 @@ export const Hifu = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="h-full flex flex-col bg-[#180118]">
+          <div className="h-full flex flex-col bg-[#160520]">
             <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 gold-text">
               Beneficios del Tratamiento
             </h2>
@@ -619,12 +619,12 @@ export const Hifu = () => {
 
 
         {/* Results Timeline with Luxury Styling */}
-        <section className="bg-black py-24">
+        <section className="bg-[#160520] py-24">
           <ResultsTimeline timelineItems={timelineItems} title="Proceso de Hifu 7d" description=" Transformación paso a paso con tecnología avanzada" />
         </section>
 
         <motion.section
-          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#0a0a0a]"
+          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#160520]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -686,7 +686,7 @@ export const Hifu = () => {
                   {/* Card background with gradient border */}
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 rounded-2xl blur-[2px]"></div>
                   <div className="relative h-full bg-[#0a0a0a] rounded-2xl p-1">
-                    <div className="h-full bg-gradient-to-br from-black to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
+                    <div className="h-full bg-gradient-to-br from-[#160520] to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
                       {/* Icon */}
                       <div className="mb-6">
                         {React.createElement(plan.icon, {
@@ -721,7 +721,7 @@ export const Hifu = () => {
             </div>
           </div>
         </motion.section>
-        <section className="py-24 bg-black">
+        <section className="py-24 bg-[#160520]">
           <div className="max-w-6xl mx-auto px-8">
             {/* Título principal */}
             <div className="text-center mb-16">

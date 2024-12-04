@@ -5,7 +5,7 @@ import Team from '../assets/img/Equipo_Trabajo.png';
 
 export const FooterWithLogo = () => {
   return (
-    <footer className="relative min-w-full bg-black" style={{
+    <footer className="relative min-w-full bg-[#160520]" style={{
       clipPath: "inset(-300px 0 0 0)",
     }}>
       {/* Main container */}
@@ -53,7 +53,7 @@ export const FooterWithLogo = () => {
       </div>
 
       {/* Footer bottom bar */}
-      <div className="bg-black text-white text-center py-2">
+      <div className="bg-[#160520] text-white text-center py-2">
         <Typography className="text-sm">&copy; 2024 Spa Holístico</Typography>
       </div>
     </footer>
