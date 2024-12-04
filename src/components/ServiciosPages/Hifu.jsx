@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { NavbarWithMegaMenu } from '../NavbarWithMegaMenu';
-import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu, ScanEye, History, PersonStanding, HandCoins, SmilePlus, Star, Crown } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu, ScanEye, History, PersonStanding, HandCoins, SmilePlus, Star, Crown, Clock, ShieldCheck, Award } from 'lucide-react';
 import { AnimatedBackground } from "../AnimatedBackground";
 import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
-import { RealResultsTimeline } from "../RealResultsTimeline";
+import { ResultsTimeline } from "../ResultsTimelineCriolipolisis";
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 // Image imports
@@ -14,33 +15,73 @@ import img2 from "../../assets/img/hifu/hifu2.webp";
 import img3 from "../../assets/img/hifu/hifu3.webp";
 import img4 from "../../assets/img/hifu/hifu1.webp";
 
-// resultados
 const timelineItems = [
   {
-    time: "Antes",
+    time: "Antes del Tratamiento",
     title: "Estado Inicial",
     description: "Signos visibles de envejecimiento y pérdida de elasticidad",
-    image: img4
+    features: [
+      "Evaluación facial completa",
+      "Análisis de elasticidad cutánea",
+      "Plan personalizado de tratamiento"
+    ],
+    icon: Clock,
+    benefits: [
+      "Diagnóstico profesional",
+      "Valoración sin compromiso",
+      "Plan adaptado a tus necesidades"
+    ]
   },
   {
-    time: "Después",
-    title: "Transformación HIFU",
+    time: "Durante el Proceso",
+    title: "Aplicación HIFU",
+    description: "Tratamiento no invasivo con ultrasonido focalizado de alta intensidad",
+    features: [
+      "Duración: 45-60 minutos",
+      "Tecnología de última generación",
+      "Proceso indoloro y seguro"
+    ],
+    icon: Star,
+    benefits: [
+      "Sin tiempo de recuperación",
+      "Máxima precisión",
+      "Confort durante el tratamiento"
+    ]
+  },
+  {
+    time: "Primeras Semanas",
+    title: "Evolución Visible",
     description: "Piel rejuvenecida, más firme y luminosa",
-    image: img1
-  },
-  {
-    time: "Detalle",
-    title: "Contorno Facial",
-    description: "Definición mejorada y lifting natural sin cirugía",
-    image: img2
+    features: [
+      "Resultados progresivos",
+      "Mejora en la textura",
+      "Mayor firmeza facial"
+    ],
+    icon: ShieldCheck,
+    benefits: [
+      "Efecto natural",
+      "Mejora continua",
+      "Seguimiento profesional"
+    ]
   },
   {
     time: "Resultado Final",
-    title: "Resultado Integral",
-    description: "Rejuvenecimiento completo con técnica no invasiva",
-    image: img3
+    title: "Transformación Completa",
+    description: "Rejuvenecimiento integral con resultados duraderos",
+    features: [
+      "Lifting natural sin cirugía",
+      "Definición mejorada del contorno",
+      "Piel revitalizada"
+    ],
+    icon: Award,
+    benefits: [
+      "Resultados duraderos",
+      "Aspecto natural",
+      "Satisfacción garantizada"
+    ]
   }
 ];
+
 
 const images = [img1, img2, img3, img4];
 const textImages = [
@@ -61,7 +102,45 @@ export const Hifu = () => {
   const [processRef, processInView] = useInView({ threshold: 0.2 });
   const [pricingRef, pricingInView] = useInView({ threshold: 0.2 });
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [text, setText] = useState("Mínima invasividad para combatir el envejecimiento");
+  const [index, setIndex] = useState(0);
   const canvasRef = useRef(null);
+
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (index < text.length) {
+        setTypedText(prev => prev + text[index]);
+        setIndex(index + 1);
+      }
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, [index, text]);
+  // galeria de resultados
+  const data = [
+    {
+      imageLink:
+        "/home/mujerSpa.webp",
+    },
+    {
+      imageLink:
+        "/home/mujerSpa.webp",
+    }, {
+      imageLink:
+        "/home/mujerSpa.webp",
+    }, {
+      imageLink:
+        "/home/mujerSpa.webp",
+    }, {
+      imageLink:
+        "/home/mujerSpa.webp",
+    }, {
+      imageLink:
+        "/home/mujerSpa.webp",
+    },
+
+  ]
 
   // funciones del slider
   useEffect(() => {
@@ -108,14 +187,23 @@ export const Hifu = () => {
     }
   ];
 
-  // lista de por que elegirnos
   const whyChooseUs = [
-    "Más de 10 años de experiencia en terapias holísticas",
-    "Terapeutas certificados y altamente capacitados",
-    "Ambiente de paz y tranquilidad para tu bienestar",
-    "Tratamientos personalizados para cada cliente",
-    "Productos naturales y orgánicos",
-    "Técnicas ancestrales combinadas con tecnología moderna"
+    {
+      title: "Efectos de Lifting No Quirúrgico",
+      description: "Logra una apariencia más juvenil al tensar y levantar la piel sin necesidad de cirugía.",
+    },
+    {
+      title: "Tecnología Avanzada",
+      description: "Utilizamos el sistema HIFU 7D de última generación, reconocido por su eficacia y seguridad.",
+    },
+    {
+      title: "Resultados Personalizados",
+      description: "Adaptamos cada tratamiento a las necesidades únicas de tu piel para garantizar el mejor resultado.",
+    },
+    {
+      title: "Experiencia Confiable",
+      description: "Nuestro equipo está altamente capacitado, asegurando un tratamiento profesional y confortable.",
+    },
   ];
 
   useEffect(() => {
@@ -276,43 +364,47 @@ export const Hifu = () => {
           />
 
           <div className="h-screen container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-8">
-            {/* Left Side - Image */}
-            <div className="w-full lg:w-[35vw] relative flex justify-center items-center">
-              <div className="w-[80vw] md:w-[60vw] lg:w-[40vw] h-auto max-w-2xl relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
-                <img
-                  src="/hifu/hifu_tool.webp"
-                  alt="Spa Holístico 3D"
-                  className="object-contain w-full h-full relative z-0"
-                />
-              </div>
-            </div>
+            {/* Main Content */}
+            <div className="relative z-10 w-full min-h-screen">
+              <div className="container mx-auto px-4">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 w-full">
+                  {/* Left side - Text Content */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
+                  >
+                    <h2 className="text-lg lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
+                      Experiencia Exclusiva
+                    </h2>
+                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif gold-text tracking-wider">
+                      HIFU 7D
+                    </h1>
+                    <div className="w-24 h-0.5 bg-gray-600" />
+                    <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 font-light">
+                      {typedText}
+                    </p>
+                    <motion.button
+                      className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-gray-600 dark-gold-text text-base lg:text-lg tracking-wider hover:bg-gray-600 hover:text-black transition-all duration-300 "
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      RESERVE SU CONSULTA
+                    </motion.button>
+                  </motion.div>
 
-            {/* Right Side - Content */}
-            <div className="w-full lg:w-[50vw] flex flex-col justify-center space-y-8 z-10">
-              <div className="text-white">
-                {/* Decorative Line */}
-                <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6"></div>
-
-                <h1 className="text-4xl md:text-5xl lg:text-7xl font-light mb-6 leading-tight">
-                  <span className="block font-serif">ULTHERAPY</span>
-                  <span className="block">
-                    <span className="font-light">Tecnología</span>
-                    <span className="text-yellow-400 font-serif gold-text"> Hifu</span>
-                  </span>
-                </h1>
-
-                <p className="text-lg md:text-xl text-gray-300 max-w-xl font-light tracking-wide">
-                  Mínima invasividad para combatir el envejecimiento
-                </p>
-              </div>
-
-              <div className="block">
-                <div className="flex items-center space-x-4">
-                  <div className="hidden lg:block h-[1px] w-12 bg-yellow-400"></div>
-                  <p className="text-yellow-400 text-base lg:text-lg font-light tracking-wider gold-text">
-                    Transformación • Renovación • Equilibrio
-                  </p>
+                  {/* Right Side - Image */}
+                  <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                    <div className="relative w-[70%] sm:w-[60%] lg:w-full max-w-xl">
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
+                      <img
+                        src="/hifu/hifu_tool.webp"
+                        alt="Spa Holístico 3D"
+                        className="w-full h-auto object-contain relative z-0"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -320,11 +412,11 @@ export const Hifu = () => {
         </section>
         {/* Tratamiento avanzado HIFU */}
         <section
-          className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-white to-gray-300"
+          className="relative py-20 px-6 md:px-16 bg-white"
         >
           {/* Texto centrado */}
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-yellow-700 mb-4 bg-gray-200/50  rounded-full">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4 rounded-full">
               HIFU y renueva la piel sin cirugías.
             </h1>
             <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -359,7 +451,7 @@ export const Hifu = () => {
 
             {/* Texto adicional */}
             <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold gold-text mb-4">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
                 Tratamiento HIFU Avanzado
               </h1>
               <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
@@ -380,8 +472,8 @@ export const Hifu = () => {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="h-full flex flex-col">
-            <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 vertical-gradient-text-gray">
+          <div className="h-full flex flex-col bg-[#180118]">
+            <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 gold-text">
               Beneficios del Tratamiento
             </h2>
 
@@ -406,7 +498,7 @@ export const Hifu = () => {
                 </button>
               </div>
 
-              <div className="absolute left-1/2 bottom-0 -translate-x-[18vw] w-[500px] transform translate-y-[15%]">
+              <div className="absolute left-[20%] md:left-1/2 bottom-0 -translate-x-[18vw] w-[500px] transform translate-y-[15%]">
                 <motion.img
                   src={benefits[currentSlide].image}
                   alt="HIFU Device"
@@ -416,7 +508,7 @@ export const Hifu = () => {
                   transition={{ duration: 0.5 }}
                 />
 
-                <div className="flex justify-center mt-4 space-x-2">
+                {/* <div className="flex justify-center mt-4 space-x-2">
                   {benefits.map((_, index) => (
                     <button
                       key={index}
@@ -425,7 +517,7 @@ export const Hifu = () => {
                         }`}
                     />
                   ))}
-                </div>
+                </div> */}
               </div>
 
               <div className="hidden md:block">
@@ -446,7 +538,7 @@ export const Hifu = () => {
                     >
                       <div className="flex flex-col items-center text-center">
                         {React.createElement(benefit.icon, {
-                          className: "text-yellow-800 w-8 h-8 mb-3"
+                          className: "gold-text w-8 h-8 mb-3"
                         })}
                         <span className="vertical-gradient-text text-4xl">{benefit.text}</span>
                       </div>
@@ -456,11 +548,11 @@ export const Hifu = () => {
               </div>
 
               <div className="md:hidden">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 space-y-4">
+                <div className="absolute top-[17%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 space-y-4">
                   {benefits[currentSlide].items.map((benefit, index) => (
                     <motion.div
                       key={index}
-                      className="flex items-center space-x-4 bg- backdrop-blur-sm rounded-lg p-4"
+                      className="flex items-center space-x-4 rounded-lg p-4"
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
@@ -468,7 +560,7 @@ export const Hifu = () => {
                       {React.createElement(benefit.icon, {
                         className: "text-white w-6 h-6"
                       })}
-                      <span className="text-white text-lg">{benefit.text}</span>
+                      <span className="text-white text-lg text-center">{benefit.text}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -501,12 +593,35 @@ export const Hifu = () => {
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           >
-            <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-yellow-800/10" />
-            <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full bg-yellow-800/10" />
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-gray-800/10" />
+            <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full bg-gray-800/10" />
           </motion.div>
         </motion.section>
 
-        <RealResultsTimeline timelineItems={timelineItems} />
+
+        <section className='py-24 max-w-7xl mx-auto px-6'>
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold gold-text mb-12">
+            Resultados de nuestros pacientes
+          </h1>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {data.map(({ imageLink }, index) => (
+              <div key={index} className="aspect-[16/9] w-full">
+                <img
+                  className="h-full w-full rounded-lg object-cover object-center"
+                  src={imageLink}
+                  alt={`Resultado de paciente ${index + 1}`}
+                />
+              </div>
+            ))}
+          </div>
+        </section>
+
+
+        {/* Results Timeline with Luxury Styling */}
+        <section className="bg-black py-24">
+          <ResultsTimeline timelineItems={timelineItems} title="Proceso de Hifu 7d" description=" Transformación paso a paso con tecnología avanzada" />
+        </section>
 
         <motion.section
           className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#0a0a0a]"
@@ -517,8 +632,8 @@ export const Hifu = () => {
         >
           {/* Decorative elements */}
           <div className="absolute inset-0">
-            <div className="absolute top-0 left-1/4 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute top-0 left-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
           </div>
 
           <div className="max-w-6xl mx-auto relative z-10">
@@ -527,7 +642,7 @@ export const Hifu = () => {
                 className="text-5xl md:text-6xl font-light mb-4"
                 variants={fadeInUp}
               >
-                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-purple-200 via-purple-400 to-purple-600 bg-clip-text gold-text">
                   Inversión en tu Belleza
                 </span>
               </motion.h2>
@@ -569,19 +684,19 @@ export const Hifu = () => {
                   variants={fadeInUp}
                 >
                   {/* Card background with gradient border */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 rounded-2xl blur-[2px]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 rounded-2xl blur-[2px]"></div>
                   <div className="relative h-full bg-[#0a0a0a] rounded-2xl p-1">
                     <div className="h-full bg-gradient-to-br from-black to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
                       {/* Icon */}
                       <div className="mb-6">
                         {React.createElement(plan.icon, {
-                          className: "w-10 h-10 text-yellow-400"
+                          className: "w-10 h-10 text-purple-400"
                         })}
                       </div>
 
                       {/* Title & Price */}
                       <h3 className="text-2xl font-light text-white mb-2">{plan.title}</h3>
-                      <div className="text-5xl font-light text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-600 mb-8">
+                      <div className="text-5xl font-light text-purple-500 bg-clip-text bg-gradient-to-r from-gray-200 to-gray-600 mb-8">
                         {plan.price}
                       </div>
 
@@ -589,14 +704,14 @@ export const Hifu = () => {
                       <ul className="space-y-4">
                         {plan.features.map((feature, idx) => (
                           <li key={idx} className="flex items-center space-x-3">
-                            <Check className="w-5 h-5 text-yellow-400" />
+                            <Check className="w-5 h-5 text-gray-400" />
                             <span className="text-gray-300">{feature}</span>
                           </li>
                         ))}
                       </ul>
 
                       {/* Button */}
-                      <button className="w-full mt-8 px-6 py-3 gold-background to-yellow-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
+                      <button className="w-full mt-8 px-6 py-3 gold-background to-purple-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
                         Reservar Ahora
                       </button>
                     </div>
@@ -606,54 +721,45 @@ export const Hifu = () => {
             </div>
           </div>
         </motion.section>
+        <section className="py-24 bg-black">
+          <div className="max-w-6xl mx-auto px-8">
+            {/* Título principal */}
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-serif gold-text mb-4">
+                ¿POR QUE ESCOGERNOS?
+              </h2>
+              <div className="w-24 h-0.5 gold-background mx-auto" />
+            </div>
 
-        <section className="relative md:h-[85vh] py-20 px-4 bg-black" style={{
-          clipPath: "inset(-300px 0 0 0)", // Recorta solo la parte inferior
-        }}>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 ">
-            <motion.div
-              className="text-white relative top-[10vh] "
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8 gold-text p-4">¿Por qué Elegirnos?</h2>
-              <ul className="space-y-4">
-                {whyChooseUs.map((benefit, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-start space-x-3"
-                    variants={fadeInUp}
-                    custom={index}
-                  >
-                    <span className="gold-text mt-1">•</span>
-                    <span className="text-lg">{benefit}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-            <div className="relative min-h-[80vh] md:w-[50vw] md:min-h-[80vh]">
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-dark-slider)] via-transparent to-transparent z-10"></div>
-              <motion.div
-                className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative w-full h-full">
-                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[var(--bg-dark-slider)] to-transparent z-10"></div>
-                  <img
-                    src="/hifu/image.webp"
-                    alt="Spa Holístico"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </div>
-              </motion.div>
+            {/* Nuevo título adicional */}
+            <div className="text-center mb-16">
+              <p className="text-gray-400 text-lg">
+                Descubre por qué nuestro tratamiento HIFU 7D es la mejor elección para el cuidado de tu piel.
+              </p>
+            </div>
+
+            {/* Beneficios */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {whyChooseUs.map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  className="p-8 border border-purple-600/20 hover:border-purple-600/40 transition-colors duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                >
+                  <h3 className="gold-text font-serif text-xl mb-4">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-400">
+                    {benefit.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </div>
-
         </section>
+
         <footer className="relative top-[30vh] md:top-[0vh]">
           <FooterWithLogo />
         </footer>

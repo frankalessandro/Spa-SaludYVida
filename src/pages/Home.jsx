@@ -86,7 +86,7 @@ export const Home = () => {
         </section>
 
         {/* Slider */}
-        <section className="w-full h-[150vh] lg:h-[100vh] flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-900">
+        <section className="w-full h-[100vh] lg:h-[100vh] flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-900">
           <SliderMain />
         </section>
 

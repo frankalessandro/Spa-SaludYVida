@@ -44,7 +44,7 @@ export const SpaAppointmentStepper = () => {
     >
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
         <div className="w-full flex flex-col md:flex-row items-center justify-center p-6 space-y-6 md:space-y-0 md:space-x-12">
-          <div className="w-full md:w-1/2 text-center md:text-left md:bg-white/70 p-8 rounded-xl shadow-2xl backdrop-blur-sm">
+          <div className="w-full md:w-1/2 text-center md:text-left md:bg-white/70 p-8 rounded-xl  backdrop-blur-sm">
             <h2
               className="text-2xl md:text-4xl font-bold mb-6 flex items-center justify-center md:justify-start gap-3"
               style={{ color: colors.textPrimary }}

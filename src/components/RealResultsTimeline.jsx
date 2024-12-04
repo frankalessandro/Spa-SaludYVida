@@ -9,7 +9,7 @@ import img4 from "../assets/img/hifu/hifu1.webp";
 
 export const RealResultsTimeline = ({ timelineItems }) => {
   return (
-    <section className="py-20 px-4 bg-white">
+    <section className="py-20 px-4 bg-transparent">
       <h2 className="text-4xl font-bold text-center text-yellow-800 mb-16 gold-text">
         Resultados Reales
       </h2>
@@ -50,11 +50,11 @@ export const RealResultsTimeline = ({ timelineItems }) => {
                 <div className="flex-grow h-0.5 gold-background"></div>
               </div>
 
-              <h3 className="text-2xl font-bold text-textDark">
+              <h3 className="text-2xl font-bold text-white">
                 {item.title}
               </h3>
 
-              <p className="text-textLight leading-relaxed">
+              <p className="text-white leading-relaxed">
                 {item.description}
               </p>
 

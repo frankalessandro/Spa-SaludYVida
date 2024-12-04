@@ -15,36 +15,36 @@ body {
 }
 
 .vertical-gradient-text {
-  background: linear-gradient(to bottom, rgb(253, 252, 252) 20%, rgb(222, 193, 88) 80%);
+  background: linear-gradient(to bottom, rgb(253, 252, 252) 20%, rgb(96, 95, 92) 80%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
   animation: vertical-shine 2s infinite ease-in-out;
 }
 
-/* Efecto de Texto Dorado Realista */
+/* Efecto de Texto Plateado Realista */
 .gold-text {
   font-weight: 700;
   letter-spacing: 1px;
-  /* Gradiente principal usando los colores solicitados */
+  /* Gradiente principal usando tonos plateados */
   background: linear-gradient(45deg,
-      #bf953f,
-      /* Base dorada */
-      #fcf6ba 45%,
+      #a8a9ad,
+      /* Base plateada */
+      #d7d9db 45%,
       /* Brillo claro */
-      #b38728 50%,
-      /* Oro medio */
-      #fbf5b7 55%,
+      #b0b3b8 50%,
+      /* Plata media */
+      #e6e8ea 55%,
       /* Otro brillo */
-      #aa771c
-      /* Oro oscuro */
+      #8d8f92
+      /* Plata oscura */
     );
 
   /* Segundo gradiente para efecto metálico */
   background-image: linear-gradient(45deg,
-      #bf953f,
-      #fbf5b7,
-      #aa771c);
+      #a8a9ad,
+      #e6e8ea,
+      #8d8f92);
   background-size: 200% 100%;
   animation: shine-text 9s infinite linear;
 
@@ -53,30 +53,30 @@ body {
   -webkit-text-fill-color: transparent;
   /* Efectos de profundidad */
   filter:
-    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 5px rgba(255, 215, 0, 0.2));
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 5px rgba(192, 192, 192, 0.2));
 }
 
-/* Efecto de Fondo Dorado Refinado */
+/* Efecto de Fondo Plateado Refinado */
 .gold-background {
   background: linear-gradient(5deg,
-      #bf953f,
-      /* Base dorada */
-      #fcf6ba 45%,
+      #a8a9ad,
+      /* Base plateada */
+      #d7d9db 45%,
       /* Brillo claro */
-      #b38728 50%,
-      /* Oro medio */
-      #fbf5b7 55%,
+      #b0b3b8 50%,
+      /* Plata media */
+      #e6e8ea 55%,
       /* Otro brillo */
-      #aa771c
-      /* Oro oscuro */
+      #8d8f92
+      /* Plata oscura */
     );
 
   /* Gradiente suave sin las líneas */
   background-image: linear-gradient(to bottom,
-      #bf953f,
-      #fbf5b7,
-      #aa771c);
-  color: #583d0f;
+      #a8a9ad,
+      #e6e8ea,
+      #8d8f92);
+  color: #4f5154;
   /* Efecto de brillo móvil */
   position: relative;
   overflow: hidden;
@@ -84,27 +84,27 @@ body {
   /* Sombras para profundidad */
   box-shadow:
     inset 0 0 20px rgba(0, 0, 0, 0.2),
-    0 0 10px rgba(255, 215, 0, 0.3);
+    0 0 10px rgba(192, 192, 192, 0.3);
 
   animation: shine-bg 8s infinite linear;
 }
 
-/* Texto Dorado Oscuro */
+/* Texto Plateado Oscuro */
 .dark-gold-text {
-  /* Color base dorado oscuro */
-  color: #aa771c;
+  /* Color base plateado oscuro */
+  color: #8d8f92;
 
   /* Gradiente sutil sin animación */
   background: linear-gradient(45deg,
-      #bf953f,
-      /* Base dorada */
-      #fcf6ba 45%,
+      #a8a9ad,
+      /* Base plateada */
+      #d7d9db 45%,
       /* Brillo claro */
-      #b38728 50%,
-      /* Oro medio */
-      #fbf5b7 55%,
+      #b0b3b8 50%,
+      /* Plata media */
+      #e6e8ea 55%,
       /* Otro brillo */
-      #aa771c);
+      #8d8f92);
 
   -webkit-background-clip: text;
   background-clip: text;
@@ -118,6 +118,77 @@ body {
   font-weight: 600;
   letter-spacing: 0.5px;
 }
+
+/* CODIGO COMENTADO DE EFECTO DORADO */
+/* Efecto de Texto Dorado Realista */
+/* .gold-text {
+  font-weight: 700;
+  letter-spacing: 1px;
+  background: linear-gradient(45deg,
+      #bf953f,
+      #fcf6ba 45%,
+      #b38728 50%,
+      #fbf5b7 55%,
+      #aa771c
+    );
+
+  background-image: linear-gradient(45deg,
+      #bf953f,
+      #fbf5b7,
+      #aa771c);
+  background-size: 200% 100%;
+  animation: shine-text 9s infinite linear;
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter:
+    drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3)) drop-shadow(0 0 5px rgba(255, 215, 0, 0.2));
+}
+
+.gold-background {
+  background: linear-gradient(5deg,
+      #bf953f,
+      #fcf6ba 45%,
+      #b38728 50%,
+      #fbf5b7 55%,
+      #aa771c
+    );
+
+  background-image: linear-gradient(to bottom,
+      #bf953f,
+      #fbf5b7,
+      #aa771c);
+  color: #583d0f;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 0 20px rgba(0, 0, 0, 0.2),
+    0 0 10px rgba(255, 215, 0, 0.3);
+
+  animation: shine-bg 8s infinite linear;
+}
+
+.dark-gold-text {
+  color: #aa771c;
+
+  background: linear-gradient(45deg,
+      #bf953f,
+      #fcf6ba 45%,
+      #b38728 50%,
+      #fbf5b7 55%,
+      #aa771c);
+
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow:
+    0 1px 1px rgba(0, 0, 0, 0.2);
+
+  font-weight: 600;
+  letter-spacing: 0.5px;
+} */
 
 /* Optimización para navegadores específicos */
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
@@ -235,7 +306,6 @@ body {
   }
 }
 
-
 :root {
   display: flex;
   flex-direction: column;
@@ -245,7 +315,7 @@ body {
   --bg-dark-slider: rgba(0, 0, 0, 0.926);
   /*color de boton navbar CONTACTANOS*/
   --color-button-light-hover: rgba(245, 210, 12, 0.865);
-  --color-button-alternative: rgb(194, 146, 41);
+  --color-button-alternative: rgb(87, 85, 82);
   /*color de boton saber mas en slider*/
   --color-button-alternative-hover: rgb(245, 210, 12);
   --color-tittle: rgb(245, 210, 12);
@@ -268,7 +338,6 @@ body {
   overflow-x: none;
   max-width: 100%;
 }
-
 
 @layer base {
   @font-face {

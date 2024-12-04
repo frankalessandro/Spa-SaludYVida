@@ -17,11 +17,11 @@ import {
   HamburgerMenuIcon,
   Cross1Icon,
 } from "@radix-ui/react-icons";
-import { 
-  Sparkles, 
-  Zap, 
-  FlaskConical, 
-  Scan, 
+import {
+  Sparkles,
+  Zap,
+  FlaskConical,
+  Scan,
   Snowflake,
   Dumbbell,
   Syringe,
@@ -196,18 +196,18 @@ function NavList() {
           </ListItem>
         </Typography>
       </Link>
-      <NavListMenu 
-        title="Servicios Faciales" 
-        items={facialServicesMenuItems} 
+      <NavListMenu
+        title="Servicios Faciales"
+        items={facialServicesMenuItems}
         icon={Eye}
       />
-      <NavListMenu 
-        title="Servicios Corporales" 
+      <NavListMenu
+        title="Servicios Corporales"
         items={bodyServicesMenuItems}
         icon={Bath}
       />
-      <NavListMenu 
-        title="Cuida tu Salud" 
+      <NavListMenu
+        title="Cuida tu Salud"
         items={healthMenuItems}
         icon={HeartPulse}
       />
@@ -227,13 +227,24 @@ function NavList() {
   );
 }
 // NavbarWithMegaMenu component remains the same...
-
 export function NavbarWithMegaMenu() {
   const [openNav, setOpenNav] = React.useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [showBanner, setShowBanner] = useState(true);
   const lastScrollY = useRef(0);
   const ticking = useRef(false);
+
+  // efecto de desenfoque y oscuro
+  useEffect(() => {
+    if (openNav) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+    return () => {
+      document.body.style.overflow = 'unset';
+    };
+  }, [openNav]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -256,7 +267,7 @@ export function NavbarWithMegaMenu() {
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-    window.addEventListener("resize", () => 
+    window.addEventListener("resize", () =>
       window.innerWidth >= 960 && setOpenNav(false)
     );
 
@@ -285,23 +296,36 @@ export function NavbarWithMegaMenu() {
     supports-[backdrop-filter]:bg-white/60 backdrop-blur-lg
   `;
 
+  // ... rest of useEffect and other code remains the same ...
+
   return (
-    <Navbar className={navbarClasses}>
-      <div className="flex items-center justify-between text-black">
-        <Link to="/">
-          <img
-            src={Logo}
-            alt="Logo"
-            className="w-12 h-12 cursor-pointer hover:bg-blue-gray-50 hover:rounded-md transition-all duration-200"
-          />
-        </Link>
-        <div className="hidden lg:block">
-          <NavList />
-        </div>
-        <button className="
+    <>
+      {/* Overlay con blur */}
+      {openNav && (
+        <div
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          onClick={() => setOpenNav(false)}
+        />
+      )}
+
+      <Navbar className={navbarClasses}>
+        <div className="flex items-center justify-between text-black relative z-50">
+          <Link to="/">
+            <img
+              src={Logo}
+              alt="Logo"
+              className="w-12 h-12 cursor-pointer hover:bg-blue-gray-50 hover:rounded-md transition-all duration-200"
+            />
+          </Link>
+          <div className="hidden lg:block">
+            <NavList />
+          </div>
+          <button className="
+          hidden
+          md:block
           align-middle select-none font-sans font-bold text-center uppercase 
           disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none 
-          text-xs py-3 px-6 rounded-lg bg-gradient-to-r from-yellow-700 via-yellow-700 via-yellow-800 to-yellow-800  text-white 
+          text-xs py-3 px-6 rounded-lg bg-gradient-to-r from-yellow-700 via-yellow-700 to-yellow-800  text-white 
           shadow-md shadow-yellow-500/20 
           hover:shadow-xl hover:bg-BotonesHover 
           focus:opacity-[0.85] focus:shadow-none 
@@ -310,24 +334,27 @@ export function NavbarWithMegaMenu() {
           translate-y-0 opacity-100
           gold-background
         ">
-          Contactanos
-        </button>
-        <IconButton
-          variant="text"
-          color="blue-gray"
-          className="lg:hidden"
-          onClick={() => setOpenNav(!openNav)}
-        >
-          {openNav ? (
-            <Cross1Icon className="h-6 w-6" />
-          ) : (
-            <HamburgerMenuIcon className="h-6 w-6" />
-          )}
-        </IconButton>
-      </div>
-      <Collapse open={openNav}>
-        <NavList />
-      </Collapse>
-    </Navbar>
+            Contactanos
+          </button>
+          <IconButton
+            variant="text"
+            color="blue-gray"
+            className="lg:hidden relative z-50"
+            onClick={() => setOpenNav(!openNav)}
+          >
+            {openNav ? (
+              <Cross1Icon className="h-6 w-6" />
+            ) : (
+              <HamburgerMenuIcon className="h-6 w-6" />
+            )}
+          </IconButton>
+        </div>
+        <Collapse open={openNav}>
+          <div className="relative z-50">
+            <NavList />
+          </div>
+        </Collapse>
+      </Navbar>
+    </>
   );
 }
