@@ -482,7 +482,7 @@ export const Hifu = () => {
               <div className="hidden md:block">
                 <button
                   onClick={prevSlide}
-                  className="absolute left-[2vw] top-1/2 -translate-y-1/2 bg-black hover:bg-white/20 p-2 rounded-full"
+                  className="absolute left-[2vw] top-1/2 -translate-y-1/2 bg-purple-100/10 hover:bg-white/20 p-2 rounded-full"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -686,7 +686,7 @@ export const Hifu = () => {
                   {/* Card background with gradient border */}
                   <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 rounded-2xl blur-[2px]"></div>
                   <div className="relative h-full bg-[#0a0a0a] rounded-2xl p-1">
-                    <div className="h-full bg-gradient-to-br from-[#160520] to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
+                    <div className="h-full bg-gradient-to-br from-[#o] to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
                       {/* Icon */}
                       <div className="mb-6">
                         {React.createElement(plan.icon, {

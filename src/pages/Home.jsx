@@ -64,7 +64,7 @@ export const Home = () => {
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${img1})` }}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-gray-900" />
+            <div className="absolute inset-0 bg-gradient-to-b from-[#160520]/80 via-[#160520]/50 to-[#160520]" />
           </div>
 
           {/* Main Content */}
@@ -79,19 +79,19 @@ export const Home = () => {
             <p className="text-xl md:text-2xl text-gray-300 font-light">
               {typedText}
             </p>
-            <button className="mt-12 px-12 py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300">
+            <button className="mt-12 px-12 py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-lg tracking-wider hover:bg-yellow-600 hover:text-[#160520] transition-all duration-300">
               RESERVE SU CITA
             </button>
           </div>
         </section>
 
         {/* Slider */}
-        <section className="w-full h-[100vh] lg:h-[100vh] flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-gray-900 to-gray-900">
+        <section className="w-full h-[100vh] lg:h-[100vh] flex items-center justify-center relative overflow-hidden bg-gradient-to-b from-[#160520] to-[#160520]">
           <SliderMain />
         </section>
 
         {/* Servicios */}
-        <section className="relative w-full py-16 bg-gradient-to-b from-gray-900 via-gray-900 to-white">
+        <section className="relative w-full py-16 bg-gradient-to-b from-[#160520] via-[#160520] to-white">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-4xl font-extrabold gold-text mb-6 text-yellow-600">
               Servicios Holísticos
