@@ -348,6 +348,9 @@ export const Hifu = () => {
       {/* <AnimatedBackground /> */}
       <div className="h-screen max-h-screen bg-[#160520] max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
         <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 z-[10]">
+          {/* figura de fondo */}
+          <div className='absolute left-0 top-0 -translate-x-1/2 w-[400px] h-[60vh] rounded-full bg-pink-100/10 blur-[40px]'></div>
+
           {/* Canvas para las partículas */}
           <canvas
             ref={canvasRef}
@@ -396,12 +399,16 @@ export const Hifu = () => {
 
                   {/* Right Side - Image */}
                   <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                    <div className="relative w-[70%] sm:w-[60%] lg:w-full max-w-xl">
+                    <div className="relative w-[70%] sm:w-[60%] lg:w-full max-w-xl overflow-hidden pb-12">
+                      {/* Efecto de resplandor en la base */}
+                      <div
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-[5vh] w-[80%] h-[150px] rounded-full bg-pink-200/10 blur-[25px]"
+                      ></div>
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
                       <img
                         src="/hifu/hifu_tool.webp"
                         alt="Spa Holístico 3D"
-                        className="w-full h-auto object-contain relative z-0"
+                        className="w-full h-auto object-contain relative z-1"
                       />
                     </div>
                   </div>
