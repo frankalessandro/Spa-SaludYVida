@@ -626,7 +626,7 @@ export const Hifu = () => {
 
 
         {/* Results Timeline with Luxury Styling */}
-        <section className="bg-[#160520] py-24">
+        <section className="bg-[#160520]">
           <ResultsTimeline timelineItems={timelineItems} title="Proceso de Hifu 7d" description=" Transformación paso a paso con tecnología avanzada" />
         </section>
 
@@ -638,7 +638,7 @@ export const Hifu = () => {
           variants={staggerContainer}
         >
           {/* Decorative elements */}
-          <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-black">
             <div className="absolute top-0 left-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
           </div>
@@ -703,7 +703,7 @@ export const Hifu = () => {
 
                       {/* Title & Price */}
                       <h3 className="text-2xl font-light text-white mb-2">{plan.title}</h3>
-                      <div className="text-5xl font-light text-purple-500 bg-clip-text bg-gradient-to-r from-gray-200 to-gray-600 mb-8">
+                      <div className="text-5xl font-semibold text-gray-500 bg-clip-text bg-gradient-to-r from-gray-200 to-gray-600 mb-8">
                         {plan.price}
                       </div>
 
