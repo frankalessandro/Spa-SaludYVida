@@ -15,15 +15,6 @@ export const FooterWithLogo = () => {
           clipPath: "polygon(0 -300%, 100% -300%, 100% 100%, 0 100%)"
         }}
       >
-        {/* Overlapping image container */}
-        <div className="absolute w-full">
-          <img
-            src={Team}
-            alt="Equipo de trabajo"
-            className="absolute right-0 -top-40 sm:-top-32 md:-top-28 lg:-top-40 w-[60%] sm:w-[50%] md:w-[40%] lg:w-[35%] max-w-[600px] object-cover"
-          />
-        </div>
-
         <div className="flex flex-col lg:flex-row items-start lg:items-center justify-between p-8 z-10 relative gap-8 lg:gap-0">
           {/* Logo and information */}
           <div className="flex items-start gap-4 lg:gap-6">
@@ -33,8 +24,9 @@ export const FooterWithLogo = () => {
                 Horarios de atención
               </Typography>
               <ul className="text-sm leading-6 text-white">
-                <li>Lunes a Viernes: 8:00 AM - 8:00 PM</li>
-                <li>Sábado: 9:00 AM - 6:00 PM</li>
+                <li>Lunes a viernes:</li>
+                <li>8:00 AM - 12:00 PM & 3:00 PM - 7:00 PM</li>
+                <li>Sábado: 8:00 AM - 12:00 PM</li>
                 <li>Domingo: Cerrado</li>
               </ul>
             </div>

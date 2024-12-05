@@ -22,7 +22,7 @@ export const WhatsAppButton = () => {
       <MessageCircle className="w-6 h-6 text-white animate-bounce" />
       
       {/* Text content */}
-      <span className="relative font-semibold text-white text-lg">
+      <span className="relative font-semibold text-white text-sm sm:text-lg">
         Escríbenos por WhatsApp
       </span>
       

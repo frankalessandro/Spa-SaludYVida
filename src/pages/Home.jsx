@@ -69,17 +69,17 @@ export const Home = () => {
 
           {/* Main Content */}
           <div className="relative z-10 text-center px-8 max-w-4xl mx-auto">
-            <h2 className="text-yellow-600 font-serif text-xl mb-4 tracking-[0.3em] uppercase">
+            <h2 className="text-gray-400 font-serif text-xl mb-4 tracking-[0.3em] uppercase">
               Experiencia Exclusiva
             </h2>
             <h1 className="text-5xl md:text-7xl font-serif text-white mb-6 tracking-wider">
-              Bienvenido
+              Spa Salud y Vida
             </h1>
-            <div className="w-24 h-0.5 bg-yellow-600 mx-auto mb-8" />
+            <div className="w-24 h-0.5 bg-gray-400 mx-auto mb-8" />
             <p className="text-xl md:text-2xl text-gray-300 font-light">
               {typedText}
             </p>
-            <button className="mt-12 px-12 py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-lg tracking-wider hover:bg-yellow-600 hover:text-[#160520] transition-all duration-300">
+            <button className="mt-12 px-12 py-4 bg-transparent border-2 border-gray-400 text-gray-400 text-lg tracking-wider hover:bg-gray-400 hover:text-[#160520] transition-all duration-300">
               RESERVE SU CITA
             </button>
           </div>
@@ -93,7 +93,7 @@ export const Home = () => {
         {/* Servicios */}
         <section className="relative w-full py-16 bg-gradient-to-b from-[#160520] via-[#160520] to-white">
           <div className="max-w-7xl mx-auto px-4 text-center">
-            <h2 className="text-4xl font-extrabold gold-text mb-6 text-yellow-600">
+            <h2 className="text-4xl font-extrabold gold-text mb-6 text-gray-400">
               Servicios Holísticos
             </h2>
             <p className="text-xl text-white mb-12">
@@ -140,9 +140,9 @@ export const Home = () => {
 
         {/* Proceso de Reserva */}
         <section className="w-full py-16 flex items-center justify-center">
-          <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-12 items-center">
+          <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-5 sm:gap-12 items-center">
             {/* Columna de texto */}
-            <div className="space-y-8 p-6 md:p-10">
+            <div className="space-y-8 p-2 sm:p-6 md:p-10">
               <h2 className="text-4xl font-extrabold gold-text text-center md:text-left">
                 Proceso de Reserva
               </h2>
@@ -162,13 +162,13 @@ export const Home = () => {
               ].map((step, index) => (
                 <div
                   key={index}
-                  className="flex flex-col sm:flex-row items-center sm:items-start gap-4 p-4 rounded-lg border bg-gray-100 shadow-md"
+                  className="flex flex-row sm:flex-row items-center sm:items-start gap-2 p-2 sm:p-4 rounded-lg border bg-gray-100 shadow-md"
                 >
                   <div className="w-12 h-12 rounded-full flex-shrink-0 flex items-center justify-center gold-background text-white font-bold text-lg">
                     {step.step}
                   </div>
                   <div className="py-2 text-center sm:text-left">
-                    <h3 className="text-xl font-semibold text-gray-800">
+                    <h3 className="text-base font-semibold sm:text-xl text-gray-800">
                       {step.title}
                     </h3>
                   </div>
@@ -180,7 +180,7 @@ export const Home = () => {
             </div>
 
             {/* Columna de imagen */}
-            <div className="relative p-6 md:p-0">
+            <div className="relative p-2 sm:p-6 md:p-0">
               <img
                 src={img_spa_ambiente}
                 alt="Spa ambiente"
@@ -191,7 +191,7 @@ export const Home = () => {
         </section>
 
         {/* Stepper */}
-        <section className="relative w-full h-[100vh] py-16">
+        <section className="relative w-full h-[100vh] pb-16">
           <SpaAppointmentStepper />
         </section>
       </main>

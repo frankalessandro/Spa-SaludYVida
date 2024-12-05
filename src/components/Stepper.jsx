@@ -4,11 +4,8 @@ import { MapPin, Phone, Mail } from 'lucide-react';
 const colors = {
   primaryBackground: '#e0f3ff',
   secondaryBackground: '#c0e4ff',
-  accentColor: '#b0d4ff',
   textPrimary: '#2d3748',
   textSecondary: '#718096',
-  linkColor: '#38b2ac',
-  iconColor: '#38b2ac',
 };
 
 const backgroundSVGs = [
@@ -18,11 +15,11 @@ const backgroundSVGs = [
 
 const sections = [
   {
-    title: "Ubicación de Spa Holístico Palmira",
+    title: "Ubicación de Spa Salud y Vida",
     content:
       "Sumérgete en una experiencia de bienestar integral en nuestro spa holístico ubicado en el corazón de Palmira. Ofrecemos tratamientos personalizados que armonizan cuerpo, mente y espíritu.",
     contactDetails: {
-      phone: "+57 318 456 7890",
+      phone: "+57 322 603 0044",
       email: "contacto@spaholisticopalmira.com",
       address: "Calle 23 #15-45, Palmira, Valle del Cauca",
     },
@@ -42,49 +39,44 @@ export const SpaAppointmentStepper = () => {
         backgroundPosition: 'center',
       }}
     >
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-4">
-        <div className="w-full flex flex-col md:flex-row items-center justify-center p-6 space-y-6 md:space-y-0 md:space-x-12">
-          <div className="w-full md:w-1/2 text-center md:text-left md:bg-white/70 p-8 rounded-xl  backdrop-blur-sm">
+      <div className="relative z-10 w-full max-w-6xl mx-auto px-4 md:px-8 py-8">
+        <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-8 md:gap-12">
+          {/* Texto */}
+          <div className="w-full md:w-1/2 bg-white/80 p-6 md:p-8 rounded-lg shadow-lg backdrop-blur-md">
             <h2
-              className="text-2xl md:text-4xl font-bold mb-6 flex items-center justify-center md:justify-start gap-3"
+              className="text-2xl md:text-3xl font-bold mb-4 flex items-center justify-center md:justify-start gap-3"
               style={{ color: colors.textPrimary }}
             >
-              <MapPin className="text-purple-500 w-6 md:w-9 h-6 md:h-9" />
+              <MapPin className="text-purple-500 w-6 md:w-8 h-6 md:h-8" />
               {section.title}
             </h2>
             <p
-              className="text-base md:text-lg mb-6"
+              className="text-sm md:text-base leading-relaxed text-gray-700"
               style={{ color: colors.textSecondary }}
             >
               {section.content}
             </p>
-            <div className="mt-6 text-gray-700 space-y-4">
+            <div className="mt-6 space-y-4 text-sm md:text-base">
               <div className="flex items-center gap-3">
-                <Phone className="text-purple-500 w-5 md:w-6 h-5 md:h-6" />
-                <span className="text-sm md:text-base">
-                  {section.contactDetails.phone}
-                </span>
+                <Phone className="text-purple-500 w-5 h-5" />
+                <span>{section.contactDetails.phone}</span>
               </div>
               <div className="flex items-center gap-3">
-                <Mail className="text-purple-500 w-5 md:w-6 h-5 md:h-6" />
+                <Mail className="text-purple-500 w-5 h-5" />
                 <a
                   href={`mailto:${section.contactDetails.email}`}
-                  className="text-purple-600 hover:underline text-sm md:text-base"
+                  className="text-purple-600 hover:underline"
                 >
                   {section.contactDetails.email}
                 </a>
               </div>
-              <div
-                className="flex items-center gap-3"
-                style={{ color: colors.textSecondary }}
-              >
-                <MapPin className="text-purple-500 w-5 md:w-6 h-5 md:h-6" />
-                <span className="text-sm md:text-base">
-                  {section.contactDetails.address}
-                </span>
+              <div className="flex items-center gap-3">
+                <MapPin className="text-purple-500 w-5 h-5" />
+                <span>{section.contactDetails.address}</span>
               </div>
             </div>
           </div>
+          {/* Mapa */}
           <div className="w-full md:w-1/2 flex justify-center">
             <iframe
               src={section.iframeMap}
@@ -93,7 +85,7 @@ export const SpaAppointmentStepper = () => {
               allowFullScreen=""
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="rounded-2xl shadow-2xl border-4 border-white"
+              className="rounded-xl shadow-md border-2 border-white"
               title="Mapa de Spa Holístico Palmira"
             ></iframe>
           </div>

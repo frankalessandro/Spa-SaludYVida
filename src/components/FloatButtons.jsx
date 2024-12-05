@@ -4,7 +4,7 @@ import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
 export const FloatButtons = () => {
   return (
     <div
-      className="fixed left-0 flex md:bg-purple-200/70 flex-col p-3 shadow-lg rounded-r-lg 
+      className="fixed left-0 flex md:bg-purple-200/70 flex-col p-2 sm:p-3 shadow-lg rounded-r-lg 
       bottom-4 md:top-1/2 md:-translate-y-1/2 md:bottom-auto z-[51] gap-2 transform translate-x-0 transition-transform duration-200"
     >
       {/* Fondo transparente optimizado */}
@@ -45,7 +45,7 @@ export const FloatButtons = () => {
         href="https://wa.me/573226030044"
         target="_blank"
         rel="noopener noreferrer"
-        className="relative p-3 text-white rounded-full bg-green-500 hover:bg-green-600 transform hover:scale-110 transition-transform duration-200 ease-in-out will-change-transform"
+        className="relative p-4 sm:p-3 text-white rounded-full bg-green-500 hover:bg-green-600 transform hover:scale-110 transition-transform duration-200 ease-in-out will-change-transform"
         style={{ 
           WebkitBackfaceVisibility: 'hidden',
           backfaceVisibility: 'hidden'
