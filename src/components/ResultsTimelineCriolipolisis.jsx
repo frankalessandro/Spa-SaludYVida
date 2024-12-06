@@ -37,7 +37,7 @@ export const ResultsTimeline = ({ timelineItems, title, description }) => {
             return (
               <div
                 key={index}
-                className="relative"
+                className="relative z-[40]"
               >
                 <div className={`
                   flex flex-col lg:flex-row items-center gap-8 

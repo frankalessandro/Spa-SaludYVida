@@ -349,21 +349,12 @@ export const Hifu = () => {
       <div className="h-screen max-h-screen bg-[#160520] max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
         <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 z-[10]">
           {/* figura de fondo */}
-          <div className='absolute left-0 top-0 -translate-x-1/2 w-[400px] h-[60vh] rounded-full bg-pink-100/10 blur-[40px]'></div>
-
+          <div className='absolute hidden md:block left-0 top-0 -translate-x-1/2 w-[400px] h-[60vh] rounded-full bg-pink-100/10 blur-[40px]'></div>
           {/* Canvas para las partículas */}
           <canvas
             ref={canvasRef}
             className="absolute inset-0 pointer-events-none"
             style={{ opacity: 0.6 }}
-          />
-
-          {/* Overlay Pattern */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
           />
 
           <div className="h-screen container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-8">
@@ -376,13 +367,20 @@ export const Hifu = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
+                    className="w-full lg:w-[80%] flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
                   >
-                    <h2 className="text-lg lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
+                    <h2 className="text-lg hidden md:block lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
                       Experiencia Exclusiva
                     </h2>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif gold-text tracking-wider">
-                      HIFU 7D
+
+                    {/* ULTHERAPY (Siempre centrado) */}
+                    <h1 className="text-8xl sm:text-4xl md:text-5xl lg:text-[10em] font-title">
+                      ULTHERAPY
+                    </h1>
+
+                    {/* Subtítulo inferior */}
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl gold-text tracking-tighter p-2">
+                      Tecnología HIFU 7D
                     </h1>
                     <div className="w-24 h-0.5 bg-gray-600" />
                     <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 font-light">
@@ -402,7 +400,7 @@ export const Hifu = () => {
                     <div className="relative w-[70%] sm:w-[60%] lg:w-full max-w-xl overflow-hidden pb-12">
                       {/* Efecto de resplandor en la base */}
                       <div
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-[5vh] w-[80%] h-[150px] rounded-full bg-pink-200/10 blur-[25px]"
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-[2vh]  md:-translate-y-[5vh] w-[80%] h-[70px] md:h-[150px] rounded-full bg-pink-200/10 blur-[17px] md:blur-[25px]"
                       ></div>
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
                       <img
@@ -626,19 +624,21 @@ export const Hifu = () => {
 
 
         {/* Results Timeline with Luxury Styling */}
-        <section className="bg-[#160520]">
-          <ResultsTimeline timelineItems={timelineItems} title="Proceso de Hifu 7d" description=" Transformación paso a paso con tecnología avanzada" />
+        <section className="bg-[#160520] ">
+          {/* gradiante */}
+          <ResultsTimeline timelineItems={timelineItems} title="Proceso de Hifu 7d" description=" Transformación paso a paso con tecnología avanzada" className="z-20" />
         </section>
 
         <motion.section
-          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#160520]"
+          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#160520] gradiante-inversion-belleza z-10"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
         >
           {/* Decorative elements */}
-          <div className="absolute inset-0 bg-black">
+          {/* <div className="absolute inset-0 bg-gradient-to-r from-black via-[var(--bg--purple-dark)] to-black"> */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#160520] via-black to-[#160520]">
             <div className="absolute top-0 left-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
           </div>
@@ -728,7 +728,7 @@ export const Hifu = () => {
             </div>
           </div>
         </motion.section>
-        <section className="py-24 bg-[#160520]">
+        <section className="py-24 bg-black">
           <div className="max-w-6xl mx-auto px-8">
             {/* Título principal */}
             <div className="text-center mb-16">
