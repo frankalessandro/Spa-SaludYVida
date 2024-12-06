@@ -421,10 +421,10 @@ export const Hifu = () => {
         >
           {/* Texto centrado */}
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4 rounded-full">
+            <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 rounded-full titles-font-family">
               HIFU y renueva la piel sin cirugías.
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
               Lift-!N es la más reciente tecnología estética HIFU (High-Intensity Focused
               Ultrasound) que focaliza toda su energía en un haz de ultrasonido de alta
               frecuencia a una zona específica de la piel, sin hacer incisiones o
@@ -434,7 +434,7 @@ export const Hifu = () => {
           </div>
 
           {/* Contenido principal */}
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
             {/* Galería derecha */}
             <div className="grid grid-cols-2 gap-4">
               <img
@@ -455,11 +455,11 @@ export const Hifu = () => {
             </div>
 
             {/* Texto adicional */}
-            <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
+            <div className='h-full w-full'>
+              <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 titles-font-family">
                 Tratamiento HIFU Avanzado
               </h1>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
                 Lift-!N es la más reciente tecnología estética HIFU (High-Intensity
                 Focused Ultrasound) que focaliza toda su energía en un haz de ultrasonido
                 de alta frecuencia a una zona específica de la piel, sin hacer incisiones
@@ -605,7 +605,7 @@ export const Hifu = () => {
 
 
         <section className='py-24 max-w-7xl mx-auto px-6'>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold gold-text mb-12">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold gold-text mb-12 ">
             Resultados de nuestros pacientes
           </h1>
 

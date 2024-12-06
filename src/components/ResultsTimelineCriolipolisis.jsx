@@ -24,7 +24,7 @@ export const ResultsTimeline = ({ timelineItems, title, description }) => {
   return (
     <section className="py-20 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
-        <h2 className="text-5xl font-bold text-center text-black mb-4">
+        <h2 className="text-7xl font-bold text-center text-black mb-4 titles-font-family tracking-wide">
           {title}
         </h2>
         <p className="text-center text-purple-600 mb-16 text-xl">
@@ -62,7 +62,7 @@ export const ResultsTimeline = ({ timelineItems, title, description }) => {
                       <div className="flex-grow h-0.5 gold-background"></div>
                     </div>
 
-                    <h3 className="text-3xl font-bold text-gray-800">
+                    <h3 className="text-5xl font-bold text-gray-800 titles-font-family tracking-wide">
                       {item.title}
                     </h3>
 

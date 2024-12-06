@@ -39,13 +39,16 @@ body {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-
   /* Sombra */
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+}
+.titles-font-family{
+  font-family: 'SF Compact Display', -apple-system, BlinkMacSystemFont, sans-serif;
 }
 
 /* Efecto de Texto Plateado Realista */
 .gold-text {
+  font-family: 'SF Compact Display', -apple-system, BlinkMacSystemFont, sans-serif;
   font-weight: 700;
   letter-spacing: 1px;
   /* Gradiente principal usando tonos plateados */
