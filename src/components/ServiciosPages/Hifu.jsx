@@ -106,6 +106,11 @@ export const Hifu = () => {
   const [text, setText] = useState("Mínima invasividad para combatir el envejecimiento");
   const [index, setIndex] = useState(0);
   const canvasRef = useRef(null);
+  // estados y variables de resultados en galeria
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const scrollContainerRef = useRef(null);
 
 
   useEffect(() => {
@@ -117,30 +122,16 @@ export const Hifu = () => {
     }, 100);
     return () => clearTimeout(timeout);
   }, [index, text]);
+
   // galeria de resultados
   const data = [
-    {
-      imageLink:
-        "/home/mujerSpa.webp",
-    },
-    {
-      imageLink:
-        "/home/mujerSpa.webp",
-    }, {
-      imageLink:
-        "/home/mujerSpa.webp",
-    }, {
-      imageLink:
-        "/home/mujerSpa.webp",
-    }, {
-      imageLink:
-        "/home/mujerSpa.webp",
-    }, {
-      imageLink:
-        "/home/mujerSpa.webp",
-    },
-
-  ]
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+  ];
 
   // funciones del slider
   useEffect(() => {
@@ -341,6 +332,65 @@ export const Hifu = () => {
       }
     }
   };
+
+  // INICIO DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
+  // Autoplay effect
+  // Animación CSS personalizada
+  const slideAnimation = `
+  @keyframes slideIn {
+    0% { transform: scale(1.1); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  .slide-in {
+    animation: slideIn 0.5s ease-out forwards;
+  }
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+  .pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  `;
+
+  useEffect(() => {
+    let interval;
+    if (isAutoPlay) {
+      interval = setInterval(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentIndex((prev) => (prev + 1) % data.length);
+          setIsTransitioning(false);
+        }, 300);
+      }, 2000);
+    }
+    return () => clearInterval(interval);
+  }, [isAutoPlay, data.length]);
+
+  const handleThumbnailClick = (index) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex(index);
+      setIsTransitioning(false);
+    }, 300);
+    setIsAutoPlay(false);
+  };
+
+  const getReorderedThumbnails = () => {
+    const before = data.slice(0, currentIndex);
+    const after = data.slice(currentIndex);
+    return [...after, ...before];
+  };
+
+  // FIN DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
 
   return (
     <>
@@ -603,22 +653,70 @@ export const Hifu = () => {
           </motion.div>
         </motion.section>
 
-
-        <section className='py-24 max-w-7xl mx-auto px-6'>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold gold-text mb-12 ">
+        <style>{slideAnimation}</style>
+        <section className="py-24 max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl w-full text-center md:text-4xl lg:text-5xl font-bold gold-text mb-12 hover:scale-105 transition-transform duration-300">
             Resultados de nuestros pacientes
           </h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Desktop Layout */}
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {data.map(({ imageLink }, index) => (
-              <div key={index} className="aspect-[16/9] w-full">
+              <div
+                key={index}
+                className="aspect-[16/9] w-full overflow-hidden group hover:scale-105 transition-all duration-300 ease-in-out"
+              >
                 <img
-                  className="h-full w-full rounded-lg object-cover object-center"
+                  className="h-full w-full rounded-lg object-cover object-center transform group-hover:scale-110 transition-transform duration-500"
                   src={imageLink}
                   alt={`Resultado de paciente ${index + 1}`}
                 />
               </div>
             ))}
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="sm:hidden space-y-4">
+            {/* Main Image */}
+            <div className="aspect-[16/9] w-full overflow-hidden rounded-lg shadow-2xl">
+              <img
+                className={`h-full w-full object-cover object-center transition-all duration-500 
+                ${isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}
+                float`}
+                src={data[currentIndex].imageLink}
+                alt={`Resultado de paciente principal`}
+              />
+            </div>
+
+            {/* Thumbnails Container */}
+            <div
+              ref={scrollContainerRef}
+              className="flex gap-2 overflow-x-auto pb-4 snap-x snap-mandatory"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch'
+              }}
+            >
+              {getReorderedThumbnails().map(({ imageLink }, index) => (
+                <div
+                  key={index}
+                  className={`flex-none w-24 aspect-[16/9] snap-start cursor-pointer 
+                  transform hover:scale-105 transition-all duration-300 ease-in-out
+                  ${(currentIndex + index) % data.length === currentIndex ? 'pulse' : ''}`}
+                  onClick={() => handleThumbnailClick((currentIndex + index) % data.length)}
+                >
+                  <img
+                    className={`h-full w-full rounded-lg object-cover object-center transition-all duration-300
+                    ${(currentIndex + index) % data.length === currentIndex
+                        ? 'ring-2 ring-blue-500 shadow-lg'
+                        : 'opacity-70 hover:opacity-100'}`}
+                    src={imageLink}
+                    alt={`Thumbnail ${index + 1}`}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
