@@ -630,12 +630,13 @@ export const Hifu = () => {
         </section>
 
         <motion.section
-          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#160520] gradiante-inversion-belleza z-10"
+          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#160520]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
         >
+          <div className='gradiante-inversion-belleza z-10'></div>
           {/* Decorative elements */}
           {/* <div className="absolute inset-0 bg-gradient-to-r from-black via-[var(--bg--purple-dark)] to-black"> */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#160520] via-black to-[#160520]">
