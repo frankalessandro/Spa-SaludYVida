@@ -379,7 +379,7 @@ export const Hifu = () => {
                     </h1>
 
                     {/* Subtítulo inferior */}
-                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl gold-text tracking-tighter p-2">
+                    <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl gold-text tracking-tighter p-2">
                       Tecnología HIFU 7D
                     </h1>
                     <div className="w-24 h-0.5 bg-gray-600" />
