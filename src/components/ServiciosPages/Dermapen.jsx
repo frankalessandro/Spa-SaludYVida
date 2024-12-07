@@ -1,69 +1,99 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { NavbarWithMegaMenu } from '../NavbarWithMegaMenu';
-import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu, ScanEye, History, PersonStanding, HandCoins, SmilePlus, Star, Crown } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu, ScanEye, History, PersonStanding, HandCoins, SmilePlus, Star, Crown, Clock, ShieldCheck, Award } from 'lucide-react';
 import { AnimatedBackground } from "../AnimatedBackground";
 import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
+import { ResultsTimeline } from "../ResultsTimelineCriolipolisis";
+
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { RealResultsTimeline } from "../RealResultsTimeline";
-
 // Image imports
 import img1 from "../../assets/img/hifu/hifu4.webp";
 import img2 from "../../assets/img/hifu/hifu2.webp";
 import img3 from "../../assets/img/hifu/hifu3.webp";
 import img4 from "../../assets/img/hifu/hifu1.webp";
 
-// resultados
 const timelineItems = [
   {
-    time: "Antes",
-    title: "Estado Inicial",
-    description: "Piel con signos de envejecimiento, manchas y falta de elasticidad",
-    image: img4
+    time: "Antes del Tratamiento",
+    title: "Evaluación Inicial",
+    description: "Análisis de la piel y preparación para el tratamiento con Dermapen.",
+    features: [
+      "Consulta personalizada",
+      "Evaluación de la salud de la piel",
+      "Plan de tratamiento adaptado"
+    ],
+    icon: Clock,
+    benefits: [
+      "Diagnóstico detallado",
+      "Plan exclusivo según tus necesidades",
+      "Preparación integral para resultados óptimos"
+    ]
   },
   {
-    time: "Después",
-    title: "Mejora Visible",
-    description: "Piel más hidratada, rejuvenecida y con una textura más uniforme",
-    image: img1
+    time: "Durante el Proceso",
+    title: "Aplicación de Dermapen",
+    description: "Tratamiento de microneedling para estimular la regeneración de la piel.",
+    features: [
+      "Duración: 45-60 minutos",
+      "Técnica mínimamente invasiva",
+      "Proceso indoloro con anestesia tópica"
+    ],
+    icon: Star,
+    benefits: [
+      "Poco tiempo de recuperación",
+      "Estimulación de colágeno y elastina",
+      "Confort durante el tratamiento"
+    ]
   },
   {
-    time: "Detalle",
-    title: "Renovación Facial",
-    description: "Reducción de cicatrices, manchas y líneas de expresión con estimulación natural de colágeno",
-    image: img2
+    time: "Primeras Semanas",
+    title: "Evolución Progresiva",
+    description: "Resultados visibles con piel más firme, luminosa y rejuvenecida.",
+    features: [
+      "Mejora en la textura y tono de la piel",
+      "Reducción de poros dilatados",
+      "Aumento de la elasticidad"
+    ],
+    icon: ShieldCheck,
+    benefits: [
+      "Resultados naturales y progresivos",
+      "Piel más suave y uniforme",
+      "Seguimiento personalizado"
+    ]
   },
   {
     time: "Resultado Final",
-    title: "Transformación Completa",
-    description: "Piel revitalizada, más firme y luminosa gracias a la regeneración celular",
-    image: img3
+    title: "Rejuvenecimiento Completo",
+    description: "Transformación duradera con una piel revitalizada y rejuvenecida.",
+    features: [
+      "Textura y firmeza mejoradas",
+      "Reducción de líneas y cicatrices",
+      "Aspecto natural y saludable"
+    ],
+    icon: Award,
+    benefits: [
+      "Resultados duraderos",
+      "Mejor calidad de piel",
+      "Satisfacción garantizada"
+    ]
   }
 ];
 
 const images = [img1, img2, img3, img4];
 const textImages = [
-  '💡 Innovación que inspira',
-  '🎯 Precisión en cada detalle',
-  '🛡️ Tu seguridad, nuestra prioridad',
-  '⚡ Resultados efectivos garantizados'
+  '✨ Técnica aprobada y segura con registro médico INVIMA',
+  '🔬 Microneedles para regeneración natural de la piel',
+  '💎 Estimulación de colágeno y elastina para una piel más joven',
+  '🌟 Piel más luminosa, tersa y de mejor calidad'
 ];
+
 
 const whatsappLink = "https://wa.me/573226030044";
 
-const ParallaxImage = ({ scrollYProgress, children }) => {
-  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  return (
-    <motion.div style={{ y }} className="relative">
-      {children}
-    </motion.div>
-  );
-};
-
 export const Dermapen = () => {
-  const { scrollYProgress } = useScroll();
   const [ref, inView] = useInView({ threshold: 0.2 });
 
   // Refs for intersection observation
@@ -72,7 +102,36 @@ export const Dermapen = () => {
   const [processRef, processInView] = useInView({ threshold: 0.2 });
   const [pricingRef, pricingInView] = useInView({ threshold: 0.2 });
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [typedText, setTypedText] = useState("");
+  const [text, setText] = useState("Mínima invasividad para combatir el envejecimiento");
+  const [index, setIndex] = useState(0);
   const canvasRef = useRef(null);
+  // estados y variables de resultados en galeria
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const scrollContainerRef = useRef(null);
+
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      if (index < text.length) {
+        setTypedText(prev => prev + text[index]);
+        setIndex(index + 1);
+      }
+    }, 100);
+    return () => clearTimeout(timeout);
+  }, [index, text]);
+
+  // galeria de resultados
+  const data = [
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+  ];
 
   // funciones del slider
   useEffect(() => {
@@ -91,43 +150,54 @@ export const Dermapen = () => {
     setCurrentSlide((prev) => (prev - 1 + benefits.length) % benefits.length);
   };
 
-
   // lista de slider beneficios
   const benefits = [
     {
-      image: "/hifu/hifu_tool.webp",
+      image: "/dermapen/dermapen_tool.webp",
       items: [
-        { text: "Resultados visibles y efectivos", icon: Smile },
-        { text: "Técnica aprobada con registro INVIMA médico", icon: Cpu },
-        { text: "Estimulación de colágeno natural", icon: ScanEye }
+        { text: "Estimulación natural de colágeno y elastina", icon: Smile },
+        { text: "Técnica aprobada y segura con registro médico", icon: Cpu },
+        { text: "Mejora de la textura y firmeza de la piel", icon: ScanEye }
       ]
     },
     {
       image: "/hifu/hifu_tool.webp",
       items: [
-        { text: "Reducción de manchas, estrías y cicatrices", icon: History },
-        { text: "Técnica aprobada con registro INVIMA médico", icon: PersonStanding },
-        { text: "Estimulación de colágeno natural", icon: HandCoins }
+        { text: "Piel más luminosa y rejuvenecida", icon: History },
+        { text: "Tratamiento mínimamente invasivo y cómodo", icon: PersonStanding },
+        { text: "Resultados visibles en las primeras semanas", icon: HandCoins }
       ]
     },
     {
       image: "/hifu/hifu_tool.webp",
       items: [
-        { text: "Reducción de manchas, estrías y cicatrices", icon: History },
-        { text: "Técnica aprobada con registro INVIMA médico", icon: PersonStanding },
-        { text: "Estimulación de colágeno natural", icon: HandCoins }
+        { text: "Sin tiempo de recuperación prolongado", icon: SmilePlus },
+        { text: "Reducción de cicatrices y poros dilatados", icon: PersonStanding },
+        { text: "Recomendado en sesiones personalizadas", icon: HandCoins }
       ]
-    },
+    }
   ];
-  // lista de por que elegirnos
+
   const whyChooseUs = [
-    "Más de 10 años de experiencia en terapias holísticas",
-    "Terapeutas certificados y altamente capacitados",
-    "Ambiente de paz y tranquilidad para tu bienestar",
-    "Tratamientos personalizados para cada cliente",
-    "Productos naturales y orgánicos",
-    "Técnicas ancestrales combinadas con tecnología moderna"
+    {
+      title: "Regeneración Natural de la Piel",
+      description: "Nuestro tratamiento con Dermapen promueve la renovación celular y la producción de colágeno de manera natural.",
+    },
+    {
+      title: "Técnica Mínimamente Invasiva",
+      description: "El Dermapen es seguro y no requiere cirugía, respetando la integridad y bienestar de tu piel.",
+    },
+    {
+      title: "Resultados Adaptados a Ti",
+      description: "Cada tratamiento se personaliza según las características de tu piel y tus objetivos estéticos.",
+    },
+    {
+      title: "Ambiente Holístico y Relajante",
+      description: "Disfruta de un entorno de spa que favorece tu relajación y bienestar durante el tratamiento.",
+    },
   ];
+
+
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -216,7 +286,6 @@ export const Dermapen = () => {
     };
   }, []);
 
-
   useEffect(() => {
     AOS.init({
       duration: 1000,
@@ -224,7 +293,6 @@ export const Dermapen = () => {
       easing: 'ease-in-out',
     });
   }, []);
-
   // Enhanced animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
@@ -237,6 +305,7 @@ export const Dermapen = () => {
       }
     }
   };
+
 
   const staggerContainer = {
     hidden: { opacity: 0 },
@@ -266,13 +335,73 @@ export const Dermapen = () => {
     }
   };
 
+  // INICIO DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
+  // Autoplay effect
+  // Animación CSS personalizada
+  const slideAnimation = `
+  @keyframes slideIn {
+    0% { transform: scale(1.1); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  .slide-in {
+    animation: slideIn 0.5s ease-out forwards;
+  }
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+  .pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  `;
+
+  useEffect(() => {
+    let interval;
+    if (isAutoPlay) {
+      interval = setInterval(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentIndex((prev) => (prev + 1) % data.length);
+          setIsTransitioning(false);
+        }, 300);
+      }, 2000);
+    }
+    return () => clearInterval(interval);
+  }, [isAutoPlay, data.length]);
+
+  const handleThumbnailClick = (index) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex(index);
+      setIsTransitioning(false);
+    }, 300);
+    setIsAutoPlay(false);
+  };
+
+  const getReorderedThumbnails = () => {
+    const before = data.slice(0, currentIndex);
+    const after = data.slice(currentIndex);
+    return [...after, ...before];
+  };
+
+  // FIN DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
+
   return (
     <>
       <NavbarWithMegaMenu />
       {/* <AnimatedBackground /> */}
-      {/* <div className="min-h-screen overflow-y-auto scroll-smooth scroll-snap-y-mandatory scrollbar-hide min-w-[100vw] bg-[--color-background-white] from-[var(--color-background-white)] to-[var(--color-bg-2)] z-[10]"> */}
-      <div className="h-screen max-h-screen bg-black max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
-        <section className="w-full min-h-[90vh] relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
+      <div className="h-screen max-h-screen bg-[#160520] max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
+        <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 z-[10]">
+          {/* figura de fondo */}
+          <div className='absolute hidden md:block left-0 top-0 -translate-x-1/2 w-[400px] h-[60vh] rounded-full bg-pink-100/10 blur-[40px]'></div>
           {/* Canvas para las partículas */}
           <canvas
             ref={canvasRef}
@@ -280,52 +409,61 @@ export const Dermapen = () => {
             style={{ opacity: 0.6 }}
           />
 
-          {/* Overlay Pattern */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
+          <div className="h-screen container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-8">
+            {/* Main Content */}
+            <div className="relative z-10 w-full min-h-screen pt-16 sm:pt-20">
+              <div className="container mx-auto px-4">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 w-full">
+                  {/* Left side - Text Content */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="w-full lg:w-[80%] flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
+                  >
+                    <h2 className="text-lg hidden md:block lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
+                      Renovación Holística
+                    </h2>
 
-          <div className="min-h-[90vh] container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-8 py-16 lg:py-0">
-            {/* Left Side - Image */}
-            <div className="w-full lg:w-[35vw] relative flex justify-center items-center mt-8 lg:mt-0">
-              <div className="w-[80vw] md:w-[60vw] lg:w-[40vw] h-auto max-w-2xl relative">
-                <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
-                <img
-                  src="/hifu/hifu_tool.webp"
-                  alt="Spa Holístico 3D"
-                  className="object-contain w-full h-full relative z-0"
-                />
-              </div>
-            </div>
+                    {/* Dermapen (Siempre centrado) */}
+                    <h1 className="text-8xl sm:text-4xl md:text-5xl lg:text-[10em] font-title">
+                      Dermapen
+                    </h1>
 
-            {/* Right Side - Content */}
-            <div className="w-full lg:w-[50vw] flex flex-col justify-center space-y-8 z-10 mb-8 lg:mb-0">
-              <div className="text-white">
-                {/* Decorative Line */}
-                <div className="w-24 h-1 bg-gradient-to-r from-yellow-400 to-yellow-600 mb-6"></div>
+                    {/* Subtítulo inferior */}
+                    <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl gold-text tracking-tighter p-2">
+                      Rejuvenecimiento Natural
+                    </h1>
+                    <div className="w-24 h-0.5 bg-gray-600" />
+                    <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 font-light">
+                      Estimula la regeneración natural de la piel y mejora su textura con nuestro tratamiento de microneedling.
+                    </p>
 
-                <h1 className="text-4xl md:text-5xl lg:text-7xl font-light mb-6 leading-tight">
-                  <span className="block font-serif">Dermapen</span>
-                  <span className="block">
-                    <span className="font-light">Tecnica</span>
-                    <span className="text-yellow-400 font-serif gold-text"> Avanzada</span>
-                  </span>
-                </h1>
+                    <motion.button
+                      className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-gray-600 dark-gold-text text-base lg:text-lg tracking-wider hover:bg-gray-600 hover:text-black transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      RESERVA TU SESIÓN
+                    </motion.button>
+                  </motion.div>
 
-                <p className="text-lg md:text-xl text-gray-300 max-w-xl font-light tracking-wide">
-                  Tratamiento no invasivo para rejuvenecer la piel y estimular el colágeno
-                </p>
-              </div>
 
-              <div className="block">
-                <div className="flex items-center space-x-4">
-                  <div className="hidden lg:block h-[1px] w-12 bg-yellow-400"></div>
-                  <p className="text-yellow-400 text-base lg:text-lg font-light tracking-wider gold-text">
-                    Redefine tu belleza • Renueva tu piel • Logra resultados visibles
-                  </p>
+                  {/* Right Side - Image */}
+                  <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                    <div className="relative w-[70%] sm:w-[60%] lg:w-full max-w-xl overflow-hidden pb-12">
+                      {/* Efecto de resplandor en la base */}
+                      <div
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-[2vh]  md:-translate-y-[5vh] w-[80%] h-[70px] md:h-[150px] rounded-full bg-pink-200/10 blur-[17px] md:blur-[25px]"
+                      ></div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
+                      <img
+                        src="/hifu/hifu_tool.webp"
+                        alt="Spa Holístico 3D"
+                        className="w-full h-auto object-contain relative z-1"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -333,34 +471,20 @@ export const Dermapen = () => {
         </section>
         {/* Tratamiento avanzado HIFU */}
         <section
-          className="relative py-20 px-6 md:px-16 bg-gradient-to-b from-white to-gray-300 overflow-hidden"
+          className="relative py-20 px-6 md:px-16 bg-white"
         >
-          {/* Fondo de Olas */}
-          <div className="absolute inset-0 pointer-events-none">
-            <svg
-              className="absolute top-[-20%] right-[-20%] w-[200%] md:w-[150%]"
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 1440 320"
-            >
-              <path
-                fill="var(--bg-gradient)"
-                d="M0,160L40,170.7C80,181,160,203,240,224C320,245,400,267,480,266.7C560,267,640,245,720,234.7C800,224,880,224,960,197.3C1040,171,1120,117,1200,112C1280,107,1360,149,1400,170.7L1440,192L1440,0L1400,0C1360,0,1280,0,1200,0C1120,0,1040,0,960,0C880,0,800,0,720,0C640,0,560,0,480,0C400,0,320,0,240,0C160,0,80,0,40,0L0,0Z"
-              ></path>
-            </svg>
-          </div>
-
           {/* Texto centrado */}
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl gold-text mb-4">
-              DERMAPEN y rejuvenece la piel sin cirugías
+            <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 rounded-full titles-font-family">
+              Dermapen: Rejuvenece tu piel de forma natural.
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              DERMAPEN es una tecnología avanzada de micropunciones que utiliza un dispositivo especializado para crear microcanales en la piel, estimulando la producción de colágeno y elastina sin incisiones ni agujas invasivas. Este procedimiento no quirúrgico mejora la textura de la piel y promueve su regeneración de forma segura y efectiva
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
+              Nuestro tratamiento con Dermapen estimula la regeneración natural de la piel, promoviendo la producción de colágeno y elastina sin necesidad de cirugías ni procedimientos invasivos. Ideal para revitalizar tu piel y mejorar su textura de manera holística.
             </p>
-          </div>
 
+          </div>
           {/* Contenido principal */}
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
             {/* Galería derecha */}
             <div className="grid grid-cols-2 gap-4">
               <img
@@ -381,27 +505,27 @@ export const Dermapen = () => {
             </div>
 
             {/* Texto adicional */}
-            <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold gold-text mb-4">
-                Tratamiento DERMAPEN Avanzado
+            <div className='h-full w-full'>
+              <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 titles-font-family">
+                Tratamiento Regenerativo con Dermapen
               </h1>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                DERMAPEN es una técnica de microneedling de última generación que utiliza micropunciones controladas para estimular la producción de colágeno y elastina en la piel. Sin necesidad de incisiones ni agujas invasivas, este tratamiento promueve la regeneración natural de la piel, mejorando su textura, reduciendo cicatrices, manchas y arrugas, y ofreciendo un aspecto rejuvenecido de forma segura y efectiva.
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
+                Descubre el poder del microneedling en la estética holística: un tratamiento avanzado que utiliza microagujas para estimular la regeneración celular, revitalizar tu piel y mejorar su textura sin cirugías ni procedimientos invasivos.
               </p>
+
             </div>
           </div>
         </section>
 
-
         {/* beneficios */}
         <motion.section
-          className="h-screen bg-[var(--bg-dark-slider)] relative overflow-hidden"
+          className="h-screen bg-[var(--bg-dark-slider)] relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="h-full flex flex-col">
-            <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 vertical-gradient-text-gray">
+          <div className="h-full flex flex-col bg-[#160520]">
+            <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 gold-text">
               Beneficios del Tratamiento
             </h2>
 
@@ -410,7 +534,7 @@ export const Dermapen = () => {
               <div className="hidden md:block">
                 <button
                   onClick={prevSlide}
-                  className="absolute left-[2vw] top-1/2 -translate-y-1/2 bg-black hover:bg-white/20 p-2 rounded-full"
+                  className="absolute left-[2vw] top-1/2 -translate-y-1/2 bg-purple-100/10 hover:bg-white/20 p-2 rounded-full"
                 >
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -426,7 +550,7 @@ export const Dermapen = () => {
                 </button>
               </div>
 
-              <div className="absolute left-1/2 bottom-0 -translate-x-[18vw] w-[500px] transform translate-y-[15%]">
+              <div className="absolute left-[20%] md:left-1/2 bottom-0 -translate-x-[18vw] w-[500px] transform translate-y-[15%]">
                 <motion.img
                   src={benefits[currentSlide].image}
                   alt="HIFU Device"
@@ -436,7 +560,7 @@ export const Dermapen = () => {
                   transition={{ duration: 0.5 }}
                 />
 
-                <div className="flex justify-center mt-4 space-x-2">
+                {/* <div className="flex justify-center mt-4 space-x-2">
                   {benefits.map((_, index) => (
                     <button
                       key={index}
@@ -445,7 +569,7 @@ export const Dermapen = () => {
                         }`}
                     />
                   ))}
-                </div>
+                </div> */}
               </div>
 
               <div className="hidden md:block">
@@ -466,7 +590,7 @@ export const Dermapen = () => {
                     >
                       <div className="flex flex-col items-center text-center">
                         {React.createElement(benefit.icon, {
-                          className: "text-yellow-800 w-8 h-8 mb-3"
+                          className: "gold-text w-8 h-8 mb-3"
                         })}
                         <span className="vertical-gradient-text text-4xl">{benefit.text}</span>
                       </div>
@@ -476,11 +600,11 @@ export const Dermapen = () => {
               </div>
 
               <div className="md:hidden">
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 space-y-4">
+                <div className="absolute top-[17%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 space-y-4">
                   {benefits[currentSlide].items.map((benefit, index) => (
                     <motion.div
                       key={index}
-                      className="flex items-center space-x-4 bg-white/2 backdrop-blur-sm rounded-lg p-4"
+                      className="flex items-center space-x-4 rounded-lg p-4"
                       initial={{ opacity: 0, x: -50 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
@@ -488,7 +612,7 @@ export const Dermapen = () => {
                       {React.createElement(benefit.icon, {
                         className: "text-white w-6 h-6"
                       })}
-                      <span className="text-white text-lg">{benefit.text}</span>
+                      <span className="text-white text-lg text-center">{benefit.text}</span>
                     </motion.div>
                   ))}
                 </div>
@@ -521,25 +645,103 @@ export const Dermapen = () => {
             animate={{ rotate: 360 }}
             transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           >
-            <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-yellow-800/10" />
-            <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full bg-yellow-800/10" />
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-gray-800/10" />
+            <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full bg-gray-800/10" />
           </motion.div>
         </motion.section>
 
-        {/* Antes/Después Gallery - Enhanced Timeline */}
-        <RealResultsTimeline timelineItems={timelineItems} />
+        <style>{slideAnimation}</style>
+        <section className="py-24 max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl w-full text-center md:text-4xl lg:text-5xl font-bold gold-text mb-12 hover:scale-105 transition-transform duration-300">
+            Resultados de nuestros pacientes
+          </h1>
+
+          {/* Desktop Layout */}
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {data.map(({ imageLink }, index) => (
+              <div
+                key={index}
+                className="aspect-[16/9] w-full overflow-hidden group hover:scale-105 transition-all duration-300 ease-in-out"
+              >
+                <img
+                  className="h-full w-full rounded-lg object-cover object-center transform group-hover:scale-110 transition-transform duration-500"
+                  src={imageLink}
+                  alt={`Resultado de paciente ${index + 1}`}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="sm:hidden space-y-4">
+            {/* Main Image */}
+            <div className="aspect-[16/9] w-full overflow-hidden rounded-lg shadow-2xl">
+              <img
+                className={`h-full w-full object-cover object-center transition-all duration-500 
+                ${isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}
+                float`}
+                src={data[currentIndex].imageLink}
+                alt={`Resultado de paciente principal`}
+              />
+            </div>
+
+            {/* Thumbnails Container */}
+            <div
+              ref={scrollContainerRef}
+              className="flex gap-2 overflow-x-auto pb-4 snap-x snap-mandatory"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch'
+              }}
+            >
+              {getReorderedThumbnails().map(({ imageLink }, index) => (
+                <div
+                  key={index}
+                  className={`flex-none w-24 aspect-[16/9] snap-start cursor-pointer 
+                  transform hover:scale-105 transition-all duration-300 ease-in-out
+                  ${(currentIndex + index) % data.length === currentIndex ? 'pulse' : ''}`}
+                  onClick={() => handleThumbnailClick((currentIndex + index) % data.length)}
+                >
+                  <img
+                    className={`h-full w-full rounded-lg object-cover object-center transition-all duration-300
+                    ${(currentIndex + index) % data.length === currentIndex
+                        ? 'ring-2 ring-blue-500 shadow-lg'
+                        : 'opacity-70 hover:opacity-100'}`}
+                    src={imageLink}
+                    alt={`Thumbnail ${index + 1}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+
+        {/* Results Timeline with Luxury Styling */}
+        <section className="bg-[#160520] ">
+          {/* Gradiente */}
+          <ResultsTimeline
+            timelineItems={timelineItems}
+            title="Proceso de Regeneración con Dermapen"
+            description="Revitalización paso a paso con tratamientos naturales y efectivos"
+            className="z-20"
+          />
+        </section>
 
         <motion.section
-          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#0a0a0a]"
+          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#160520]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
         >
+          <div className='gradiante-inversion-belleza z-10'></div>
           {/* Decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 left-1/4 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl"></div>
+          {/* <div className="absolute inset-0 bg-gradient-to-r from-black via-[var(--bg--purple-dark)] to-black"> */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#160520] via-black to-[#160520]">
+            <div className="absolute top-0 left-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
           </div>
 
           <div className="max-w-6xl mx-auto relative z-10">
@@ -548,15 +750,15 @@ export const Dermapen = () => {
                 className="text-5xl md:text-6xl font-light mb-4"
                 variants={fadeInUp}
               >
-                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text text-transparent gold-text">
-                  Inversión en tu Belleza
+                <span className="bg-gradient-to-r from-purple-200 via-purple-400 to-purple-600 bg-clip-text gold-text">
+                  Inversión en tu Belleza Natural
                 </span>
               </motion.h2>
               <motion.p
                 className="text-gray-400 text-lg"
                 variants={fadeInUp}
               >
-                Descubre nuestros exclusivos tratamientos premium
+                Descubre nuestros exclusivos tratamientos de microneedling para revitalizar tu piel
               </motion.p>
             </div>
 
@@ -567,7 +769,7 @@ export const Dermapen = () => {
                   price: "$300,000",
                   icon: Star,
                   features: [
-                    "1 sesión completa de DERMAPEN",
+                    "1 sesión completa de Dermapen",
                     "Valoración personalizada",
                     "Seguimiento post-tratamiento"
                   ]
@@ -577,7 +779,7 @@ export const Dermapen = () => {
                   price: "$600,000",
                   icon: Crown,
                   features: [
-                    "Múltiples sesiones de DERMAPEN",
+                    "Múltiples sesiones de Dermapen",
                     "Plasma rico en plaquetas",
                     "Limpieza facial profunda",
                     "Plan de cuidado personalizado"
@@ -590,19 +792,19 @@ export const Dermapen = () => {
                   variants={fadeInUp}
                 >
                   {/* Card background with gradient border */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 rounded-2xl blur-[2px]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 rounded-2xl blur-[2px]"></div>
                   <div className="relative h-full bg-[#0a0a0a] rounded-2xl p-1">
-                    <div className="h-full bg-gradient-to-br from-black to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
+                    <div className="h-full bg-gradient-to-br from-[#o] to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
                       {/* Icon */}
                       <div className="mb-6">
                         {React.createElement(plan.icon, {
-                          className: "w-10 h-10 text-yellow-400"
+                          className: "w-10 h-10 text-purple-400"
                         })}
                       </div>
 
                       {/* Title & Price */}
                       <h3 className="text-2xl font-light text-white mb-2">{plan.title}</h3>
-                      <div className="text-5xl font-light text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-600 mb-8">
+                      <div className="text-5xl font-semibold text-gray-500 bg-clip-text bg-gradient-to-r from-gray-200 to-gray-600 mb-8">
                         {plan.price}
                       </div>
 
@@ -610,14 +812,14 @@ export const Dermapen = () => {
                       <ul className="space-y-4">
                         {plan.features.map((feature, idx) => (
                           <li key={idx} className="flex items-center space-x-3">
-                            <Check className="w-5 h-5 text-yellow-400" />
+                            <Check className="w-5 h-5 text-gray-400" />
                             <span className="text-gray-300">{feature}</span>
                           </li>
                         ))}
                       </ul>
 
                       {/* Button */}
-                      <button className="w-full mt-8 px-6 py-3 gold-background text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
+                      <button className="w-full mt-8 px-6 py-3 gold-background to-purple-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
                         Reservar Ahora
                       </button>
                     </div>
@@ -627,54 +829,46 @@ export const Dermapen = () => {
             </div>
           </div>
         </motion.section>
+        <section className="py-24 bg-black">
+          <div className="max-w-6xl mx-auto px-8">
+            {/* Título principal */}
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-serif gold-text mb-4">
+                ¿POR QUE ESCOGERNOS?
+              </h2>
+              <div className="w-24 h-0.5 gold-background mx-auto" />
+            </div>
 
-        <section className="relative md:h-[85vh] py-20 px-4 bg-black" style={{
-          clipPath: "inset(-300px 0 0 0)", // Recorta solo la parte inferior
-        }}>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 ">
-            <motion.div
-              className="text-white relative top-[10vh] "
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8">¿Por qué Elegirnos?</h2>
-              <ul className="space-y-4">
-                {whyChooseUs.map((benefit, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-start space-x-3"
-                    variants={fadeInUp}
-                    custom={index}
-                  >
-                    <span className="text-purple-300 mt-1">•</span>
-                    <span className="text-lg">{benefit}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-            <div className="relative min-h-[80vh] md:w-[50vw] md:min-h-[80vh]">
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-dark-slider)] via-transparent to-transparent z-10"></div>
-              <motion.div
-                className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0 overflow-x-hidden"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative w-full h-full">
-                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[var(--bg-dark-slider)] to-transparent z-10"></div>
-                  <img
-                    src="/hifu/image.webp"
-                    alt="Spa Holístico"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </div>
-              </motion.div>
+            {/* Nuevo título adicional */}
+            <div className="text-center mb-16">
+              <p className="text-gray-400 text-lg">
+                Descubre por qué nuestros tratamientos con plasma regenerativo son la mejor elección para revitalizar y cuidar tu piel de manera natural.
+              </p>
+
+            </div>
+
+            {/* Beneficios */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {whyChooseUs.map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  className="p-8 border border-purple-600/20 hover:border-purple-600/40 transition-colors duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                >
+                  <h3 className="gold-text font-serif text-xl mb-4">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-400">
+                    {benefit.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </div>
-
         </section>
+
         <footer className="relative top-[30vh] md:top-[0vh]">
           <FooterWithLogo />
         </footer>

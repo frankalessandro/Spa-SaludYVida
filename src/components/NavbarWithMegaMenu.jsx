@@ -303,7 +303,7 @@ export function NavbarWithMegaMenu() {
       {/* Overlay con blur */}
       {openNav && (
         <div
-          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-40 lg:hidden"
+          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 lg:hidden"
           onClick={() => setOpenNav(false)}
         />
       )}

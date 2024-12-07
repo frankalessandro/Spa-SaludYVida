@@ -1,67 +1,117 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { NavbarWithMegaMenu } from '../NavbarWithMegaMenu';
-import { Check, ArrowRight, BookCheck, Clock, Star, ShieldCheck, Award, Crown } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu, ScanEye, History, PersonStanding, HandCoins, SmilePlus, Star, Crown, Clock, ShieldCheck, Award } from 'lucide-react';
+import { AnimatedBackground } from "../AnimatedBackground";
 import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
 import { ResultsTimeline } from "../ResultsTimelineCriolipolisis";
 
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 // Image imports
-import img1 from "../../assets/img/drenajes/drenaje1.webp";
-import img2 from "../../assets/img/drenajes/drenaje2.webp";
+import img1 from "../../assets/img/hifu/hifu4.webp";
+import img2 from "../../assets/img/hifu/hifu2.webp";
+import img3 from "../../assets/img/hifu/hifu3.webp";
+import img4 from "../../assets/img/hifu/hifu1.webp";
+
+const timelineItems = [
+  {
+    time: "Antes del Tratamiento",
+    title: "Evaluación Inicial",
+    description: "Análisis de la condición del sistema linfático y preparación para la sesión de drenaje.",
+    features: [
+      "Consulta personalizada",
+      "Evaluación de la salud y necesidades del cuerpo",
+      "Plan de tratamiento adaptado"
+    ],
+    icon: Clock,
+    benefits: [
+      "Diagnóstico detallado",
+      "Plan exclusivo según tus necesidades",
+      "Preparación integral para resultados óptimos"
+    ]
+  },
+  {
+    time: "Durante el Proceso",
+    title: "Sesión de Drenaje Linfático",
+    description: "Tratamiento no invasivo que utiliza técnicas de masaje suave para activar el sistema linfático y eliminar toxinas.",
+    features: [
+      "Duración: 45-60 minutos",
+      "Movimientos rítmicos y específicos",
+      "Proceso cómodo y relajante"
+    ],
+    icon: Star,
+    benefits: [
+      "Sin tiempo de recuperación",
+      "Estimulación de la circulación linfática",
+      "Confort durante el tratamiento"
+    ]
+  },
+  {
+    time: "Primeras Semanas",
+    title: "Evolución Progresiva",
+    description: "Resultados visibles con una reducción de la hinchazón y una sensación general de ligereza y bienestar.",
+    features: [
+      "Mejora en la circulación y drenaje de líquidos",
+      "Reducción de la retención de líquidos",
+      "Sensación de mayor ligereza y bienestar"
+    ],
+    icon: ShieldCheck,
+    benefits: [
+      "Resultados naturales y progresivos",
+      "Piel más suave y saludable",
+      "Seguimiento personalizado"
+    ]
+  },
+  {
+    time: "Resultado Final",
+    title: "Transformación Completa",
+    description: "Resultados duraderos con un cuerpo más equilibrado, libre de toxinas y revitalizado.",
+    features: [
+      "Estimulación de la regeneración y equilibrio corporal",
+      "Aumento de la circulación y alivio de la pesadez",
+      "Resultados visibles y sostenibles"
+    ],
+    icon: Award,
+    benefits: [
+      "Resultados duraderos",
+      "Bienestar general mejorado",
+      "Satisfacción garantizada"
+    ]
+  }
+];
+
+
+const images = [img1, img2, img3, img4];
+const textImages = [
+  '💧 Limpieza y revitalización del cuerpo',
+  '🔬 Procedimiento no invasivo y seguro',
+  '💎 Mejora en la circulación y reducción de la retención de líquidos',
+  '🌟 Bienestar holístico para una vida equilibrada'
+];
 
 const whatsappLink = "https://wa.me/573226030044";
 
-const ParallaxImage = ({ scrollYProgress, children }) => {
-  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  return (
-    <motion.div style={{ y }} className="relative">
-      {children}
-    </motion.div>
-  );
-};
-
 export const Drenajes = () => {
-  const { scrollYProgress } = useScroll();
+  const [ref, inView] = useInView({ threshold: 0.2 });
+
+  // Refs for intersection observation
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
-  const [scrolling, setScrolling] = useState(false);
-  const [backgroundImage, setBackgroundImage] = useState(img1);
+  const [benefitsRef, benefitsInView] = useInView({ threshold: 0.2 });
+  const [processRef, processInView] = useInView({ threshold: 0.2 });
+  const [pricingRef, pricingInView] = useInView({ threshold: 0.2 });
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [typedText, setTypedText] = useState("");
-  const [text, setText] = useState("limina fluidos acumulados y promueve la recuperación de áreas intervenidas.");
+  const [text, setText] = useState("Mínima invasividad para combatir el envejecimiento");
   const [index, setIndex] = useState(0);
+  const canvasRef = useRef(null);
+  // estados y variables de resultados en galeria
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const scrollContainerRef = useRef(null);
 
-  const texts = [
-    "Elimina fluidos acumulados y promueve la recuperación de áreas intervenidas.",
-    "Resultados inmediatos para reducir la presión en zonas operadas y mejorar el bienestar.",
-    "La mejor opción en drenaje postoperatorio con atención especializada y técnicas efectivas."
-  ];
-
-
-  // Lista de por qué elegirnos
-  const whyChooseUs = [
-    "Especialistas en drenajes con experiencia y técnicas comprobadas",
-    "Equipos de última generación para un tratamiento efectivo y seguro",
-    "Procedimiento no invasivo con mínima incomodidad y recuperación rápida",
-    "Atención personalizada para cada cliente y sus necesidades específicas",
-    "Resultados visibles desde la primera sesión, promoviendo la comodidad y bienestar",
-    "Valoraciones previas gratuitas con profesionales altamente capacitados para un plan adaptado"
-  ];
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolling(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const imageInterval = setInterval(() => {
-      setBackgroundImage(prev => prev === img1 ? img2 : img1);
-    }, 5000);
-    return () => clearInterval(imageInterval);
-  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -73,104 +123,174 @@ export const Drenajes = () => {
     return () => clearTimeout(timeout);
   }, [index, text]);
 
-  useEffect(() => {
-    const textInterval = setInterval(() => {
-      const nextText = texts[(texts.indexOf(text) + 1) % texts.length];
-      setText(nextText);
-      setTypedText("");
-      setIndex(0);
-    }, 10000);
-    return () => clearInterval(textInterval);
-  }, [text]);
+  // galeria de resultados
+  const data = [
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+  ];
 
+  // funciones del slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % benefits.length);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % benefits.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + benefits.length) % benefits.length);
+  };
+
+  // lista de slider beneficios
   const benefits = [
     {
-      title: "Procedimiento Premium",
-      description: "Técnicas avanzadas y equipos especializados para un drenaje seguro y eficaz."
-    },
-    {
-      title: "Exclusividad",
-      description: "Atención personalizada en un entorno relajante y de alta calidad."
-    },
-    {
-      title: "Resultados Inmediatos",
-      description: "Reducción de la presión en áreas operadas y mejoría del bienestar desde la primera sesión."
-    },
-    {
-      title: "Experiencia Elite",
-      description: "Profesionales altamente capacitados en técnicas de drenaje postoperatorio."
-    }
-  ];
-
-  const timelineItems = [
-    {
-      time: "Antes del Tratamiento",
-      title: "Preparación Inicial",
-      description: "Evaluación previa y recomendaciones para un drenaje efectivo y seguro.",
-      features: [
-        "Consulta de valoración gratuita",
-        "Diagnóstico personalizado",
-        "Instrucciones claras sobre cuidados previos"
-      ],
-      icon: Clock,
-      benefits: [
-        "Seguridad garantizada",
-        "Preparación adecuada",
-        "Atención sin compromiso inicial"
+      image: "/hifu/hifu_tool.webp",
+      items: [
+        { text: "Eliminación de toxinas y líquidos retenidos", icon: Smile },
+        { text: "Mejora en la circulación y reducción de la hinchazón", icon: Cpu },
+        { text: "Relajación y bienestar general", icon: ScanEye }
       ]
     },
     {
-      time: "Durante el Proceso",
-      title: "Aplicación de Drenaje",
-      description: "Procedimiento para extraer fluidos acumulados con técnica y equipo especializado.",
-      features: [
-        "Duración: 20 a 40 minutos por sesión",
-        "Técnica no invasiva y controlada",
-        "Ambiente cómodo y privado"
-      ],
-      icon: Star,
-      benefits: [
-        "Procedimiento cómodo y efectivo",
-        "Reducción de presión en zonas operadas",
-        "Máxima seguridad e higiene"
+      image: "/hifu/hifu_tool.webp",
+      items: [
+        { text: "Aumento de la energía y vitalidad", icon: History },
+        { text: "Tratamiento seguro y no invasivo", icon: PersonStanding },
+        { text: "Entorno cómodo y relajante", icon: HandCoins }
       ]
     },
     {
-      time: "Primeros Días",
-      title: "Recuperación y Beneficios Iniciales",
-      description: "Resultados visibles desde la primera sesión, con mayor comodidad y bienestar.",
-      features: [
-        "Mejora en la circulación de fluidos",
-        "Reducción de hinchazón y molestias",
-        "Atención continua y seguimiento"
-      ],
-      icon: ShieldCheck,
-      benefits: [
-        "Mayor alivio y comodidad",
-        "Bienestar general mejorado",
-        "Recuperación efectiva"
-      ]
-    },
-    {
-      time: "Resultados Finales",
-      title: "Renovación Completa",
-      description: "Beneficios a largo plazo tras completar las sesiones recomendadas.",
-      features: [
-        "Mejoría en la zona tratada",
-        "Mayor movilidad y comodidad",
-        "Sensación de ligereza y bienestar"
-      ],
-      icon: Award,
-      benefits: [
-        "Recuperación total de la zona operada",
-        "Resultados duraderos",
-        "Satisfacción garantizada"
+      image: "/hifu/hifu_tool.webp",
+      items: [
+        { text: "Estimulación del sistema linfático", icon: SmilePlus },
+        { text: "Apoyo a un estilo de vida equilibrado", icon: PersonStanding },
+        { text: "Tratamientos personalizados según tus necesidades", icon: HandCoins }
       ]
     }
   ];
 
+  const whyChooseUs = [
+    {
+      title: "Desintoxicación Natural",
+      description: "Nuestros drenajes ayudan a eliminar líquidos y toxinas, promoviendo una limpieza profunda y natural del cuerpo.",
+    },
+    {
+      title: "Mejora de la Circulación",
+      description: "El tratamiento favorece la circulación sanguínea, reduciendo la hinchazón y contribuyendo a una piel más saludable.",
+    },
+    {
+      title: "Mayor Energía y Vitalidad",
+      description: "Los drenajes ayudan a restaurar la energía, dejando el cuerpo más ligero y renovado.",
+    },
+    {
+      title: "Tratamiento Seguro y Relajante",
+      description: "El drenaje es un procedimiento no invasivo, realizado en un ambiente relajante y profesional para tu comodidad.",
+    },
+  ];
 
-  // precios
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+    let particles = [];
+
+    // Ajustar el canvas al tamaño de la ventana
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    // Crear partículas iniciales
+    const createParticles = () => {
+      particles = [];
+      const numberOfParticles = Math.floor((window.innerWidth * window.innerHeight) / 15000);
+
+      for (let i = 0; i < numberOfParticles; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
+          speedX: Math.random() * 0.2 - 0.1,
+          speedY: Math.random() * 0.2 - 0.1,
+          opacity: Math.random() * 0.5 + 0.2,
+          growing: true
+        });
+      }
+    };
+
+    // Animar partículas
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        // Actualizar opacidad con efecto de brillo
+        if (particle.growing) {
+          particle.opacity += 0.01;
+          if (particle.opacity >= 0.7) particle.growing = false;
+        } else {
+          particle.opacity -= 0.01;
+          if (particle.opacity <= 0.2) particle.growing = true;
+        }
+
+        // Mover partícula
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+
+        // Envolver partículas en los bordes
+        if (particle.x < 0) particle.x = canvas.width;
+        if (particle.x > canvas.width) particle.x = 0;
+        if (particle.y < 0) particle.y = canvas.height;
+        if (particle.y > canvas.height) particle.y = 0;
+
+        // Dibujar partícula
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, particle.size
+        );
+        gradient.addColorStop(0, `rgba(255, 223, 0, ${particle.opacity})`);
+        gradient.addColorStop(1, 'rgba(255, 223, 0, 0)');
+        ctx.fillStyle = gradient;
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    // Inicializar
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createParticles();
+    });
+
+    resizeCanvas();
+    createParticles();
+    animate();
+
+    // Limpieza
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out',
+    });
+  }, []);
   // Enhanced animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
@@ -183,6 +303,8 @@ export const Drenajes = () => {
       }
     }
   };
+
+
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
@@ -192,85 +314,532 @@ export const Drenajes = () => {
       }
     }
   };
+
+  // Enhanced icon hover variants
+  const iconHoverVariants = {
+    rest: {
+      rotate: 0,
+      scale: 1,
+      transition: { duration: 0.3 }
+    },
+    hover: {
+      rotate: [0, -10, 10, 0],
+      scale: 1.05,
+      transition: {
+        duration: 0.4,
+        type: "spring",
+        stiffness: 300
+      }
+    }
+  };
+
+  // INICIO DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
+  // Autoplay effect
+  // Animación CSS personalizada
+  const slideAnimation = `
+  @keyframes slideIn {
+    0% { transform: scale(1.1); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  .slide-in {
+    animation: slideIn 0.5s ease-out forwards;
+  }
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+  .pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  `;
+
+  useEffect(() => {
+    let interval;
+    if (isAutoPlay) {
+      interval = setInterval(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentIndex((prev) => (prev + 1) % data.length);
+          setIsTransitioning(false);
+        }, 300);
+      }, 2000);
+    }
+    return () => clearInterval(interval);
+  }, [isAutoPlay, data.length]);
+
+  const handleThumbnailClick = (index) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex(index);
+      setIsTransitioning(false);
+    }, 300);
+    setIsAutoPlay(false);
+  };
+
+  const getReorderedThumbnails = () => {
+    const before = data.slice(0, currentIndex);
+    const after = data.slice(currentIndex);
+    return [...after, ...before];
+  };
+
+  // FIN DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
+
   return (
     <>
       <NavbarWithMegaMenu />
-      <div className="min-h-screen bg-black max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
-        {/* Hero Section */}
+      {/* <AnimatedBackground /> */}
+      <div className="h-screen max-h-screen bg-[#160520] max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
+        <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 z-[10]">
+          {/* figura de fondo */}
+          <div className='absolute hidden md:block left-0 top-0 -translate-x-1/2 w-[400px] h-[60vh] rounded-full bg-pink-100/10 blur-[40px]'></div>
+          {/* Canvas para las partículas */}
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 pointer-events-none"
+            style={{ opacity: 0.6 }}
+          />
+
+          <div className="h-screen container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-8">
+            {/* Main Content */}
+            <div className="relative z-10 w-full min-h-screen pt-16 sm:pt-20">
+              <div className="container mx-auto px-4">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 w-full">
+                  {/* Left side - Text Content */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="w-full lg:w-[80%] flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
+                  >
+                    <h2 className="text-lg hidden md:block lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
+                      Renovación Holística
+                    </h2>
+
+                    {/* Drenajes (Siempre centrado) */}
+                    <h1 className="text-8xl sm:text-4xl md:text-5xl lg:text-[9em] font-title">
+                      Drenajes
+                    </h1>
+
+                    {/* Subtítulo inferior */}
+                    <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl gold-text tracking-tighter p-2">
+                      Limpieza y Bienestar Interno
+                    </h1>
+                    <div className="w-24 h-0.5 bg-gray-600" />
+                    <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 font-light text-justify">
+                      Drenajes: tratamiento natural y no invasivo para desintoxicar el cuerpo, mejorar la circulación y promover el bienestar general.
+                    </p>
+                    <motion.button
+                      className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-gray-600 dark-gold-text text-base lg:text-lg tracking-wider hover:bg-gray-600 hover:text-black transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      RESERVA TU SESIÓN
+                    </motion.button>
+                  </motion.div>
+                  {/* Right Side - Image */}
+                  <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                    <div className="relative w-[70%] sm:w-[60%] lg:w-full max-w-xl overflow-hidden pb-12">
+                      {/* Efecto de resplandor en la base */}
+                      <div
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-[2vh]  md:-translate-y-[5vh] w-[80%] h-[70px] md:h-[150px] rounded-full bg-pink-200/10 blur-[17px] md:blur-[25px]"
+                      ></div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
+                      <img
+                        src="/hifu/hifu_tool.webp"
+                        alt="Spa Holístico 3D"
+                        className="w-full h-auto object-contain relative z-1"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        {/* Tratamiento avanzado HIFU */}
+        <section
+          className="relative py-20 px-6 md:px-16 bg-white"
+        >
+          {/* Texto centrado */}
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 rounded-full titles-font-family">
+              Drenajes: Bienestar y Renovación Interna.
+            </h1>
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
+              Descubre los beneficios de los drenajes, un tratamiento natural diseñado para desintoxicar y mejorar la circulación, promoviendo una mejor salud y bienestar general. Este procedimiento no invasivo ayuda a eliminar líquidos y toxinas acumuladas, revitalizando tu organismo y favoreciendo tu bienestar. Ideal para quienes buscan un enfoque holístico para optimizar su salud interna y experimentar una renovada vitalidad.
+            </p>
+          </div>
+          {/* Contenido principal */}
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
+            {/* Galería derecha */}
+            <div className="grid grid-cols-2 gap-4">
+              <img
+                src={img1}
+                alt="Tratamiento facial"
+                className="rounded-lg shadow-lg"
+              />
+              <img
+                src={img1}
+                alt="Equipo de HIFU"
+                className="rounded-lg shadow-lg"
+              />
+              <img
+                src={img1}
+                alt="Aplicación HIFU"
+                className="col-span-2 rounded-lg shadow-lg"
+              />
+            </div>
+
+            {/* Texto adicional */}
+            <div className='h-full w-full'>
+              <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 titles-font-family">
+                Tratamiento Holístico con Drenajes
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
+                Descubre el poder de los drenajes, un procedimiento natural que favorece la eliminación de líquidos y toxinas acumuladas, mejorando el equilibrio y la salud interna del cuerpo. Este tratamiento no invasivo revitaliza el sistema circulatorio, alivia la hinchazón y potencia la sensación de bienestar general. Ideal para quienes buscan optimizar su salud y desintoxicar su organismo de manera segura y efectiva.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* beneficios */}
         <motion.section
-          ref={heroRef}
+          className="h-screen bg-[var(--bg-dark-slider)] relative"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80" />
-          </div>
+          <div className="h-full flex flex-col bg-[#160520]">
+            <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 gold-text">
+              Beneficios del Tratamiento
+            </h2>
 
-          <div className="relative z-10 w-full min-h-screen">
-            <div className="container mx-auto px-4">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-                className="flex flex-col items-center text-center max-w-3xl mx-auto space-y-6 pt-20"
-              >
-                <h2 className="text-lg lg:text-xl font-serif tracking-[0.3em] uppercase text-yellow-600 gold-background rounded-full px-2">
-                  Experiencia Exclusiva
-                </h2>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif tracking-wider gold-text">
-                  DRENAJES
-                </h1>
-                <div className="w-24 h-0.5 bg-yellow-600" />
-                <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 font-light">
-                  {typedText}
-                </p>
-                <motion.button
-                  className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-base lg:text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300 dark-gold-text"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+            <div className="flex-grow relative">
+              {/* Navigation Buttons - Desktop */}
+              <div className="hidden md:block">
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-[2vw] top-1/2 -translate-y-1/2 bg-purple-100/10 hover:bg-white/20 p-2 rounded-full"
                 >
-                  RESERVE SU CONSULTA
-                </motion.button>
-              </motion.div>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-[2vw] top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-2 rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="absolute left-[20%] md:left-1/2 bottom-0 -translate-x-[18vw] w-[500px] transform translate-y-[15%]">
+                <motion.img
+                  src={benefits[currentSlide].image}
+                  alt="HIFU Device"
+                  className="min-w-[35vw] h-[80vh] object-contain"
+                  initial={{ opacity: 0, y: 100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                />
+
+                {/* <div className="flex justify-center mt-4 space-x-2">
+                  {benefits.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-3 h-3 rounded-full transition-all ${currentSlide === index ? 'bg-white scale-125' : 'bg-white/30'
+                        }`}
+                    />
+                  ))}
+                </div> */}
+              </div>
+
+              <div className="hidden md:block">
+                {benefits[currentSlide].items.map((benefit, index) => {
+                  const positions = [
+                    "top-[16%] left-[17vw]",
+                    "top-[60%] left-[18vw]",
+                    "top-[39%] right-[18vw]"
+                  ];
+
+                  return (
+                    <motion.div
+                      key={index}
+                      className={`absolute ${positions[index]} max-w-[250px]`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.2 }}
+                    >
+                      <div className="flex flex-col items-center text-center">
+                        {React.createElement(benefit.icon, {
+                          className: "gold-text w-8 h-8 mb-3"
+                        })}
+                        <span className="vertical-gradient-text text-4xl">{benefit.text}</span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <div className="md:hidden">
+                <div className="absolute top-[17%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 space-y-4">
+                  {benefits[currentSlide].items.map((benefit, index) => (
+                    <motion.div
+                      key={index}
+                      className="flex items-center space-x-4 rounded-lg p-4"
+                      initial={{ opacity: 0, x: -50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      {React.createElement(benefit.icon, {
+                        className: "text-white w-6 h-6"
+                      })}
+                      <span className="text-white text-lg text-center">{benefit.text}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Navigation Buttons - Mobile */}
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-4">
+                  <button
+                    onClick={prevSlide}
+                    className="bg-white/10 hover:bg-white/20 p-2 rounded-full"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="bg-white/10 hover:bg-white/20 p-2 rounded-full"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Elegant Scroll Indicator */}
           <motion.div
-            className="absolute bottom-12 left-[43vw] md:left-[49vw] transform -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
+            className="absolute w-full h-full top-0 left-0 pointer-events-none"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
           >
-            <div className="w-12 h-12 border border-yellow-600/50 rounded-full flex items-center justify-center gold-background">
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              >
-                <ArrowRight className="w-6 h-6 text-black transform rotate-90" />
-              </motion.div>
-            </div>
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-gray-800/10" />
+            <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full bg-gray-800/10" />
           </motion.div>
         </motion.section>
-        {/* Benefits Section */}
-        <section className="py-24 bg-black">
-          <div className="max-w-6xl mx-auto px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif text-white mb-4 dark-gold-text">
-                EXCELENCIA EN DRENAJES
-              </h2>
 
-              <div className="w-24 h-0.5 bg-yellow-600 mx-auto" />
+        <style>{slideAnimation}</style>
+        <section className="py-24 max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl w-full text-center md:text-4xl lg:text-5xl font-bold gold-text mb-12 hover:scale-105 transition-transform duration-300">
+            Resultados de nuestros pacientes
+          </h1>
+          {/* Desktop Layout */}
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {data.map(({ imageLink }, index) => (
+              <div
+                key={index}
+                className="aspect-[16/9] w-full overflow-hidden group hover:scale-105 transition-all duration-300 ease-in-out"
+              >
+                <img
+                  className="h-full w-full rounded-lg object-cover object-center transform group-hover:scale-110 transition-transform duration-500"
+                  src={imageLink}
+                  alt={`Resultado de paciente ${index + 1}`}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="sm:hidden space-y-4">
+            {/* Main Image */}
+            <div className="aspect-[16/9] w-full overflow-hidden rounded-lg shadow-2xl">
+              <img
+                className={`h-full w-full object-cover object-center transition-all duration-500 
+                ${isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}
+                float`}
+                src={data[currentIndex].imageLink}
+                alt={`Resultado de paciente principal`}
+              />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit, index) => (
+            {/* Thumbnails Container */}
+            <div
+              ref={scrollContainerRef}
+              className="flex gap-2 overflow-x-auto pb-4 snap-x snap-mandatory"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch'
+              }}
+            >
+              {getReorderedThumbnails().map(({ imageLink }, index) => (
+                <div
+                  key={index}
+                  className={`flex-none w-24 aspect-[16/9] snap-start cursor-pointer 
+                  transform hover:scale-105 transition-all duration-300 ease-in-out
+                  ${(currentIndex + index) % data.length === currentIndex ? 'pulse' : ''}`}
+                  onClick={() => handleThumbnailClick((currentIndex + index) % data.length)}
+                >
+                  <img
+                    className={`h-full w-full rounded-lg object-cover object-center transition-all duration-300
+                    ${(currentIndex + index) % data.length === currentIndex
+                        ? 'ring-2 ring-blue-500 shadow-lg'
+                        : 'opacity-70 hover:opacity-100'}`}
+                    src={imageLink}
+                    alt={`Thumbnail ${index + 1}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+        {/* Results Timeline with Luxury Styling */}
+        <section className="bg-[#160520]">
+          {/* Gradiente */}
+          <ResultsTimeline
+            timelineItems={timelineItems}
+            title="Proceso de Limpieza y Bienestar con Drenajes"
+            description="Eliminación de toxinas y mejora de la circulación para un bienestar integral y un cuerpo revitalizado"
+            className="z-20"
+          />
+        </section>
+        <motion.section
+          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#160520]"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={staggerContainer}
+        >
+          <div className='gradiante-inversion-belleza z-10'></div>
+          {/* Decorative elements */}
+          {/* <div className="absolute inset-0 bg-gradient-to-r from-black via-[var(--bg--purple-dark)] to-black"> */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#160520] via-black to-[#160520]">
+            <div className="absolute top-0 left-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="max-w-6xl mx-auto relative z-10">
+            <div className="text-center mb-16">
+              <motion.h2
+                className="text-5xl md:text-6xl font-light mb-4"
+                variants={fadeInUp}
+              >
+                <span className="bg-gradient-to-r from-blue-200 via-blue-400 to-blue-600 bg-clip-text gold-text">
+                  Inversión en tu Bienestar Interno
+                </span>
+              </motion.h2>
+              <motion.p
+                className="text-gray-400 text-lg"
+                variants={fadeInUp}
+              >
+                Redescubre tu bienestar con nuestros tratamientos de drenajes, diseñados para eliminar toxinas y promover la circulación de manera natural. Este proceso no invasivo ayuda a mejorar la salud general, aporta una sensación de ligereza y revitaliza tu cuerpo.
+              </motion.p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+              {[
+                {
+                  title: "Sesión Individual",
+                  price: "$200,000",
+                  icon: Star,
+                  features: [
+                    "1 sesión completa de drenaje",
+                    "Valoración personalizada",
+                    "Seguimiento post-tratamiento"
+                  ]
+                },
+                {
+                  title: "Tratamiento Completo",
+                  price: "$1,200,000",
+                  icon: Crown,
+                  features: [
+                    "Múltiples sesiones de drenaje",
+                    "Plan de cuidados previos y posteriores",
+                    "Valoración y seguimiento profesional",
+                    "Resultados garantizados y bienestar mejorado"
+                  ]
+                }
+              ].map((plan, index) => (
                 <motion.div
                   key={index}
-                  className="p-8 border border-yellow-600/20 hover:border-yellow-600/40 transition-colors duration-300"
+                  className="relative group"
+                  variants={fadeInUp}
+                >
+                  {/* Card background with gradient border */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 rounded-2xl blur-[2px]"></div>
+                  <div className="relative h-full bg-[#0a0a0a] rounded-2xl p-1">
+                    <div className="h-full bg-gradient-to-br from-[#o] to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
+                      {/* Icon */}
+                      <div className="mb-6">
+                        {React.createElement(plan.icon, {
+                          className: "w-10 h-10 text-purple-400"
+                        })}
+                      </div>
+
+                      {/* Title & Price */}
+                      <h3 className="text-2xl font-light text-white mb-2">{plan.title}</h3>
+                      <div className="text-5xl font-semibold text-gray-500 bg-clip-text bg-gradient-to-r from-gray-200 to-gray-600 mb-8">
+                        {plan.price}
+                      </div>
+
+                      {/* Features */}
+                      <ul className="space-y-4">
+                        {plan.features.map((feature, idx) => (
+                          <li key={idx} className="flex items-center space-x-3">
+                            <Check className="w-5 h-5 text-gray-400" />
+                            <span className="text-gray-300">{feature}</span>
+                          </li>
+                        ))}
+                      </ul>
+
+                      {/* Button */}
+                      <button className="w-full mt-8 px-6 py-3 gold-background to-purple-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
+                        Reservar Ahora
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </motion.section>
+        <section className="py-24 bg-black">
+          <div className="max-w-6xl mx-auto px-8">
+            {/* Título principal */}
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-serif gold-text mb-4">
+                ¿POR QUE ESCOGERNOS?
+              </h2>
+              <div className="w-24 h-0.5 gold-background mx-auto" />
+            </div>
+
+            {/* Nuevo título adicional */}
+            <div className="text-center mb-16">
+              <p className="text-gray-400 text-lg">
+                Descubre por qué nuestros tratamientos de drenaje son la mejor elección para revitalizar y mejorar tu bienestar corporal y digestivo de manera natural y efectiva.
+              </p>
+            </div>
+
+            {/* Beneficios */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {whyChooseUs.map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  className="p-8 border border-purple-600/20 hover:border-purple-600/40 transition-colors duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.2 }}
@@ -287,237 +856,10 @@ export const Drenajes = () => {
           </div>
         </section>
 
-        {/* Treatment Process */}
-        <section className="py-24 bg-neutral-900">
-          <div className="max-w-6xl mx-auto px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif dark-gold-text mb-4 ">
-                EL PROCESO
-              </h2>
-              <div className="w-24 h-0.5 bg-yellow-600 mx-auto" />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {[
-                {
-                  step: "01",
-                  title: "Consulta Personalizada",
-                  description: "Evaluación detallada de tu estado de salud y recomendaciones específicas para el drenaje."
-                },
-                {
-                  step: "02",
-                  title: "Procedimiento de Drenaje",
-                  description: "Técnica segura para extraer los fluidos acumulados en un entorno cómodo y relajante."
-                },
-                {
-                  step: "03",
-                  title: "Resultados Inmediatos",
-                  description: "Reducción de la presión y mejora en el bienestar general desde la primera sesión."
-                }
-
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="relative"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                >
-                  <div className="gold-text font-serif text-4xl mb-4">
-                    {item.step}
-                  </div>
-                  <h3 className="text-white font-serif text-xl mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-400">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Results Timeline with Luxury Styling */}
-        <section className="bg-black py-24">
-          <ResultsTimeline
-            timelineItems={timelineItems}
-            title="Proceso de Colonterapia"
-            description="Limpieza intestinal paso a paso con tecnología ozónica avanzada"
-          />
-        </section>
-
-
-        <motion.section
-          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#0a0a0a]"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={staggerContainer}
-        >
-          {/* Decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl"></div>
-          </div>
-
-          <div className="max-w-6xl mx-auto relative z-10">
-            <div className="text-center mb-16">
-              <motion.h2
-                className="text-5xl md:text-6xl font-light mb-4"
-                variants={fadeInUp}
-              >
-                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text gold-text">
-                  Inversión en tu Bienestar
-                </span>
-              </motion.h2>
-              <motion.p
-                className="text-gray-400 text-lg"
-                variants={fadeInUp}
-              >
-                Descubre nuestros exclusivos tratamientos de drenajes para una recuperación óptima y bienestar general
-              </motion.p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
-              {[
-                {
-                  title: "Sesión Individual",
-                  price: "$200,000",
-                  icon: Star,
-                  features: [
-                    "1 sesión completa de drenaje",
-                    "Valoración personalizada",
-                    "Seguimiento post-tratamiento",
-                  ]
-                },
-                {
-                  title: "Tratamiento Completo",
-                  price: "$1,200,000",
-                  icon: Crown,
-                  features: [
-                    "Múltiples sesiones de drenaje",
-                    "Plan de cuidados previos y posteriores",
-                    "Valoración y seguimiento profesional",
-                    "Resultados garantizados y bienestar mejorado",
-                  ]
-                }
-
-              ].map((plan, index) => (
-                <motion.div
-                  key={index}
-                  className="relative group"
-                  variants={fadeInUp}
-                >
-                  {/* Card background with gradient border */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 rounded-2xl blur-[2px]"></div>
-                  <div className="relative h-full bg-[#0a0a0a] rounded-2xl p-1">
-                    <div className="h-full bg-gradient-to-br from-black to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
-                      {/* Icon */}
-                      <div className="mb-6">
-                        {React.createElement(plan.icon, {
-                          className: "w-10 h-10 text-purple-400"
-                        })}
-                      </div>
-
-                      {/* Title & Price */}
-                      <h3 className="text-2xl font-light text-white mb-2">{plan.title}</h3>
-                      <div className="text-5xl font-light text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-600 mb-8">
-                        {plan.price}
-                      </div>
-
-                      {/* Features */}
-                      <ul className="space-y-4">
-                        {plan.features.map((feature, idx) => (
-                          <li key={idx} className="flex items-center space-x-3">
-                            <Check className="w-5 h-5 text-yellow-400" />
-                            <span className="text-gray-300">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
-
-                      {/* Button */}
-                      <button className="w-full mt-8 px-6 py-3 gold-background text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
-                        Reservar Ahora
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </motion.section>
-
-        {/* Final CTA Section */}
-        <section className="py-24 bg-black">
-          <div className="max-w-4xl mx-auto text-center px-8">
-            <h2 className="text-3xl md:text-4xl font-serif text-white mb-8 dark-gold-text">
-              EXPERIENCIA EXCLUSIVA
-            </h2>
-            <div className="w-24 h-0.5 bg-yellow-600 mx-auto mb-8" />
-            <p className="text-gray-400 text-lg mb-12">
-              Descubra la excelencia en tratamientos de drenaje. Obtenga resultados inmediatos y una mejora notable en su bienestar con tecnología avanzada y atención personalizada.
-            </p>
-            <motion.button
-              className="px-12 py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.open(whatsappLink, "_blank")}
-            >
-              RESERVE SU CITA
-            </motion.button>
-          </div>
-        </section>
-        <section className="relative md:h-[85vh] py-20 px-4 bg-black" style={{
-          clipPath: "inset(-300px 0 0 0)", // Recorta solo la parte inferior
-        }}>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 ">
-            <motion.div
-              className="text-white relative top-[10vh] "
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8 gold-text">¿Por qué Elegirnos?</h2>
-              <ul className="space-y-4">
-                {whyChooseUs.map((benefit, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-start space-x-3"
-                    variants={fadeInUp}
-                    custom={index}
-                  >
-                    <span className="text-yellow-300 mt-1">•</span>
-                    <span className="text-lg">{benefit}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-            <div className="relative min-h-[80vh] md:w-[45vw] md:min-h-[80vh]">
-              <motion.div
-                className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0 overflow-x-hidden"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative w-full h-full">
-                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[var(--bg-dark-slider)] to-transparent z-10"></div>
-                  <img
-                    src="/colonterapia/colonterapia.webp"
-                    alt="Spa Holístico"
-                    // className="w-full h-full object-cover rounded-lg z-[20]"
-                    className="relative w-full md:h-full bottom-[-45vh] md:bottom-0 h-[40vh] object-cover rounded-lg z-[20]"
-                  />
-                </div>
-              </motion.div>
-            </div>
-          </div>
-        </section>
-        <FooterWithLogo />
+        <footer className="relative top-[30vh] md:top-[0vh]">
+          <FooterWithLogo />
+        </footer>
       </div>
     </>
   );
 };
-
-export default Drenajes;

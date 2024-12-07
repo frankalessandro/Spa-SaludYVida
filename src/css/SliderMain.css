@@ -105,8 +105,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    width: 100%;
 }
-
+.container-title span{
+    font-size:2em;
+}
 .buttons span {
     position: relative;
     width: 50px;

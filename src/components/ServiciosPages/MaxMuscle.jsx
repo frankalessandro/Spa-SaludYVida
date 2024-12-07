@@ -1,66 +1,117 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { NavbarWithMegaMenu } from '../NavbarWithMegaMenu';
-import { Check, ArrowRight, BookCheck, Clock, Star, ShieldCheck, Award, Crown } from 'lucide-react';
+import { Check, ArrowRight, Sparkles, Wand2, Target, Zap, Shell, Smile, Cpu, ScanEye, History, PersonStanding, HandCoins, SmilePlus, Star, Crown, Clock, ShieldCheck, Award } from 'lucide-react';
+import { AnimatedBackground } from "../AnimatedBackground";
 import { FooterWithLogo } from "../Footer";
 import { useInView } from 'react-intersection-observer';
 import { ResultsTimeline } from "../ResultsTimelineCriolipolisis";
 
-
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 // Image imports
-import img1 from "../../assets/img/criolipolisis/criolipolisis_bg.webp";
-import img2 from "../../assets/img/criolipolisis/criolipolisis_bg2.webp";
+import img1 from "../../assets/img/hifu/hifu4.webp";
+import img2 from "../../assets/img/hifu/hifu2.webp";
+import img3 from "../../assets/img/hifu/hifu3.webp";
+import img4 from "../../assets/img/hifu/hifu1.webp";
+
+const timelineItems = [
+  {
+    time: "Antes del Tratamiento",
+    title: "Evaluación Inicial",
+    description: "Análisis de la salud muscular y planificación para la aplicación de MaxMuscle, un tratamiento de estimulación y fortalecimiento.",
+    features: [
+      "Consulta personalizada",
+      "Evaluación de la condición muscular",
+      "Plan de tratamiento adaptado"
+    ],
+    icon: Clock,
+    benefits: [
+      "Diagnóstico detallado",
+      "Plan exclusivo según tus objetivos de entrenamiento",
+      "Preparación integral para resultados óptimos"
+    ]
+  },
+  {
+    time: "Durante el Proceso",
+    title: "Aplicación de MaxMuscle",
+    description: "Tratamiento no invasivo que utiliza tecnología avanzada y bioestimulantes para fortalecer y revitalizar los músculos.",
+    features: [
+      "Duración: 45-60 minutos",
+      "Formulación específica de MaxMuscle",
+      "Proceso cómodo y relajante"
+    ],
+    icon: Star,
+    benefits: [
+      "Sin tiempo de recuperación",
+      "Estimulación de la producción de colágeno y desarrollo muscular",
+      "Confort durante el tratamiento"
+    ]
+  },
+  {
+    time: "Primeras Semanas",
+    title: "Evolución Progresiva",
+    description: "Resultados visibles con músculos más firmes, tonificados y energizados.",
+    features: [
+      "Mejora en la resistencia y fuerza muscular",
+      "Reducción de la fatiga muscular",
+      "Tonificación y revitalización"
+    ],
+    icon: ShieldCheck,
+    benefits: [
+      "Resultados naturales y progresivos",
+      "Músculos más firmes y saludables",
+      "Seguimiento personalizado"
+    ]
+  },
+  {
+    time: "Resultado Final",
+    title: "Transformación Completa",
+    description: "Resultados duraderos con músculos revitalizados, más fuertes y energizados.",
+    features: [
+      "Estimulación de la regeneración y fortaleza muscular",
+      "Aumento de la resistencia y tonicidad",
+      "Resultados visibles y sostenibles"
+    ],
+    icon: Award,
+    benefits: [
+      "Resultados duraderos",
+      "Aspecto natural y saludable",
+      "Satisfacción garantizada"
+    ]
+  }
+];
+
+const images = [img1, img2, img3, img4];
+const textImages = [
+  '💪 Tratamiento MaxMuscle para fortalecer y revitalizar los músculos',
+  '🔬 Estimulación y regeneración muscular no invasiva',
+  '💎 Músculos más tonificados y energizados',
+  '🌟 Cuidado holístico para resultados visibles y duraderos'
+];
+
 
 const whatsappLink = "https://wa.me/573226030044";
 
-const ParallaxImage = ({ scrollYProgress, children }) => {
-  const y = useTransform(scrollYProgress, [0, 1], [0, 300]);
-  return (
-    <motion.div style={{ y }} className="relative">
-      {children}
-    </motion.div>
-  );
-};
-
 export const MaxMuscle = () => {
-  const { scrollYProgress } = useScroll();
+  const [ref, inView] = useInView({ threshold: 0.2 });
+
+  // Refs for intersection observation
   const [heroRef, heroInView] = useInView({ threshold: 0.1 });
-  const [scrolling, setScrolling] = useState(false);
-  const [backgroundImage, setBackgroundImage] = useState(img1);
+  const [benefitsRef, benefitsInView] = useInView({ threshold: 0.2 });
+  const [processRef, processInView] = useInView({ threshold: 0.2 });
+  const [pricingRef, pricingInView] = useInView({ threshold: 0.2 });
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [typedText, setTypedText] = useState("");
-  const [text, setText] = useState("Transforma tu cuerpo con el tratamiento MAX MUSCLE.");
+  const [text, setText] = useState("Mínima invasividad para combatir el envejecimiento");
   const [index, setIndex] = useState(0);
+  const canvasRef = useRef(null);
+  // estados y variables de resultados en galeria
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const scrollContainerRef = useRef(null);
 
-  const texts = [
-    "Transforma tu cuerpo con el tratamiento MAX MUSCLE.",
-    "Tonifica y fortalece tu musculatura de manera eficaz.",
-    "Resultados visibles y mejoras desde la primera semana de tratamiento."
-  ];
-
-  const whyChooseUs = [
-    "Especialistas en tratamientos de tonificación y fortalecimiento muscular",
-    "Uso de aparatología médica avanzada y tecnología de última generación",
-    "Resultados rápidos y efectivos en reducción de grasa y tonificación",
-    "Atención personalizada según las necesidades y objetivos de cada cliente",
-    "Tratamiento no invasivo que se adapta a tu rutina diaria",
-    "Valoraciones gratuitas realizadas por profesionales especializados"
-  ];
-
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolling(window.scrollY > 10);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  useEffect(() => {
-    const imageInterval = setInterval(() => {
-      setBackgroundImage(prev => prev === img1 ? img2 : img1);
-    }, 5000);
-    return () => clearInterval(imageInterval);
-  }, []);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -72,104 +123,175 @@ export const MaxMuscle = () => {
     return () => clearTimeout(timeout);
   }, [index, text]);
 
-  useEffect(() => {
-    const textInterval = setInterval(() => {
-      const nextText = texts[(texts.indexOf(text) + 1) % texts.length];
-      setText(nextText);
-      setTypedText("");
-      setIndex(0);
-    }, 10000);
-    return () => clearInterval(textInterval);
-  }, [text]);
+  // galeria de resultados
+  const data = [
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+  ];
 
+  // funciones del slider
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % benefits.length);
+    }, 3000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % benefits.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + benefits.length) % benefits.length);
+  };
+
+  // lista de slider beneficios
   const benefits = [
     {
-      title: "Tecnología Avanzada",
-      description: "Aparatología médica de última generación para resultados rápidos y eficaces"
-    },
-    {
-      title: "Adaptación Personalizada",
-      description: "Plan de tratamiento diseñado de acuerdo a tus necesidades y objetivos"
-    },
-    {
-      title: "Resultados Visibles",
-      description: "Mejoras desde la primera semana con tonificación y reducción de grasa"
-    },
-    {
-      title: "Atención Profesional",
-      description: "Especialistas con experiencia que garantizan un seguimiento adecuado"
-    }
-  ];
-
-  const timelineItems = [
-    {
-      time: "Antes del Tratamiento",
-      title: "Valoración Inicial",
-      description: "Evaluación profesional para determinar el plan de tratamiento adecuado con MAX MUSCLE.",
-      features: [
-        "Consulta de valoración gratuita",
-        "Análisis personalizado de tipo y estado corporal",
-        "Plan de tratamiento adaptado a tus objetivos"
-      ],
-      icon: Clock,
-      benefits: [
-        "Análisis completo de necesidades",
-        "Plan de tratamiento adaptado a cada persona",
-        "Sin compromiso inicial"
+      image: "/hifu/hifu_tool.webp",
+      items: [
+        { text: "Fortalecimiento muscular efectivo", icon: Smile },
+        { text: "Tratamiento con MaxMuscle para optimizar el rendimiento", icon: Cpu },
+        { text: "Mejora visible de la fuerza y resistencia muscular", icon: ScanEye }
       ]
     },
     {
-      time: "Durante el Proceso",
-      title: "Sesión de MAX MUSCLE",
-      description: "Tratamiento no quirúrgico con tecnología de pulsaciones para fortalecer y tonificar el cuerpo.",
-      features: [
-        "Duración: 30 minutos por sesión",
-        "Simulación de contracciones musculares",
-        "Ambiente profesional y cómodo"
-      ],
-      icon: Star,
-      benefits: [
-        "Procedimiento no invasivo",
-        "Sin tiempo de inactividad",
-        "Alta seguridad y efectividad"
+      image: "/hifu/hifu_tool.webp",
+      items: [
+        { text: "Músculos revitalizados y tonificados", icon: History },
+        { text: "Tratamiento no invasivo y relajante", icon: PersonStanding },
+        { text: "Resultados visibles en pocas sesiones", icon: HandCoins }
       ]
     },
     {
-      time: "Primeras Semanas",
-      title: "Evolución Inicial",
-      description: "Resultados visibles y mejora en la tonificación y firmeza desde la primera semana.",
-      features: [
-        "Adaptación gradual del cuerpo",
-        "Seguimiento profesional",
-        "Mejoría progresiva en la musculatura"
-      ],
-      icon: ShieldCheck,
-      benefits: [
-        "Resultados visibles desde la primera semana",
-        "Seguimiento continuo y personalizado",
-        "Mejora progresiva y natural"
-      ]
-    },
-    {
-      time: "Resultado Final",
-      title: "Transformación Completa",
-      description: "Resultados óptimos entre 1 a 3 meses con constancia en el tratamiento y ejercicio.",
-      features: [
-        "Reducción de grasa localizada",
-        "Aumento de masa muscular y tonificación",
-        "Mejora en la flacidez de la piel"
-      ],
-      icon: Award,
-      benefits: [
-        "Resultados duraderos y naturales",
-        "Mejora estética y corporal",
-        "Satisfacción garantizada"
+      image: "/hifu/hifu_tool.webp",
+      items: [
+        { text: "Sin tiempo de recuperación", icon: SmilePlus },
+        { text: "Estimulación natural de la regeneración muscular", icon: PersonStanding },
+        { text: "Tratamientos personalizados para tus objetivos", icon: HandCoins }
       ]
     }
   ];
 
+  const whyChooseUs = [
+    {
+      title: "Fortalecimiento y Tonificación Muscular",
+      description: "MaxMuscle está diseñado para estimular el crecimiento y fortalecimiento muscular, mejorando la resistencia y el rendimiento de forma natural.",
+    },
+    {
+      title: "Estimulación Avanzada de la Regeneración",
+      description: "La tecnología de MaxMuscle potencia la regeneración de las fibras musculares, apoyando la recuperación y el desarrollo de la fuerza.",
+    },
+    {
+      title: "Resultados Rápidos y Duraderos",
+      description: "Este tratamiento permite una mejora visible en la fuerza, resistencia y tonificación muscular, con efectos prolongados en el tiempo.",
+    },
+    {
+      title: "Tratamiento Seguro y No Invasivo",
+      description: "MaxMuscle es una opción completamente segura, no invasiva y diseñada para proporcionar una experiencia cómoda y efectiva.",
+    },
+  ];
 
-  // precios
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    let animationFrameId;
+    let particles = [];
+
+    // Ajustar el canvas al tamaño de la ventana
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+
+    // Crear partículas iniciales
+    const createParticles = () => {
+      particles = [];
+      const numberOfParticles = Math.floor((window.innerWidth * window.innerHeight) / 15000);
+
+      for (let i = 0; i < numberOfParticles; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          size: Math.random() * 2 + 1,
+          speedX: Math.random() * 0.2 - 0.1,
+          speedY: Math.random() * 0.2 - 0.1,
+          opacity: Math.random() * 0.5 + 0.2,
+          growing: true
+        });
+      }
+    };
+
+    // Animar partículas
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      particles.forEach(particle => {
+        // Actualizar opacidad con efecto de brillo
+        if (particle.growing) {
+          particle.opacity += 0.01;
+          if (particle.opacity >= 0.7) particle.growing = false;
+        } else {
+          particle.opacity -= 0.01;
+          if (particle.opacity <= 0.2) particle.growing = true;
+        }
+
+        // Mover partícula
+        particle.x += particle.speedX;
+        particle.y += particle.speedY;
+
+        // Envolver partículas en los bordes
+        if (particle.x < 0) particle.x = canvas.width;
+        if (particle.x > canvas.width) particle.x = 0;
+        if (particle.y < 0) particle.y = canvas.height;
+        if (particle.y > canvas.height) particle.y = 0;
+
+        // Dibujar partícula
+        ctx.beginPath();
+        const gradient = ctx.createRadialGradient(
+          particle.x, particle.y, 0,
+          particle.x, particle.y, particle.size
+        );
+        gradient.addColorStop(0, `rgba(255, 223, 0, ${particle.opacity})`);
+        gradient.addColorStop(1, 'rgba(255, 223, 0, 0)');
+        ctx.fillStyle = gradient;
+        ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      animationFrameId = requestAnimationFrame(animate);
+    };
+
+    // Inicializar
+    window.addEventListener('resize', () => {
+      resizeCanvas();
+      createParticles();
+    });
+
+    resizeCanvas();
+    createParticles();
+    animate();
+
+    // Limpieza
+    return () => {
+      window.removeEventListener('resize', resizeCanvas);
+      cancelAnimationFrame(animationFrameId);
+    };
+  }, []);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      easing: 'ease-in-out',
+    });
+  }, []);
   // Enhanced animation variants
   const fadeInUp = {
     hidden: { opacity: 0, y: 60 },
@@ -182,6 +304,8 @@ export const MaxMuscle = () => {
       }
     }
   };
+
+
   const staggerContainer = {
     hidden: { opacity: 0 },
     visible: {
@@ -191,190 +315,423 @@ export const MaxMuscle = () => {
       }
     }
   };
+
+  // Enhanced icon hover variants
+  const iconHoverVariants = {
+    rest: {
+      rotate: 0,
+      scale: 1,
+      transition: { duration: 0.3 }
+    },
+    hover: {
+      rotate: [0, -10, 10, 0],
+      scale: 1.05,
+      transition: {
+        duration: 0.4,
+        type: "spring",
+        stiffness: 300
+      }
+    }
+  };
+
+  // INICIO DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
+  // Autoplay effect
+  // Animación CSS personalizada
+  const slideAnimation = `
+  @keyframes slideIn {
+    0% { transform: scale(1.1); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  .slide-in {
+    animation: slideIn 0.5s ease-out forwards;
+  }
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+  .pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  `;
+
+  useEffect(() => {
+    let interval;
+    if (isAutoPlay) {
+      interval = setInterval(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentIndex((prev) => (prev + 1) % data.length);
+          setIsTransitioning(false);
+        }, 300);
+      }, 2000);
+    }
+    return () => clearInterval(interval);
+  }, [isAutoPlay, data.length]);
+
+  const handleThumbnailClick = (index) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex(index);
+      setIsTransitioning(false);
+    }, 300);
+    setIsAutoPlay(false);
+  };
+
+  const getReorderedThumbnails = () => {
+    const before = data.slice(0, currentIndex);
+    const after = data.slice(currentIndex);
+    return [...after, ...before];
+  };
+
+  // FIN DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
+
   return (
     <>
       <NavbarWithMegaMenu />
-      <div className="min-h-screen bg-black max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
-        {/* Hero Section */}
-        <motion.section
-          ref={heroRef}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-        >
-          {/* Background Image with Overlay */}
-          <div
-            className="absolute inset-0 bg-cover bg-center transition-all duration-1000"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-black/80" />
-          </div>
+      {/* <AnimatedBackground /> */}
+      <div className="h-screen max-h-screen bg-[#160520] max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
+        <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 z-[10]">
+          {/* figura de fondo */}
+          <div className='absolute hidden md:block left-0 top-0 -translate-x-1/2 w-[400px] h-[60vh] rounded-full bg-pink-100/10 blur-[40px]'></div>
+          {/* Canvas para las partículas */}
+          <canvas
+            ref={canvasRef}
+            className="absolute inset-0 pointer-events-none"
+            style={{ opacity: 0.6 }}
+          />
 
-          {/* Main Content */}
-          <div className="relative z-10 w-full min-h-screen">
-            <div className="container mx-auto px-4">
-              <div className="flex flex-col lg:flex-row items-center justify-between gap-8 w-full">
-                {/* Left side - Text Content */}
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.8 }}
-                  className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
-                >
-                  <h2 className="text-lg lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
-                    Experiencia Exclusiva
-                  </h2>
-                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif text-white tracking-wider">
-                    MAX MUSCLE
-                  </h1>
-                  <div className="w-24 h-0.5 bg-yellow-600" />
-                  <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 font-light">
-                    {typedText}
-                  </p>
-                  <motion.button
-                    className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-yellow-600 dark-gold-text text-base lg:text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
+          <div className="h-screen container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-8">
+            {/* Main Content */}
+            <div className="relative z-10 w-full min-h-screen pt-16 sm:pt-20">
+              <div className="container mx-auto px-4">
+                <div className="flex flex-col lg:flex-row items-center justify-between gap-8 w-full">
+                  {/* Left side - Text Content */}
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="w-full lg:w-[80%] flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
                   >
-                    RESERVE SU CONSULTA
-                  </motion.button>
+                    <h2 className="text-lg hidden md:block lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
+                      Potencia y Rendimiento
+                    </h2>
 
+                    {/* MaxMuscle (Siempre centrado) */}
+                    <h1 className="text-8xl sm:text-4xl md:text-5xl lg:text-[10em] font-title">
+                      MaxMuscle
+                    </h1>
 
-                </motion.div>
-
-                {/* Right Side - Image */}
-                <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
-                  <div className="relative w-[70%] sm:w-[60%] lg:w-full max-w-xl">
-                    <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
-                    <img
-                      src="/hifu/hifu_tool.webp"
-                      alt="Spa Holístico 3D"
-                      className="w-full h-auto object-contain relative z-0"
-                    />
+                    {/* Subtítulo inferior */}
+                    <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl gold-text tracking-tighter p-2">
+                      Fortalecimiento y Tonificación para tu Cuerpo
+                    </h1>
+                    <div className="w-24 h-0.5 bg-gray-600" />
+                    <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 font-light">
+                      MaxMuscle potencia tu fuerza y resistencia, estimulando la regeneración muscular de forma no invasiva.
+                    </p>
+                    <motion.button
+                      className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-gray-600 dark-gold-text text-base lg:text-lg tracking-wider hover:bg-gray-600 hover:text-black transition-all duration-300"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      RESERVA TU SESIÓN
+                    </motion.button>
+                  </motion.div>
+                  {/* Right Side - Image */}
+                  <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
+                    <div className="relative w-[70%] sm:w-[60%] lg:w-full max-w-xl overflow-hidden pb-12">
+                      {/* Efecto de resplandor en la base */}
+                      <div
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-[2vh] md:-translate-y-[5vh] w-[80%] h-[70px] md:h-[150px] rounded-full bg-pink-200/10 blur-[17px] md:blur-[25px]"
+                      ></div>
+                      <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
+                      <img
+                        src="/hifu/hifu_tool.webp"
+                        alt="Spa Holístico 3D"
+                        className="w-full h-auto object-contain relative z-1"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          {/* Elegant Scroll Indicator */}
-          <motion.div
-            className="absolute bottom-12 left-[43vw] md:left-[49vw] transform -translate-x-1/2"
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
-            <div className="w-12 h-12 border border-yellow-600/50 rounded-full flex items-center justify-center">
-              <motion.div
-                animate={{ y: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              >
-                <ArrowRight className="w-6 h-6 text-yellow-600 transform rotate-90" />
-              </motion.div>
+        </section>
+        {/* Tratamiento avanzado HIFU */}
+        <section
+          className="relative py-20 px-6 md:px-16 bg-white"
+        >
+          {/* Texto centrado */}
+          <div className="max-w-4xl mx-auto text-center mb-12">
+            <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 rounded-full titles-font-family">
+              MaxMuscle: Fuerza y Rendimiento Natural para tu Cuerpo.
+            </h1>
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
+              Descubre los beneficios de MaxMuscle, un tratamiento avanzado diseñado para potenciar la regeneración muscular y mejorar la resistencia de manera natural. Formulado con ingredientes de alta calidad, MaxMuscle revitaliza y fortalece los músculos, mejorando su tono y rendimiento, proporcionando resultados visibles y duraderos sin necesidad de procedimientos invasivos. Ideal para quienes buscan un enfoque holístico y un rendimiento físico optimizado.
+            </p>
+          </div>
+          {/* Contenido principal */}
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
+            {/* Galería derecha */}
+            <div className="grid grid-cols-2 gap-4">
+              <img
+                src={img1}
+                alt="Tratamiento facial"
+                className="rounded-lg shadow-lg"
+              />
+              <img
+                src={img1}
+                alt="Equipo de HIFU"
+                className="rounded-lg shadow-lg"
+              />
+              <img
+                src={img1}
+                alt="Aplicación HIFU"
+                className="col-span-2 rounded-lg shadow-lg"
+              />
             </div>
+
+            {/* Texto adicional */}
+            <div className='h-full w-full'>
+              <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 titles-font-family">
+                Tratamiento Regenerativo con MaxMuscle
+              </h1>
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
+                Descubre el poder de MaxMuscle, un tratamiento avanzado que potencia la regeneración muscular y mejora la resistencia física de manera natural. Esta terapia no invasiva revitaliza y tonifica, ayudando a fortalecer los músculos y mejorar su rendimiento. Ideal para quienes buscan resultados visibles y duraderos sin necesidad de procedimientos quirúrgicos, MaxMuscle es perfecto para optimizar tu bienestar y mantenerte activo y saludable.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* beneficios */}
+        <motion.section
+          className="h-screen bg-[var(--bg-dark-slider)] relative"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="h-full flex flex-col bg-[#160520]">
+            <h2 className="text-center text-4xl md:text-5xl lg:text-8xl font-bold pt-20 gold-text">
+              Beneficios del Tratamiento
+            </h2>
+
+            <div className="flex-grow relative">
+              {/* Navigation Buttons - Desktop */}
+              <div className="hidden md:block">
+                <button
+                  onClick={prevSlide}
+                  className="absolute left-[2vw] top-1/2 -translate-y-1/2 bg-purple-100/10 hover:bg-white/20 p-2 rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <button
+                  onClick={nextSlide}
+                  className="absolute right-[2vw] top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 p-2 rounded-full"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="absolute left-[20%] md:left-1/2 bottom-0 -translate-x-[18vw] w-[500px] transform translate-y-[15%]">
+                <motion.img
+                  src={benefits[currentSlide].image}
+                  alt="HIFU Device"
+                  className="min-w-[35vw] h-[80vh] object-contain"
+                  initial={{ opacity: 0, y: 100 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5 }}
+                />
+
+                {/* <div className="flex justify-center mt-4 space-x-2">
+                  {benefits.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentSlide(index)}
+                      className={`w-3 h-3 rounded-full transition-all ${currentSlide === index ? 'bg-white scale-125' : 'bg-white/30'
+                        }`}
+                    />
+                  ))}
+                </div> */}
+              </div>
+
+              <div className="hidden md:block">
+                {benefits[currentSlide].items.map((benefit, index) => {
+                  const positions = [
+                    "top-[16%] left-[17vw]",
+                    "top-[60%] left-[18vw]",
+                    "top-[39%] right-[18vw]"
+                  ];
+
+                  return (
+                    <motion.div
+                      key={index}
+                      className={`absolute ${positions[index]} max-w-[250px]`}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: index * 0.2 }}
+                    >
+                      <div className="flex flex-col items-center text-center">
+                        {React.createElement(benefit.icon, {
+                          className: "gold-text w-8 h-8 mb-3"
+                        })}
+                        <span className="vertical-gradient-text text-4xl">{benefit.text}</span>
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              <div className="md:hidden">
+                <div className="absolute top-[17%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-full px-4 space-y-4">
+                  {benefits[currentSlide].items.map((benefit, index) => (
+                    <motion.div
+                      key={index}
+                      className="flex items-center space-x-4 rounded-lg p-4"
+                      initial={{ opacity: 0, x: -50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                    >
+                      {React.createElement(benefit.icon, {
+                        className: "text-white w-6 h-6"
+                      })}
+                      <span className="text-white text-lg text-center">{benefit.text}</span>
+                    </motion.div>
+                  ))}
+                </div>
+
+                {/* Navigation Buttons - Mobile */}
+                <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-4">
+                  <button
+                    onClick={prevSlide}
+                    className="bg-white/10 hover:bg-white/20 p-2 rounded-full"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                    </svg>
+                  </button>
+                  <button
+                    onClick={nextSlide}
+                    className="bg-white/10 hover:bg-white/20 p-2 rounded-full"
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <motion.div
+            className="absolute w-full h-full top-0 left-0 pointer-events-none"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+          >
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 rounded-full bg-gray-800/10" />
+            <div className="absolute bottom-1/4 right-1/4 w-32 h-32 rounded-full bg-gray-800/10" />
           </motion.div>
         </motion.section>
 
-        {/* Benefits Section */}
-        <section className="py-24 bg-black">
-          <div className="max-w-6xl mx-auto px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
-                EXCELENCIA EN CADA DETALLE
-              </h2>
-              <div className="w-24 h-0.5 gold-background mx-auto" />
+        <style>{slideAnimation}</style>
+        <section className="py-24 max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl w-full text-center md:text-4xl lg:text-5xl font-bold gold-text mb-12 hover:scale-105 transition-transform duration-300">
+            Resultados de nuestros pacientes
+          </h1>
+          {/* Desktop Layout */}
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {data.map(({ imageLink }, index) => (
+              <div
+                key={index}
+                className="aspect-[16/9] w-full overflow-hidden group hover:scale-105 transition-all duration-300 ease-in-out"
+              >
+                <img
+                  className="h-full w-full rounded-lg object-cover object-center transform group-hover:scale-110 transition-transform duration-500"
+                  src={imageLink}
+                  alt={`Resultado de paciente ${index + 1}`}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile Layout */}
+          <div className="sm:hidden space-y-4">
+            {/* Main Image */}
+            <div className="aspect-[16/9] w-full overflow-hidden rounded-lg shadow-2xl">
+              <img
+                className={`h-full w-full object-cover object-center transition-all duration-500 
+                ${isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}
+                float`}
+                src={data[currentIndex].imageLink}
+                alt={`Resultado de paciente principal`}
+              />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit, index) => (
-                <motion.div
+            {/* Thumbnails Container */}
+            <div
+              ref={scrollContainerRef}
+              className="flex gap-2 overflow-x-auto pb-4 snap-x snap-mandatory"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch'
+              }}
+            >
+              {getReorderedThumbnails().map(({ imageLink }, index) => (
+                <div
                   key={index}
-                  className="p-8 border border-yellow-600/20 hover:border-yellow-600/40 transition-colors duration-300"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
+                  className={`flex-none w-24 aspect-[16/9] snap-start cursor-pointer 
+                  transform hover:scale-105 transition-all duration-300 ease-in-out
+                  ${(currentIndex + index) % data.length === currentIndex ? 'pulse' : ''}`}
+                  onClick={() => handleThumbnailClick((currentIndex + index) % data.length)}
                 >
-                  <h3 className="dark-gold-text font-serif text-xl mb-4">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-400">
-                    {benefit.description}
-                  </p>
-                </motion.div>
+                  <img
+                    className={`h-full w-full rounded-lg object-cover object-center transition-all duration-300
+                    ${(currentIndex + index) % data.length === currentIndex
+                        ? 'ring-2 ring-blue-500 shadow-lg'
+                        : 'opacity-70 hover:opacity-100'}`}
+                    src={imageLink}
+                    alt={`Thumbnail ${index + 1}`}
+                  />
+                </div>
               ))}
             </div>
           </div>
         </section>
-
-        {/* Treatment Process */}
-        <section className="py-24 bg-neutral-900">
-          <div className="max-w-6xl mx-auto px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-serif text-white mb-4">
-                EL PROCESO
-              </h2>
-              <div className="w-24 h-0.5 gold-background mx-auto" />
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-              {[
-                {
-                  step: "01",
-                  title: "Valoración Inicial",
-                  description: "Evaluación de tipo y estado corporal para definir el plan de tratamiento más efectivo."
-                },
-                {
-                  step: "02",
-                  title: "Sesión de MAX MUSCLE",
-                  description: "Aplicación de tecnología avanzada para simular contracciones musculares y tonificar el cuerpo."
-                },
-                {
-                  step: "03",
-                  title: "Resultados Visibles y Duraderos",
-                  description: "Mejora en la masa muscular y reducción de grasa con seguimiento para asegurar resultados óptimos."
-                }
-
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="relative"
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.2 }}
-                >
-                  <div className="gold-text font-serif text-4xl mb-4">
-                    {item.step}
-                  </div>
-                  <h3 className="text-white font-serif text-xl mb-4">
-                    {item.title}
-                  </h3>
-                  <p className="text-gray-400">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Results Timeline with Luxury Styling */}
-        <section className="bg-black py-24">
+        <section className="bg-[#160520]">
+          {/* Gradiente */}
           <ResultsTimeline
             timelineItems={timelineItems}
-            title="Proceso de Tratamiento MAX MUSCLE"
-            description="Transformación corporal efectiva con tecnología avanzada y estimulación muscular"
+            title="Proceso de Fortalecimiento y Recuperación con MaxMuscle"
+            description="Estimulación natural de los músculos y mejora de la resistencia con tratamientos avanzados y no invasivos"
+            className="z-20"
           />
         </section>
-
         <motion.section
-          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#0a0a0a]"
+          className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#160520]"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
           variants={staggerContainer}
         >
+          <div className='gradiante-inversion-belleza z-10'></div>
           {/* Decorative elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute top-0 left-1/4 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl"></div>
+          {/* <div className="absolute inset-0 bg-gradient-to-r from-black via-[var(--bg--purple-dark)] to-black"> */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#160520] via-black to-[#160520]">
+            <div className="absolute top-0 left-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
+            <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
           </div>
 
           <div className="max-w-6xl mx-auto relative z-10">
@@ -383,19 +740,17 @@ export const MaxMuscle = () => {
                 className="text-5xl md:text-6xl font-light mb-4"
                 variants={fadeInUp}
               >
-                <span className="bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 bg-clip-text gold-text">
-                  Inversión en tu Fuerza y Belleza
+                <span className="bg-gradient-to-r from-blue-200 via-blue-400 to-blue-600 bg-clip-text gold-text">
+                  Inversión en tu Bienestar y Fuerza
                 </span>
               </motion.h2>
               <motion.p
                 className="text-gray-400 text-lg"
                 variants={fadeInUp}
               >
-                Potencia tus resultados con nuestro tratamiento MAX MUSCLE
+                Redescubre la vitalidad y potencia de tu cuerpo con nuestros exclusivos tratamientos de MaxMuscle, formulados para estimular la musculatura y mejorar la recuperación de forma no invasiva, aumentando la resistencia, fuerza y bienestar general para una apariencia más tonificada y saludable.
               </motion.p>
             </div>
-
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
               {[
                 {
@@ -419,7 +774,6 @@ export const MaxMuscle = () => {
                     "Seguimiento y ajuste de sesiones para resultados duraderos"
                   ]
                 }
-
               ].map((plan, index) => (
                 <motion.div
                   key={index}
@@ -427,9 +781,9 @@ export const MaxMuscle = () => {
                   variants={fadeInUp}
                 >
                   {/* Card background with gradient border */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-yellow-200 via-yellow-400 to-yellow-600 rounded-2xl blur-[2px]"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-gray-200 via-gray-400 to-gray-600 rounded-2xl blur-[2px]"></div>
                   <div className="relative h-full bg-[#0a0a0a] rounded-2xl p-1">
-                    <div className="h-full bg-gradient-to-br from-black to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
+                    <div className="h-full bg-gradient-to-br from-[#o] to-[#1a1a1a] rounded-xl p-8 transition-transform duration-500 group-hover:scale-[1.02]">
                       {/* Icon */}
                       <div className="mb-6">
                         {React.createElement(plan.icon, {
@@ -439,7 +793,7 @@ export const MaxMuscle = () => {
 
                       {/* Title & Price */}
                       <h3 className="text-2xl font-light text-white mb-2">{plan.title}</h3>
-                      <div className="text-5xl font-light text-transparent bg-clip-text bg-gradient-to-r from-yellow-200 to-yellow-600 mb-8">
+                      <div className="text-5xl font-semibold text-gray-500 bg-clip-text bg-gradient-to-r from-gray-200 to-gray-600 mb-8">
                         {plan.price}
                       </div>
 
@@ -447,14 +801,14 @@ export const MaxMuscle = () => {
                       <ul className="space-y-4">
                         {plan.features.map((feature, idx) => (
                           <li key={idx} className="flex items-center space-x-3">
-                            <Check className="w-5 h-5 text-yellow-400" />
+                            <Check className="w-5 h-5 text-gray-400" />
                             <span className="text-gray-300">{feature}</span>
                           </li>
                         ))}
                       </ul>
 
                       {/* Button */}
-                      <button className="w-full mt-8 px-6 py-3 gold-background text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
+                      <button className="w-full mt-8 px-6 py-3 gold-background to-purple-600 text-black rounded-lg font-medium transform transition-transform duration-200 hover:scale-105">
                         Reservar Ahora
                       </button>
                     </div>
@@ -464,81 +818,49 @@ export const MaxMuscle = () => {
             </div>
           </div>
         </motion.section>
-
-        {/* Final CTA Section */}
         <section className="py-24 bg-black">
-          <div className="max-w-4xl mx-auto text-center px-8">
-            <h2 className="text-3xl md:text-4xl font-serif text-white mb-8">
-              EXPERIENCIA EXCLUSIVA
-            </h2>
-            <div className="w-24 h-0.5 bg-yellow-600 mx-auto mb-8" />
-            <p className="text-gray-400 text-lg mb-12">
-              Potencie su cuerpo y logre una transformación muscular efectiva con MAX MUSCLE.
-              Resultados notables respaldados por tecnología avanzada y un tratamiento personalizado.
-            </p>
-            <motion.button
-              className="px-12 py-4 bg-transparent border-2 border-yellow-600 text-yellow-600 text-lg tracking-wider hover:bg-yellow-600 hover:text-black transition-all duration-300"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => window.open(whatsappLink, "_blank")}
-            >
-              RESERVE SU CITA
-            </motion.button>
-          </div>
-        </section>
+          <div className="max-w-6xl mx-auto px-8">
+            {/* Título principal */}
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-serif gold-text mb-4">
+                ¿POR QUE ESCOGERNOS?
+              </h2>
+              <div className="w-24 h-0.5 gold-background mx-auto" />
+            </div>
 
-        <section className="relative md:h-[85vh] py-20 px-4 bg-black" style={{
-          clipPath: "inset(-300px 0 0 0)", // Recorta solo la parte inferior
-        }}>
-          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 ">
-            <motion.div
-              className="text-white relative top-[10vh] "
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={fadeInUp}
-            >
-              <h2 className="text-4xl md:text-5xl font-bold mb-8 gold-text">¿Por qué Elegirnos?</h2>
-              <ul className="space-y-4">
-                {whyChooseUs.map((benefit, index) => (
-                  <motion.li
-                    key={index}
-                    className="flex items-start space-x-3"
-                    variants={fadeInUp}
-                    custom={index}
-                  >
-                    <span className="dark-gold-text mt-1">•</span>
-                    <span className="text-lg">{benefit}</span>
-                  </motion.li>
-                ))}
-              </ul>
-            </motion.div>
-            <div className="relative min-h-[80vh] md:w-[50vw] md:min-h-[80vh]">
-              <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg-dark-slider)] via-transparent to-transparent z-10"></div>
-              <motion.div
-                className="absolute right-[0vw] -top-[30vh] w-full h-[120%] z-0 overflow-x-hidden"
-                initial={{ opacity: 0, x: 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-              >
-                <div className="relative w-full h-full">
-                  <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[var(--bg-dark-slider)] to-transparent z-10"></div>
-                  <img
-                    src="/criolipolisis/image.webp"
-                    alt="Spa Holístico"
-                    className="w-full h-full object-cover rounded-lg"
-                  />
-                </div>
-              </motion.div>
+            {/* Nuevo título adicional */}
+            <div className="text-center mb-16">
+              <p className="text-gray-400 text-lg">
+                Descubre por qué nuestros tratamientos con MAX MUSCLE son la mejor elección para fortalecer y tonificar tus músculos de manera natural y efectiva.
+              </p>
+            </div>
+
+            {/* Beneficios */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {whyChooseUs.map((benefit, index) => (
+                <motion.div
+                  key={index}
+                  className="p-8 border border-purple-600/20 hover:border-purple-600/40 transition-colors duration-300"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.2 }}
+                >
+                  <h3 className="gold-text font-serif text-xl mb-4">
+                    {benefit.title}
+                  </h3>
+                  <p className="text-gray-400">
+                    {benefit.description}
+                  </p>
+                </motion.div>
+              ))}
             </div>
           </div>
-
         </section>
 
-        <FooterWithLogo />
+        <footer className="relative top-[30vh] md:top-[0vh]">
+          <FooterWithLogo />
+        </footer>
       </div>
     </>
   );
 };
-
-export default MaxMuscle;

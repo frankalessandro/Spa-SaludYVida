@@ -84,10 +84,10 @@ const timelineItems = [
 
 const images = [img1, img2, img3, img4];
 const textImages = [
-  '💡 Innovación que inspira',
-  '🎯 Precisión en cada detalle',
-  '🛡️ Tu seguridad, nuestra prioridad',
-  '⚡ Resultados efectivos garantizados'
+  '✨ Técnica aprobada y segura con registro médico INVIMA',
+  '🔬 Extracción de plasma propio para regeneración celular',
+  '💎 Estimulación natural de colágeno y elastina',
+  '🌟 Piel más luminosa, tersa y de mejor calidad'
 ];
 
 const whatsappLink = "https://wa.me/573226030044";
@@ -105,6 +105,11 @@ export const Plasma = () => {
   const [text, setText] = useState("Mínima invasividad para combatir el envejecimiento");
   const [index, setIndex] = useState(0);
   const canvasRef = useRef(null);
+  // estados y variables de resultados en galeria
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlay, setIsAutoPlay] = useState(true);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const scrollContainerRef = useRef(null);
 
 
   useEffect(() => {
@@ -116,30 +121,16 @@ export const Plasma = () => {
     }, 100);
     return () => clearTimeout(timeout);
   }, [index, text]);
+
   // galeria de resultados
   const data = [
-    {
-      imageLink:
-        "/home/mujerSpa.webp",
-    },
-    {
-      imageLink:
-        "/home/mujerSpa.webp",
-    }, {
-      imageLink:
-        "/home/mujerSpa.webp",
-    }, {
-      imageLink:
-        "/home/mujerSpa.webp",
-    }, {
-      imageLink:
-        "/home/mujerSpa.webp",
-    }, {
-      imageLink:
-        "/home/mujerSpa.webp",
-    },
-
-  ]
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+    { imageLink: "/home/mujerSpa.webp" },
+    { imageLink: "/home/happySpa.webp" },
+  ];
 
   // funciones del slider
   useEffect(() => {
@@ -163,47 +154,48 @@ export const Plasma = () => {
     {
       image: "/hifu/hifu_tool.webp",
       items: [
-        { text: "Rejuvenecimiento facial sin cirugía", icon: Smile },
-        { text: "Tecnología HIFU avanzada", icon: Cpu },
-        { text: "Resultados visibles", icon: ScanEye }
+        { text: "Estimulación de colágeno y elastina", icon: Smile },
+        { text: "Técnica aprobada con registro médico INVIMA", icon: Cpu },
+        { text: "Regeneración celular y rejuvenecimiento", icon: ScanEye }
       ]
     },
     {
       image: "/hifu/hifu_tool.webp",
       items: [
-        { text: "Sin tiempo de recuperación", icon: History },
-        { text: "Tratamiento no invasivo", icon: PersonStanding },
-        { text: "Estimulación de colágeno", icon: HandCoins }
+        { text: "Piel más tersa y luminosa", icon: History },
+        { text: "Tratamiento no invasivo y seguro", icon: PersonStanding },
+        { text: "Mejora visible desde los primeros días", icon: HandCoins }
       ]
     },
     {
       image: "/hifu/hifu_tool.webp",
       items: [
         { text: "Sin tiempo de recuperación", icon: SmilePlus },
-        { text: "Tratamiento no invasivo", icon: PersonStanding },
-        { text: "Estimulación de colágeno", icon: HandCoins }
+        { text: "Reducción de signos de envejecimiento", icon: PersonStanding },
+        { text: "Resultados óptimos con 2-4 sesiones recomendadas", icon: HandCoins }
       ]
     }
   ];
 
   const whyChooseUs = [
     {
-      title: "Efectos de Lifting No Quirúrgico",
-      description: "Logra una apariencia más juvenil al tensar y levantar la piel sin necesidad de cirugía.",
+      title: "Regeneración Celular Natural",
+      description: "Promovemos la renovación celular utilizando tu propio plasma, garantizando resultados efectivos y naturales.",
     },
     {
-      title: "Tecnología Avanzada",
-      description: "Utilizamos el sistema HIFU 7D de última generación, reconocido por su eficacia y seguridad.",
+      title: "Técnicas No Invasivas",
+      description: "Nuestros tratamientos con plasma se realizan sin procedimientos quirúrgicos, respetando tu bienestar integral.",
     },
     {
       title: "Resultados Personalizados",
-      description: "Adaptamos cada tratamiento a las necesidades únicas de tu piel para garantizar el mejor resultado.",
+      description: "Diseñamos cada terapia de plasma según las necesidades específicas de tu piel y objetivos estéticos.",
     },
     {
-      title: "Experiencia Confiable",
-      description: "Nuestro equipo está altamente capacitado, asegurando un tratamiento profesional y confortable.",
+      title: "Ambiente Relajante y Seguro",
+      description: "Disfruta de un entorno holístico y profesional, ideal para tu comodidad y recuperación.",
     },
   ];
+
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -341,6 +333,65 @@ export const Plasma = () => {
     }
   };
 
+  // INICIO DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
+  // Autoplay effect
+  // Animación CSS personalizada
+  const slideAnimation = `
+  @keyframes slideIn {
+    0% { transform: scale(1.1); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+  .slide-in {
+    animation: slideIn 0.5s ease-out forwards;
+  }
+  .float {
+    animation: float 3s ease-in-out infinite;
+  }
+  .pulse {
+    animation: pulse 2s ease-in-out infinite;
+  }
+  `;
+
+  useEffect(() => {
+    let interval;
+    if (isAutoPlay) {
+      interval = setInterval(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+          setCurrentIndex((prev) => (prev + 1) % data.length);
+          setIsTransitioning(false);
+        }, 300);
+      }, 2000);
+    }
+    return () => clearInterval(interval);
+  }, [isAutoPlay, data.length]);
+
+  const handleThumbnailClick = (index) => {
+    setIsTransitioning(true);
+    setTimeout(() => {
+      setCurrentIndex(index);
+      setIsTransitioning(false);
+    }, 300);
+    setIsAutoPlay(false);
+  };
+
+  const getReorderedThumbnails = () => {
+    const before = data.slice(0, currentIndex);
+    const after = data.slice(currentIndex);
+    return [...after, ...before];
+  };
+
+  // FIN DE ESTADOS Y USEEFFECT DE GALERIA RESULTADOS RESPONSIVE
+
   return (
     <>
       <NavbarWithMegaMenu />
@@ -348,8 +399,7 @@ export const Plasma = () => {
       <div className="h-screen max-h-screen bg-[#160520] max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
         <section className="w-full h-screen relative bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800 z-[10]">
           {/* figura de fondo */}
-          <div className='absolute left-0 top-0 -translate-x-1/2 w-[400px] h-[60vh] rounded-full bg-pink-100/10 blur-[40px]'></div>
-
+          <div className='absolute hidden md:block left-0 top-0 -translate-x-1/2 w-[400px] h-[60vh] rounded-full bg-pink-100/10 blur-[40px]'></div>
           {/* Canvas para las partículas */}
           <canvas
             ref={canvasRef}
@@ -357,17 +407,9 @@ export const Plasma = () => {
             style={{ opacity: 0.6 }}
           />
 
-          {/* Overlay Pattern */}
-          <div
-            className="absolute inset-0 opacity-10"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          />
-
           <div className="h-screen container mx-auto flex flex-col-reverse lg:flex-row items-center justify-between px-8">
             {/* Main Content */}
-            <div className="relative z-10 w-full min-h-screen">
+            <div className="relative z-10 w-full min-h-screen pt-16 sm:pt-20">
               <div className="container mx-auto px-4">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-8 w-full">
                   {/* Left side - Text Content */}
@@ -375,33 +417,41 @@ export const Plasma = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="w-full lg:w-1/2 flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
+                    className="w-full lg:w-[80%] flex flex-col items-center lg:items-start text-center lg:text-left space-y-6"
                   >
-                    <h2 className="text-lg lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
-                      Experiencia Exclusiva
+                    <h2 className="text-lg hidden md:block lg:text-xl font-serif tracking-[0.3em] uppercase gold-text">
+                      Renovación Holística
                     </h2>
-                    <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-serif gold-text tracking-wider">
-                      HIFU 7D
+
+                    {/* Plasma (Siempre centrado) */}
+                    <h1 className="text-8xl sm:text-4xl md:text-5xl lg:text-[10em] font-title">
+                      Plasma
+                    </h1>
+
+                    {/* Subtítulo inferior */}
+                    <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl gold-text tracking-tighter p-2">
+                      Rejuvenecimiento Celular
                     </h1>
                     <div className="w-24 h-0.5 bg-gray-600" />
                     <p className="text-lg sm:text-xl lg:text-2xl text-gray-300 font-light">
-                      {typedText}
+                      Revitaliza tu piel y promueve la regeneración celular con tratamientos de plasma no invasivos.
                     </p>
                     <motion.button
-                      className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-gray-600 dark-gold-text text-base lg:text-lg tracking-wider hover:bg-gray-600 hover:text-black transition-all duration-300 "
+                      className="mt-6 px-8 lg:px-12 py-3 lg:py-4 bg-transparent border-2 border-gray-600 dark-gold-text text-base lg:text-lg tracking-wider hover:bg-gray-600 hover:text-black transition-all duration-300"
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                     >
-                      RESERVE SU CONSULTA
+                      RESERVA TU SESIÓN
                     </motion.button>
                   </motion.div>
+
 
                   {/* Right Side - Image */}
                   <div className="w-full lg:w-1/2 flex justify-center lg:justify-end">
                     <div className="relative w-[70%] sm:w-[60%] lg:w-full max-w-xl overflow-hidden pb-12">
                       {/* Efecto de resplandor en la base */}
                       <div
-                        className="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-[5vh] w-[80%] h-[150px] rounded-full bg-pink-200/10 blur-[25px]"
+                        className="absolute bottom-0 left-1/2 -translate-x-1/2 -translate-y-[2vh]  md:-translate-y-[5vh] w-[80%] h-[70px] md:h-[150px] rounded-full bg-pink-200/10 blur-[17px] md:blur-[25px]"
                       ></div>
                       <div className="absolute inset-0 bg-gradient-to-b from-transparent to-slate-900/50 z-10"></div>
                       <img
@@ -422,20 +472,15 @@ export const Plasma = () => {
         >
           {/* Texto centrado */}
           <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4 rounded-full">
-              HIFU y renueva la piel sin cirugías.
+            <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 rounded-full titles-font-family">
+              Plasma: Regenera tu piel de forma natural.
             </h1>
-            <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-              Lift-!N es la más reciente tecnología estética HIFU (High-Intensity Focused
-              Ultrasound) que focaliza toda su energía en un haz de ultrasonido de alta
-              frecuencia a una zona específica de la piel, sin hacer incisiones o
-              utilizar agujas en el paciente, con el fin de remodelar su tejido
-              mediante ablación térmica.
+            <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
+              Nuestros tratamientos de plasma aprovechan el poder regenerativo de tu propio cuerpo, estimulando la producción de colágeno y elastina sin necesidad de cirugías ni procedimientos invasivos. Ideal para rejuvenecer y revitalizar tu piel de manera holística.
             </p>
           </div>
-
           {/* Contenido principal */}
-          <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
+          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-8 relative z-10">
             {/* Galería derecha */}
             <div className="grid grid-cols-2 gap-4">
               <img
@@ -456,16 +501,12 @@ export const Plasma = () => {
             </div>
 
             {/* Texto adicional */}
-            <div>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
-                Tratamiento HIFU Avanzado
+            <div className='h-full w-full'>
+              <h1 className="text-3xl md:text-4xl lg:text-7xl font-bold text-black mb-4 titles-font-family">
+                Tratamiento Regenerativo con Plasma
               </h1>
-              <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
-                Lift-!N es la más reciente tecnología estética HIFU (High-Intensity
-                Focused Ultrasound) que focaliza toda su energía en un haz de ultrasonido
-                de alta frecuencia a una zona específica de la piel, sin hacer incisiones
-                o utilizar agujas en el paciente, con el fin de remodelar su tejido
-                mediante ablación térmica.
+              <p className="text-lg md:text-xl text-gray-700 leading-relaxed text-justify">
+                Descubre el poder del plasma en la estética holística: un tratamiento avanzado que utiliza tu propio plasma para estimular la regeneración celular, revitalizar tu piel y mejorar su textura sin cirugías ni procedimientos invasivos.
               </p>
             </div>
           </div>
@@ -604,30 +645,85 @@ export const Plasma = () => {
           </motion.div>
         </motion.section>
 
-
-        <section className='py-24 max-w-7xl mx-auto px-6'>
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold gold-text mb-12">
+        <style>{slideAnimation}</style>
+        <section className="py-24 max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl w-full text-center md:text-4xl lg:text-5xl font-bold gold-text mb-12 hover:scale-105 transition-transform duration-300">
             Resultados de nuestros pacientes
           </h1>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Desktop Layout */}
+          <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {data.map(({ imageLink }, index) => (
-              <div key={index} className="aspect-[16/9] w-full">
+              <div
+                key={index}
+                className="aspect-[16/9] w-full overflow-hidden group hover:scale-105 transition-all duration-300 ease-in-out"
+              >
                 <img
-                  className="h-full w-full rounded-lg object-cover object-center"
+                  className="h-full w-full rounded-lg object-cover object-center transform group-hover:scale-110 transition-transform duration-500"
                   src={imageLink}
                   alt={`Resultado de paciente ${index + 1}`}
                 />
               </div>
             ))}
           </div>
+
+          {/* Mobile Layout */}
+          <div className="sm:hidden space-y-4">
+            {/* Main Image */}
+            <div className="aspect-[16/9] w-full overflow-hidden rounded-lg shadow-2xl">
+              <img
+                className={`h-full w-full object-cover object-center transition-all duration-500 
+                ${isTransitioning ? 'opacity-0 scale-110' : 'opacity-100 scale-100'}
+                float`}
+                src={data[currentIndex].imageLink}
+                alt={`Resultado de paciente principal`}
+              />
+            </div>
+
+            {/* Thumbnails Container */}
+            <div
+              ref={scrollContainerRef}
+              className="flex gap-2 overflow-x-auto pb-4 snap-x snap-mandatory"
+              style={{
+                scrollbarWidth: 'none',
+                msOverflowStyle: 'none',
+                WebkitOverflowScrolling: 'touch'
+              }}
+            >
+              {getReorderedThumbnails().map(({ imageLink }, index) => (
+                <div
+                  key={index}
+                  className={`flex-none w-24 aspect-[16/9] snap-start cursor-pointer 
+                  transform hover:scale-105 transition-all duration-300 ease-in-out
+                  ${(currentIndex + index) % data.length === currentIndex ? 'pulse' : ''}`}
+                  onClick={() => handleThumbnailClick((currentIndex + index) % data.length)}
+                >
+                  <img
+                    className={`h-full w-full rounded-lg object-cover object-center transition-all duration-300
+                    ${(currentIndex + index) % data.length === currentIndex
+                        ? 'ring-2 ring-blue-500 shadow-lg'
+                        : 'opacity-70 hover:opacity-100'}`}
+                    src={imageLink}
+                    alt={`Thumbnail ${index + 1}`}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </section>
 
 
         {/* Results Timeline with Luxury Styling */}
-        <section className="bg-[#160520]">
-          <ResultsTimeline timelineItems={timelineItems} title="Proceso de Hifu 7d" description=" Transformación paso a paso con tecnología avanzada" />
+        <section className="bg-[#160520] ">
+          {/* Gradiente */}
+          <ResultsTimeline
+            timelineItems={timelineItems}
+            title="Proceso de Regeneración con Plasma"
+            description="Revitalización paso a paso con tratamientos naturales y efectivos"
+            className="z-20"
+          />
         </section>
+
 
         <motion.section
           className="relative py-20 my-auto px-4 min-h-[80vh] bg-[#160520]"
@@ -636,8 +732,10 @@ export const Plasma = () => {
           viewport={{ once: true }}
           variants={staggerContainer}
         >
+          <div className='gradiante-inversion-belleza z-10'></div>
           {/* Decorative elements */}
-          <div className="absolute inset-0 bg-black">
+          {/* <div className="absolute inset-0 bg-gradient-to-r from-black via-[var(--bg--purple-dark)] to-black"> */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#160520] via-black to-[#160520]">
             <div className="absolute top-0 left-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 right-1/4 w-64 h-64 bg-transparent rounded-full blur-3xl"></div>
           </div>
@@ -664,20 +762,20 @@ export const Plasma = () => {
               {[
                 {
                   title: "Sesión Individual",
-                  price: "$1,000,000",
+                  price: "$200,000",
                   icon: Star,
                   features: [
-                    "1 sesión completa de HIFU 7D",
+                    "1 sesión completa de PLASMA",
                     "Valoración personalizada",
                     "Seguimiento post-tratamiento"
                   ]
                 },
                 {
                   title: "Tratamiento Completo",
-                  price: "$2,500,000",
+                  price: "$500,000",
                   icon: Crown,
                   features: [
-                    "Múltiples sesiones de HIFU 7D",
+                    "Múltiples sesiones de PLASMA",
                     "Plasma rico en plaquetas",
                     "Limpieza facial profunda",
                     "Plan de cuidado personalizado"
@@ -727,7 +825,7 @@ export const Plasma = () => {
             </div>
           </div>
         </motion.section>
-        <section className="py-24 bg-[#160520]">
+        <section className="py-24 bg-black">
           <div className="max-w-6xl mx-auto px-8">
             {/* Título principal */}
             <div className="text-center mb-16">
@@ -740,8 +838,9 @@ export const Plasma = () => {
             {/* Nuevo título adicional */}
             <div className="text-center mb-16">
               <p className="text-gray-400 text-lg">
-                Descubre por qué nuestro tratamiento HIFU 7D es la mejor elección para el cuidado de tu piel.
+                Descubre por qué nuestros tratamientos con plasma regenerativo son la mejor elección para revitalizar y cuidar tu piel de manera natural.
               </p>
+
             </div>
 
             {/* Beneficios */}
