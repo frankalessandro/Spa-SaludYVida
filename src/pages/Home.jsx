@@ -53,7 +53,7 @@ export const Home = () => {
   }, [currentTextIndex]);
 
   return (
-    <div className="h-screen max-h-screen bg-white max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
+    <div className="h-screen max-h-screen bg-[#160520] max-w-[100vw] md:min-w-[100vw] overflow-x-hidden">
       {/* Navbar */}
       <NavbarWithMegaMenu />
       <main className="flex-grow relative">
@@ -91,7 +91,7 @@ export const Home = () => {
         </section>
 
         {/* Servicios */}
-        <section className="relative w-full py-16 bg-gradient-to-b from-[#160520] via-[#160520] to-white">
+        <section className="relative w-full py-16 bg-[#160520]">
           <div className="max-w-7xl mx-auto px-4 text-center">
             <h2 className="text-4xl font-extrabold gold-text mb-6 text-gray-400">
               Servicios Holísticos
@@ -139,7 +139,7 @@ export const Home = () => {
         </section>
 
         {/* Proceso de Reserva */}
-        <section className="w-full py-16 flex items-center justify-center">
+        <section className="w-full py-16 flex items-center justify-center bg-[#160520]">
           <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-2 gap-5 sm:gap-12 items-center">
             {/* Columna de texto */}
             <div className="space-y-8 p-2 sm:p-6 md:p-10">
@@ -191,7 +191,7 @@ export const Home = () => {
         </section>
 
         {/* Stepper */}
-        <section className="relative w-full h-[100vh] pb-16">
+        <section className="relative w-full h-[100vh] pb-16 bg-[#160520]">
           <SpaAppointmentStepper />
         </section>
       </main>

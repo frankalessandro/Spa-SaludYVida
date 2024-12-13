@@ -42,21 +42,19 @@ export const SpaAppointmentStepper = () => {
       <div className="relative z-10 w-full max-w-6xl mx-auto px-4 md:px-8 py-8">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-center gap-8 md:gap-12">
           {/* Texto */}
-          <div className="w-full md:w-1/2 bg-white/80 p-6 md:p-8 rounded-lg shadow-lg backdrop-blur-md">
+          <div className="w-full md:w-1/2 bg-[#160520] p-6 md:p-8 rounded-lg backdrop-blur-md">
             <h2
-              className="text-2xl md:text-3xl font-bold mb-4 flex items-center justify-center md:justify-start gap-3"
-              style={{ color: colors.textPrimary }}
+              className="text-2xl md:text-3xl font-bold mb-4 flex items-center justify-center md:justify-start gap-3 text-white"
             >
               <MapPin className="text-purple-500 w-6 md:w-8 h-6 md:h-8" />
               {section.title}
             </h2>
             <p
-              className="text-sm md:text-base leading-relaxed text-gray-700"
-              style={{ color: colors.textSecondary }}
+              className="text-sm md:text-base leading-relaxed text-gray-300"
             >
               {section.content}
             </p>
-            <div className="mt-6 space-y-4 text-sm md:text-base">
+            <div className="mt-6 space-y-4 text-sm md:text-base text-gray-400">
               <div className="flex items-center gap-3">
                 <Phone className="text-purple-500 w-5 h-5" />
                 <span>{section.contactDetails.phone}</span>
@@ -65,7 +63,7 @@ export const SpaAppointmentStepper = () => {
                 <Mail className="text-purple-500 w-5 h-5" />
                 <a
                   href={`mailto:${section.contactDetails.email}`}
-                  className="text-purple-600 hover:underline"
+                  className="text-purple-400 hover:underline"
                 >
                   {section.contactDetails.email}
                 </a>
@@ -91,6 +89,7 @@ export const SpaAppointmentStepper = () => {
           </div>
         </div>
       </div>
+
     </section>
   );
 

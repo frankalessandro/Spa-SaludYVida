@@ -432,7 +432,7 @@
 
     .slider .slides:nth-child(1),
     .slider .slides:nth-child(2) {
-        top: 6vh;
+        top: 0vh;
     }
 }
 
@@ -534,10 +534,6 @@
 
     .content-info {
         height: 60vh;
-    }
-
-    .btn-info {
-        grid-template-columns: 1fr;
     }
 
     .container-title span {

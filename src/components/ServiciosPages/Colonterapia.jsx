@@ -424,12 +424,12 @@ export const Colonterapia = () => {
                     </h2>
 
                     {/* Colonterapia (Siempre centrado) */}
-                    <h1 className="text-8xl sm:text-4xl md:text-5xl lg:text-[7em] font-title">
+                    <h1 className="text-5xl md:text-8xl lg:text-[7em] font-title">
                       Colonterapia
                     </h1>
 
                     {/* Subtítulo inferior */}
-                    <h1 className="text-5xl sm:text-3xl md:text-4xl lg:text-5xl gold-text tracking-tighter p-2">
+                    <h1 className="text-3xl md:text-4xl lg:text-5xl gold-text tracking-tighter p-2">
                       Limpieza y Bienestar Interno
                     </h1>
                     <div className="w-24 h-0.5 bg-gray-600" />
@@ -839,7 +839,7 @@ export const Colonterapia = () => {
               {whyChooseUs.map((benefit, index) => (
                 <motion.div
                   key={index}
-                  className="p-8 border border-purple-600/20 hover:border-purple-600/40 transition-colors duration-300"
+                  className="p-8 border border-purple-600/40 hover:border-purple-600/60  transition-colors duration-300"
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.2 }}

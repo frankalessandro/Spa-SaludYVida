@@ -107,7 +107,7 @@ export const SliderMain = () => {
     }, [isSliding, slides.length]);
 
     return (
-        <div className="container lg:max-w-screen-2xl max-w-[100vw]">
+        <div className="container lg:max-w-screen-2xl max-w-[100vw] p-0 lg:p-5">
             <section className='content-info relative'>
                 <div className="container-title relative">
                     <span className='gold-text text-8xl'>Nuestros Tratamientos</span>
@@ -116,7 +116,7 @@ export const SliderMain = () => {
                         <span className="text-black next"><ChevronRightIcon  className='text-black' width={30} height={30} /></span>
                     </div>
                 </div>
-                <div className={`text-textWhite content ${isSliding ? '' : 'active'}`}>
+                <div className={`text-textWhite content scale-75 sm:scale-100 ${isSliding ? '' : 'active'}`}>
                     <span className='text-md gold-text'>{slides[currentSlide].title}</span>
                     <span className='md:text-9xl' style={{fontSize:'.8em'}}>{slides[currentSlide].ReqConsulta === 'Si' ? 'Requiere consulta' : 'No requiere consulta'}</span>
                     <div className="btn-info">
