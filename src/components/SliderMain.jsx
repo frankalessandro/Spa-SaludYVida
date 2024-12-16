@@ -124,10 +124,10 @@ export const SliderMain = () => {
                         <div className="btn-info-child text-textWhite"><HobbyKnifeIcon width={30} height={30} /><div className='child-info'><div>Invasión:</div><div>{slides[currentSlide].invasion}</div></div></div>
                         <div className="btn-info-child text-textWhite"><PersonIcon width={30} height={30} /><div className='child-info'><div>Edad Mínima:</div><div>{slides[currentSlide].edadMinima}</div></div></div>
                     </div>
-                    <div className='content-descr text-[.8em]'><div>{slides[currentSlide].description}</div></div>
+                    <div className='content-descr text-[.7em] md:text-[.8em]'><div>{slides[currentSlide].description}</div></div>
                     <div className='container-btn-showmore'>
                         <Link to={slides[currentSlide].link}>
-                            <button className='content-btn'>Saber más</button>
+                            <button className='content-btn px-8 md:px-0'>Saber más</button>
                         </Link>
                     </div>
                 </div>
