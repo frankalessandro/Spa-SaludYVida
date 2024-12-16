@@ -107,24 +107,24 @@ export const SliderMain = () => {
     }, [isSliding, slides.length]);
 
     return (
-        <div className="container lg:max-w-screen-2xl">
-            <section className='content-info'>
-                <div className="container-title text-textDark relative ">
-                    <span className='text-textDark'>Nuestros Tratamientos</span>
+        <div className="container lg:max-w-screen-2xl max-w-[100vw] p-0 lg:p-5">
+            <section className='content-info relative'>
+                <div className="container-title relative">
+                    <span className='gold-text text-8xl'>Nuestros Tratamientos</span>
                     <div className="buttons">
-                        <span className="text-textDark prev"><ChevronLeftIcon width={30} height={30} /></span>
-                        <span className="next"><ChevronRightIcon width={30} height={30} /></span>
+                        <span className="text-white prev"><ChevronLeftIcon className='text-black' width={30} height={30} /></span>
+                        <span className="text-black next"><ChevronRightIcon  className='text-black' width={30} height={30} /></span>
                     </div>
                 </div>
-                <div className={`text-textLight content ${isSliding ? '' : 'active'}`}>
-                    <span className='text-md'>{slides[currentSlide].title}</span>
-                    <span className=''>{slides[currentSlide].ReqConsulta === 'Si' ? 'Requiere consulta' : 'No requiere consulta'}</span>
+                <div className={`text-textWhite content scale-75 sm:scale-100 ${isSliding ? '' : 'active'}`}>
+                    <span className='text-md gold-text'>{slides[currentSlide].title}</span>
+                    <span className='md:text-9xl' style={{fontSize:'.8em'}}>{slides[currentSlide].ReqConsulta === 'Si' ? 'Requiere consulta' : 'No requiere consulta'}</span>
                     <div className="btn-info">
-                        <div className="btn-info-child"><TimerIcon width={30} height={30} /><div className='child-info'><p>Tiempo:</p><p>{slides[currentSlide].duracion}</p></div></div>
-                        <div className="btn-info-child"><HobbyKnifeIcon width={30} height={30} /><div className='child-info'><p>Invasión:</p><p>{slides[currentSlide].invasion}</p></div></div>
-                        <div className="btn-info-child"><PersonIcon width={30} height={30} /><div className='child-info'><p>Edad Mínima:</p><p>{slides[currentSlide].edadMinima}</p></div></div>
+                        <div className="btn-info-child text-textWhite"><TimerIcon width={30} height={30} /><div className='child-info'><div>Tiempo:</div><div>{slides[currentSlide].duracion}</div></div></div>
+                        <div className="btn-info-child text-textWhite"><HobbyKnifeIcon width={30} height={30} /><div className='child-info'><div>Invasión:</div><div>{slides[currentSlide].invasion}</div></div></div>
+                        <div className="btn-info-child text-textWhite"><PersonIcon width={30} height={30} /><div className='child-info'><div>Edad Mínima:</div><div>{slides[currentSlide].edadMinima}</div></div></div>
                     </div>
-                    <div className='content-descr'><p>{slides[currentSlide].description}</p></div>
+                    <div className='content-descr text-[.8em]'><div>{slides[currentSlide].description}</div></div>
                     <div className='container-btn-showmore'>
                         <Link to={slides[currentSlide].link}>
                             <button className='content-btn'>Saber más</button>
