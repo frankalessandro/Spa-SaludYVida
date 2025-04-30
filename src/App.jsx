@@ -11,9 +11,10 @@ import { Colonterapia } from "./components/ServiciosPages/Colonterapia"; // Pág
 import { Drenajes } from "./components/ServiciosPages/Drenajes"; // Página para Drenajes
 
 export default function App() {
+  
   return (
     <Router>
-        {/* Aquí se definirán las rutas */}
+      {/* Aquí se definirán las rutas */}
       <div className="w-[100%] flex flex-col items-center">
         <Routes>
           <Route path="/" element={<Home />} /> {/* Ruta para la página principal */}
